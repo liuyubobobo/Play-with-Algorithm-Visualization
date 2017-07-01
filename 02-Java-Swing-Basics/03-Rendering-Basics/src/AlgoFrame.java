@@ -21,7 +21,6 @@ public class AlgoFrame extends JFrame{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle(title);
 
         setVisible(true);
 
