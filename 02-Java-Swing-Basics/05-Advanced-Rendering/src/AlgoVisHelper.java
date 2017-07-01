@@ -20,7 +20,7 @@ public class AlgoVisHelper {
     }
 
     static public void setColor(Graphics2D g, Color color){
-        g.setPaint(color);
+        g.setColor(color);
     }
 
     static public void setStrokeWidth(Graphics2D g, int w){
