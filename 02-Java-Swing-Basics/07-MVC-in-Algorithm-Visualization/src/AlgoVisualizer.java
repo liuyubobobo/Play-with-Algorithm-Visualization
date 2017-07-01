@@ -27,11 +27,11 @@ public class AlgoVisualizer {
     public void run(){
 
         while(true){
-            // render
+            // 绘制数据
             frame.setCircles(circles);
             AlgoVisHelper.pause(20);
 
-            // update
+            // 更新数据
             for(Circle circle: circles)
                 circle.go(0, 0, frame.getCanvasWidth(), frame.getCanvasHeight());
         }
