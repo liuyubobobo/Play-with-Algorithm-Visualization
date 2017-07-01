@@ -37,9 +37,4 @@ public class AlgoVisHelper {
         }
     }
 
-    public static void clear(Graphics2D g, int width, int height){
-
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0,width,height);
-    }
 }
