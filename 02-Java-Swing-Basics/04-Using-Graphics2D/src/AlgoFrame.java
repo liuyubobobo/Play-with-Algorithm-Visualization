@@ -9,6 +9,8 @@ public class AlgoFrame extends JFrame{
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
+        super(title);
+
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
@@ -19,7 +21,6 @@ public class AlgoFrame extends JFrame{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle(title);
 
         setVisible(true);
     }
@@ -43,14 +44,15 @@ public class AlgoFrame extends JFrame{
 
             Graphics2D g2d = (Graphics2D)g;
 
-            Ellipse2D circle = new Ellipse2D.Double(50, 50, 600, 600);
-            g2d.setPaint(Color.RED);
             int strokeWidth = 10;
             g2d.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
+            g2d.setColor(Color.RED);
+            Ellipse2D circle = new Ellipse2D.Double(50, 50, 600, 600);
             g2d.draw(circle);
 
+            g2d.setColor(Color.BLUE);
             Ellipse2D circle2 = new Ellipse2D.Double(50, 50, 600, 600);
-            g2d.setPaint(Color.BLUE);
             g2d.fill(circle2);
         }
     }
