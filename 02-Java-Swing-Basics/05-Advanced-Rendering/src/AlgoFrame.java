@@ -22,7 +22,6 @@ public class AlgoFrame extends JFrame{
         this.canvasHeight = canvasHeight;
 
         AlgoCanvas canvas = new AlgoCanvas();
-        canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeight));
         setContentPane(canvas);
         pack();
 
@@ -94,8 +93,8 @@ public class AlgoFrame extends JFrame{
         }
 
         @Override
-        public void paint(Graphics g) {
-            super.paint(g);
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
 
             Graphics2D g2d = (Graphics2D)g;
 
@@ -113,6 +112,11 @@ public class AlgoFrame extends JFrame{
 
             AlgoVisHelper.setColor(g2d, Color.BLUE);
             AlgoVisHelper.fillCircle(g2d, canvasWidth/2,canvasHeight/2,300);
+        }
+
+        @Override
+        public Dimension getPreferredSize(){
+            return new Dimension(canvasWidth, canvasHeight);
         }
 
     }

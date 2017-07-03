@@ -33,7 +33,7 @@ public class Main {
 
                     // 更新数据
                     for(Circle circle: circles)
-                        circle.go();
+                        circle.move();
                 }
             }).start();
         });

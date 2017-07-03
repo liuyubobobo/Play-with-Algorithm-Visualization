@@ -15,7 +15,7 @@ public class Circle {
         this.vy = vy;
     }
 
-    public void go(){
+    public void move(){
         x += vx;
         y += vy;
     }

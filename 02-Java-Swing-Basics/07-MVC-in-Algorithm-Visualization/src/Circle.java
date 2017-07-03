@@ -15,7 +15,7 @@ public class Circle {
         this.vy = vy;
     }
 
-    public void go(int minx, int miny, int maxx, int maxy){
+    public void move(int minx, int miny, int maxx, int maxy){
         x += vx;
         y += vy;
 

@@ -33,7 +33,7 @@ public class AlgoVisualizer {
 
             // 更新数据
             for(Circle circle: circles)
-                circle.go(0, 0, frame.getCanvasWidth(), frame.getCanvasHeight());
+                circle.move(0, 0, frame.getCanvasWidth(), frame.getCanvasHeight());
         }
     }
 
@@ -51,6 +51,5 @@ public class AlgoVisualizer {
                 vis.run();
             }).start();
         });
-
     }
 }
