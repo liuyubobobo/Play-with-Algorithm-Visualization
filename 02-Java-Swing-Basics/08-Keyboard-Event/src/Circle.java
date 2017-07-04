@@ -8,9 +8,6 @@ public class Circle {
     public int vx;
     public int vy;
 
-    public boolean isFilled = false;
-    public Color color = Color.RED;
-
     public Circle(int x, int y, int r, int vx, int vy){
         this.x = x;
         this.y = y;
