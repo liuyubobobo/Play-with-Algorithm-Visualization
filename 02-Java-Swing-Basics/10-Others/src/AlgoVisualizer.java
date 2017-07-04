@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class AlgoVisualizer{
 
+    private static int DELAY = 20;
+
     private int N;
     private Circle[] circles;
     private static int R = 50;
@@ -32,7 +34,7 @@ public class AlgoVisualizer{
         while(true){
             // 绘制数据
             frame.setCircles(circles);
-            AlgoVisHelper.pause(20);
+            AlgoVisHelper.pause(DELAY);
 
             // 更新数据
             if( isAnimated)
