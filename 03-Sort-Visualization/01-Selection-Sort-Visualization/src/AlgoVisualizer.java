@@ -3,6 +3,8 @@ import java.util.Random;
 
 public class AlgoVisualizer {
 
+    private static int DELAY = 40;
+
     private int N;
     private int[] numbers;
     private AlgoFrame frame;
@@ -28,13 +30,12 @@ public class AlgoVisualizer {
             // 寻找[i, n)区间里的最小值的索引
             int minIndex = i;
             for( int j = i + 1 ; j < N ; j ++ )
-                // 使用compareTo方法比较两个Comparable对象的大小
                 if( numbers[j] < numbers[minIndex] )
                     minIndex = j;
 
             swap( numbers , i , minIndex);
             frame.setNumbers(numbers);
-            AlgoVisHelper.pause(100);
+            AlgoVisHelper.pause(DELAY);
         }
     }
 
