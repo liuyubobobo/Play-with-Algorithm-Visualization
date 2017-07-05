@@ -43,6 +43,8 @@ public class AlgoVisualizer {
             frame.setNumbers(numbers, i+1, -1, -1);
             AlgoVisHelper.pause(DELAY);
         }
+        frame.setNumbers(numbers, N, -1, -1);
+        AlgoVisHelper.pause(DELAY);
     }
 
     private static void swap(int[] arr, int i, int j) {

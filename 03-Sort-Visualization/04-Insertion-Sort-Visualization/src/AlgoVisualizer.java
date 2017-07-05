@@ -28,6 +28,8 @@ public class AlgoVisualizer {
                 AlgoVisHelper.pause(DELAY);
             }
         }
+        this.setData(data.N(), -1);
+        AlgoVisHelper.pause(DELAY);
     }
 
     private void setData(int orderedIndex, int currentIndex){

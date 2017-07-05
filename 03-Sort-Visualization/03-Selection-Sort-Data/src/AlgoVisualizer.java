@@ -36,6 +36,9 @@ public class AlgoVisualizer {
             this.setData(i+1, -1, -1);
             AlgoVisHelper.pause(DELAY);
         }
+
+        this.setData(data.N(),-1,-1);
+        AlgoVisHelper.pause(DELAY);
     }
 
     private void setData(int orderedIndex, int currentCompareIndex, int currentMinIndex){
