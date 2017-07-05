@@ -25,7 +25,7 @@ public class AlgoVisualizer {
     public void run(){
 
         frame.setNumbers(numbers);
-        AlgoVisHelper.pause(20);
+        AlgoVisHelper.pause(DELAY);
         for( int i = 0 ; i < N ; i ++ ){
             // 寻找[i, n)区间里的最小值的索引
             int minIndex = i;

@@ -39,16 +39,12 @@ public class AlgoFrame extends JFrame{
 
     // data
     private int[] numbers;
-    private int orderedIndex;   //[0...orderedIndex) 是有序的
-    public void setNumbers(int[] numbers, int orderedIndex){
+    private int orderedIndex;   // [0...orderedIndex) 是有序的
+    private int currentCompareIndex; // 当前正在比较的元素索引
+    public void setNumbers(int[] numbers, int orderedIndex, int currentCompareIndex){
         this.numbers = numbers;
         this.orderedIndex = orderedIndex;
-        repaint();
-    }
-
-    private int currentCompareIndex;
-    public void setCurrentCompareIndex(int index){
-        this.currentCompareIndex = index;
+        this.currentCompareIndex = currentCompareIndex;
         repaint();
     }
 
@@ -81,7 +77,7 @@ public class AlgoFrame extends JFrame{
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( i == currentCompareIndex )
+                if( currentCompareIndex != -1 && i == currentCompareIndex )
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
 
                 AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - numbers[i], w - 1, numbers[i]);
