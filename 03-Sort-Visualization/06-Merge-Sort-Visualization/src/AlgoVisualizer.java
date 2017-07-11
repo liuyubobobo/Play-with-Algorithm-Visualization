@@ -85,7 +85,7 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
 
         EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Selection Visualization", sceneWidth,sceneHeight);
+            AlgoFrame frame = new AlgoFrame("Merge Sort Visualization", sceneWidth,sceneHeight);
 
             int N = 200;
             // int N = 100;
