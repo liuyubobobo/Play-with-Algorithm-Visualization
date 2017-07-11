@@ -22,7 +22,7 @@ public class AlgoVisualizer {
 
         mergeSort(0, data.N()-1);
 
-        this.setData(0, data.N(), data.N());
+        this.setData(0, data.N()-1, data.N());
         AlgoVisHelper.pause(DELAY);
     }
 
