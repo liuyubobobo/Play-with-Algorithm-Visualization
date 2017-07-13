@@ -36,17 +36,6 @@ public class QuickSortData {
         }
     }
 
-    // 生成N个[lBound,rBound]之间的随机数
-    public QuickSortData(int N, int lBound, int rBound){
-        this.N = N;
-
-        numbers = new int[N];
-
-        Random rand = new Random();
-        for( int i = 0 ; i < N ; i ++)
-            numbers[i] = rand.nextInt(rBound-lBound+1) + lBound;
-    }
-
     public int N(){
         return N;
     }
