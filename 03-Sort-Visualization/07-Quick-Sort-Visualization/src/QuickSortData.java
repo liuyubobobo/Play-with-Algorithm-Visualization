@@ -10,6 +10,7 @@ public class QuickSortData {
     public int l, r;
     public boolean[] fixedPivots;
     public int curPivot;
+    public int curElement;
 
     // 生成N个[0,randomBound)之间的随机数；nearlyOrdered控制随机数是否近乎有序
     public QuickSortData(int N, int randomBound, boolean nearlyOrdered){

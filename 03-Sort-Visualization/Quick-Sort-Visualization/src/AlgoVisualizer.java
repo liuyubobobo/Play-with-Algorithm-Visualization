@@ -17,12 +17,12 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        this.setData(-1, -1, -1, -1);
+        this.setData(-1, -1, -1, -1, -1);
         AlgoVisHelper.pause(DELAY);
 
         quickSort(0, data.N()-1);
 
-        this.setData(0, data.N()-1, -1, -1);
+        this.setData(0, data.N()-1, -1, -1, -1);
         AlgoVisHelper.pause(DELAY);
     }
 
@@ -35,11 +35,12 @@ public class AlgoVisualizer {
             return;
 
         if( l == r ){
-            setData(l, r, l, -1);
+            setData(l, r, l, -1, -1);
+            AlgoVisHelper.pause(DELAY);
             return;
         }
 
-        setData(l, r, -1, -1);
+        setData(l, r, -1, -1, -1);
         AlgoVisHelper.pause(DELAY);
 
         int p = partition(l, r);
@@ -49,32 +50,41 @@ public class AlgoVisualizer {
 
     private int partition(int l, int r){
 
+        int p = (int)(Math.random()*(r-l+1)) + l;
+        data.swap(l, p);
+        setData(l, r, -1, l, p);
+        AlgoVisHelper.pause(DELAY);
+
         int v = data.get(l);
-        setData(l, r, -1, l);
+        setData(l, r, -1, l, -1);
         AlgoVisHelper.pause(DELAY);
 
         int j = l; // arr[l+1...j] < v ; arr[j+1...i) > v
-        for( int i = l + 1 ; i <= r ; i ++ )
-            if( data.get(i) < v ){
-                j ++;
+        for( int i = l + 1 ; i <= r ; i ++ ) {
+            setData(l, r, -1, l, i);
+            AlgoVisHelper.pause(DELAY);
+            if (data.get(i) < v) {
+                j++;
                 data.swap(j, i);
-                setData(l, r, -1, l);
+                setData(l, r, -1, l, i);
                 AlgoVisHelper.pause(DELAY);
             }
+        }
 
         data.swap(l, j);
-        setData(l, r, j, -1);
+        setData(l, r, j, -1, -1);
         AlgoVisHelper.pause(DELAY);
 
         return j;
     }
 
-    private void setData(int l, int r, int fixedPivot, int curPivot){
+    private void setData(int l, int r, int fixedPivot, int curPivot, int curElement){
         data.l = l;
         data.r = r;
         if(fixedPivot != -1)
             data.fixedPivots[fixedPivot] = true;
         data.curPivot = curPivot;
+        data.curElement = curElement;
         frame.setData(data);
     }
 
@@ -89,7 +99,7 @@ public class AlgoVisualizer {
             int N = 200;
             // int N = 100;
 
-            QuickSortData data = new QuickSortData(N, sceneHeight, false);
+            QuickSortData data = new QuickSortData(N, sceneHeight, true);
             AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
             new Thread(() -> {
                 vis.run();
