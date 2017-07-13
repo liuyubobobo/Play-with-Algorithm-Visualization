@@ -25,7 +25,7 @@ public class AlgoVisualizer {
             this.setData(i, -1, minIndex);
             for( int j = i + 1 ; j < data.N() ; j ++ ){
                 this.setData(i, j, minIndex);
-                AlgoVisHelper.pause(DELAY/4);
+                AlgoVisHelper.pause(DELAY);
                 if( data.get(j) < data.get(minIndex) ){
                     minIndex = j;
                     this.setData(i, j, minIndex);

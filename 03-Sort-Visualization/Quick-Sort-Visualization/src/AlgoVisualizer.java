@@ -99,7 +99,9 @@ public class AlgoVisualizer {
             int N = 200;
             // int N = 100;
 
-            QuickSortData data = new QuickSortData(N, sceneHeight, true);
+            QuickSortData data = new QuickSortData(N, sceneHeight, false);
+            //QuickSortData data = new QuickSortData(N, sceneHeight, true);
+
             AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
             new Thread(() -> {
                 vis.run();

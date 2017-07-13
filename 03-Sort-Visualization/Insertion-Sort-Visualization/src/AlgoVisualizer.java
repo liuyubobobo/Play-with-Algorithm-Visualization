@@ -49,7 +49,8 @@ public class AlgoVisualizer {
             int N = 200;
             // int N = 100;
 
-            InsertionSortData data = new InsertionSortData(N, sceneHeight, true);
+            InsertionSortData data = new InsertionSortData(N, sceneHeight, false);
+            //InsertionSortData data = new InsertionSortData(N, sceneHeight, true);
             AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
             new Thread(() -> {
                 vis.run();

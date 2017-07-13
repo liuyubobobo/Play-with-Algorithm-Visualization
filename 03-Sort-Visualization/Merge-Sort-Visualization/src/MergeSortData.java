@@ -15,9 +15,8 @@ public class MergeSortData {
 
         numbers = new int[N];
 
-        Random rand = new Random();
         for( int i = 0 ; i < N ; i ++)
-            numbers[i] = rand.nextInt(randomBound) + 1;
+            numbers[i] = (int)(Math.random()*randomBound) + 1;
     }
 
     public int N(){

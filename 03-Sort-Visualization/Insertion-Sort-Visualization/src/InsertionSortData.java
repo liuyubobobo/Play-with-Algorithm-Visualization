@@ -15,16 +15,15 @@ public class InsertionSortData {
 
         numbers = new int[N];
 
-        Random rand = new Random();
         for( int i = 0 ; i < N ; i ++)
-            numbers[i] = rand.nextInt(randomBound) + 1;
+            numbers[i] = (int)(Math.random()*randomBound) + 1;
 
         if(nearlyOrdered){
             Arrays.sort(numbers);
             int swapTime = (int)(0.02*N);
             for(int i = 0 ; i < swapTime; i ++){
-                int a = rand.nextInt(N);
-                int b = rand.nextInt(N);
+                int a = (int)(Math.random()*N);
+                int b = (int)(Math.random()*N);
                 swap(a, b);
             }
         }

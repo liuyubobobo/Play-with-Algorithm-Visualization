@@ -16,10 +16,8 @@ public class AlgoVisualizer {
         numbers = new int[N];
 
         // 根据frame的大小计算合理数值
-        Random rand = new Random();
         for( int i = 0 ; i < N ; i ++)
-            numbers[i] = rand.nextInt(800) + 1;
-
+            numbers[i] = (int)(Math.random()*frame.getCanvasHeight()) + 1;
     }
 
     public void run(){
@@ -32,7 +30,7 @@ public class AlgoVisualizer {
             frame.setNumbers(numbers, i, -1, minIndex);
             for( int j = i + 1 ; j < N ; j ++ ){
                 frame.setNumbers(numbers, i, j, minIndex);
-                AlgoVisHelper.pause(DELAY/4);
+                AlgoVisHelper.pause(DELAY);
                 if( numbers[j] < numbers[minIndex] ){
                     minIndex = j;
                     frame.setNumbers(numbers, i, j, minIndex);
