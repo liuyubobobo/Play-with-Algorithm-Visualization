@@ -111,8 +111,7 @@ public class AlgoVisualizer {
             // int N = 100;
 
             // TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight, true);
-            // TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight, false);
-            TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight/2 - 5, sceneHeight/2 + 5);
+            TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight, false);
             AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
             new Thread(() -> {
                 vis.run();
