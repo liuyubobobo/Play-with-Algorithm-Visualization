@@ -17,12 +17,11 @@ public class AlgoVisualizer{
 
         circles = new Circle[N];
 
-        Random rand = new Random();
         for(int i = 0 ; i < N ; i ++ ) {
-            int x = rand.nextInt(frame.getCanvasWidth()-2*R) + R;
-            int y = rand.nextInt(frame.getCanvasHeight()-2*R) + R;
-            int vx = rand.nextInt(11) - 5;
-            int vy = rand.nextInt(11) - 5;
+            int x = (int)(Math.random()*(frame.getCanvasWidth()-2*R)) + R;
+            int y = (int)(Math.random()*(frame.getCanvasHeight()-2*R)) + R;
+            int vx = (int)(Math.random()*11) - 5;
+            int vy = (int)(Math.random()*11) - 5;
             circles[i] = new Circle(x, y, R, vx, vy);
         }
     }
