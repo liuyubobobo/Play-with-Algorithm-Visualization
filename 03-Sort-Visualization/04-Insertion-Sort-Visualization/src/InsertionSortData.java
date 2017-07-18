@@ -24,7 +24,7 @@ public class InsertionSortData {
 
     public int get(int index){
         if( index < 0 || index >= numbers.length)
-            throw new IllegalArgumentException("Invalid index to access Selection Sort Data.");
+            throw new IllegalArgumentException("Invalid index to access Sort Data.");
 
         return numbers[index];
     }
