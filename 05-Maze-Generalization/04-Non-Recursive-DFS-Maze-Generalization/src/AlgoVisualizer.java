@@ -1,6 +1,10 @@
+import javafx.geometry.Pos;
+import javafx.util.Pair;
+
 import java.awt.*;
 import java.util.Random;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class AlgoVisualizer {
 
@@ -8,6 +12,7 @@ public class AlgoVisualizer {
 
     private MazeData data;
     private AlgoFrame frame;
+    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
     public AlgoVisualizer(int N, AlgoFrame frame, MazeData data){
 
@@ -17,38 +22,30 @@ public class AlgoVisualizer {
 
     public void run(){
 
-//        data.maze[1][0] = ' ';                      // 设置迷宫入口
-//        data.maze[data.N()-2][data.M()-1] = ' ';    // 设置迷宫出口
-
         data.maze[1][0] = MazeData.ROAD;                    // 设置迷宫入口
         data.maze[data.N()-2][data.M()-1] = MazeData.ROAD;  // 设置迷宫出口
 
-        genMazeByDFS(1, 1);
+        Stack<Position> stack = new Stack<Position>();
+        stack.push(new Position(1, 1));
+        data.visited[1][1] = true;
+        while(!stack.empty()){
+            Position cur = stack.pop();
+
+            for(int i = 0 ; i < 4 ; i ++){
+                int newX = cur.x + d[i][0]*2;
+                int newY = cur.y + d[i][1]*2;
+                if(data.inArea(newX, newY) && !data.visited[newX][newY]){
+                    data.maze[cur.x+d[i][0]][cur.y+d[i][1]] = MazeData.ROAD;
+                    stack.push(new Position(newX, newY));
+                    data.visited[newX][newY] = true;
+                    this.setData();
+                    AlgoVisHelper.pause(DELAY);
+                }
+            }
+        }
 
         this.setData();
         AlgoVisHelper.pause(DELAY);
-    }
-
-    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
-    public void genMazeByDFS(int x, int y){
-
-        if(x < 0 || x >= data.N() || y < 0 || y >= data.M())
-            throw new IllegalArgumentException("x, y out of index in genMaze function!");
-
-        if(x%2 ==0 || y%2 == 0)
-            throw new IllegalArgumentException("invalid x, y value in genMaze function!");
-
-        data.visited[x][y] = true;
-        for(int i = 0 ; i < 4 ; i ++){
-            int newX = x + d[i][0]*2;
-            int newY = y + d[i][1]*2;
-            if(data.inArea(newX, newY) && !data.visited[newX][newY]){
-                data.maze[x+d[i][0]][y+d[i][1]] = MazeData.ROAD;
-                this.setData();
-                AlgoVisHelper.pause(DELAY);
-                genMazeByDFS(newX, newY);
-            }
-        }
     }
 
     private void setData(){
