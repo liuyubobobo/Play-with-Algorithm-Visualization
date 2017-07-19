@@ -58,11 +58,11 @@ public class AlgoFrame extends JFrame{
             Graphics2D g2d = (Graphics2D)g;
 
             // 抗锯齿
-            RenderingHints hints = new RenderingHints(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            g2d.addRenderingHints(hints);
+//            RenderingHints hints = new RenderingHints(
+//                    RenderingHints.KEY_ANTIALIASING,
+//                    RenderingHints.VALUE_ANTIALIAS_ON);
+//            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+//            g2d.addRenderingHints(hints);
 
             // 具体绘制
             int w = canvasWidth/data.M();

@@ -13,7 +13,7 @@ public class AlgoVisualizer {
     private AlgoFrame frame;
     private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
-    public AlgoVisualizer(int N, AlgoFrame frame, MazeData data){
+    public AlgoVisualizer(AlgoFrame frame, MazeData data){
 
         this.frame = frame;
         this.data = data;
@@ -58,13 +58,13 @@ public class AlgoVisualizer {
         int blockSide = 8;
 
         EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Three Ways Quick Sort Visualization", sceneWidth,sceneHeight);
+            AlgoFrame frame = new AlgoFrame("Maze Generation Visualization", sceneWidth,sceneHeight);
 
             int N = sceneWidth/blockSide;
             int M = sceneWidth/blockSide;
 
             MazeData data = new MazeData(N, M);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();
