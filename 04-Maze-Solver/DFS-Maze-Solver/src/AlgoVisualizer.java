@@ -32,7 +32,7 @@ public class AlgoVisualizer {
 
         String filename = "maze_101_101.txt";
         MazeData data = new MazeData(filename);
-        data.print();
+        //data.print();
 
         int blockSide = 8;
         int sceneWidth = data.N() * blockSide;

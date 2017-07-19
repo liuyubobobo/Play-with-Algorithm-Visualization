@@ -32,15 +32,12 @@ public class MazeData {
             Scanner nmScanner = null;
             nmScanner = new Scanner(nmline);
             N = nmScanner.nextInt();
-            System.out.println("N = " + N);
             M = nmScanner.nextInt();
-            System.out.println("M = " + M);
             nmScanner.close();
 
             maze = new char[N][M];
             for(int i = 0 ; i < N ; i ++){
                 String line = scanner.nextLine();
-                System.out.println(line);
                 if(line.length() != M)
                     throw new IllegalArgumentException("Maze file " + filename + " is invalid");
                 for(int j = 0 ; j < M ; j ++)
