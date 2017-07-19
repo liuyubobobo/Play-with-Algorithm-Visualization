@@ -9,7 +9,7 @@ public class AlgoVisualizer {
     private TwoWaysQuickSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, TwoWaysQuickSortData data){
+    public AlgoVisualizer(AlgoFrame frame, TwoWaysQuickSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -113,7 +113,7 @@ public class AlgoVisualizer {
             // TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight, true);
             // TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight, false);
             TwoWaysQuickSortData data = new TwoWaysQuickSortData(N, sceneHeight/2 - 5, sceneHeight/2 + 5);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();

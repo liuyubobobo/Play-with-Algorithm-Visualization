@@ -9,7 +9,7 @@ public class AlgoVisualizer {
     private MergeSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, MergeSortData data){
+    public AlgoVisualizer(AlgoFrame frame, MergeSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -91,7 +91,7 @@ public class AlgoVisualizer {
             // int N = 100;
 
             MergeSortData data = new MergeSortData(N, sceneHeight);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();

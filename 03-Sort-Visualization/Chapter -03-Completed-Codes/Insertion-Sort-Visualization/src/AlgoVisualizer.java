@@ -8,7 +8,7 @@ public class AlgoVisualizer {
     private InsertionSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, InsertionSortData data){
+    public AlgoVisualizer(AlgoFrame frame, InsertionSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -51,7 +51,7 @@ public class AlgoVisualizer {
 
             InsertionSortData data = new InsertionSortData(N, sceneHeight, false);
             //InsertionSortData data = new InsertionSortData(N, sceneHeight, true);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();

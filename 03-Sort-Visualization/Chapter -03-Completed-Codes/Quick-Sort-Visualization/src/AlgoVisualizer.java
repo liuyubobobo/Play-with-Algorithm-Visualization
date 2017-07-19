@@ -9,7 +9,7 @@ public class AlgoVisualizer {
     private QuickSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, QuickSortData data){
+    public AlgoVisualizer(AlgoFrame frame, QuickSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -102,7 +102,7 @@ public class AlgoVisualizer {
             QuickSortData data = new QuickSortData(N, sceneHeight, false);
             //QuickSortData data = new QuickSortData(N, sceneHeight, true);
 
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();

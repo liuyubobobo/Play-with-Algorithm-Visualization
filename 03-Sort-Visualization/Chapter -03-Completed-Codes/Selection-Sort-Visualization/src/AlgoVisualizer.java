@@ -8,7 +8,7 @@ public class AlgoVisualizer {
     private SelectionSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, SelectionSortData data){
+    public AlgoVisualizer(AlgoFrame frame, SelectionSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -57,7 +57,7 @@ public class AlgoVisualizer {
             // int N = 100;
 
             SelectionSortData data = new SelectionSortData(N, sceneHeight);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();

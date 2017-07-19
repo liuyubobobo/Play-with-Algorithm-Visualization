@@ -9,7 +9,7 @@ public class AlgoVisualizer {
     private HeapSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame, HeapSortData data){
+    public AlgoVisualizer(AlgoFrame frame, HeapSortData data){
 
         this.frame = frame;
         this.data = data;
@@ -71,7 +71,7 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
 
         EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Three Ways Quick Sort Visualization", sceneWidth,sceneHeight);
+            AlgoFrame frame = new AlgoFrame("Heap Sort Visualization", sceneWidth,sceneHeight);
 
             int N = 200;
             // int N = 100;
@@ -79,7 +79,7 @@ public class AlgoVisualizer {
             HeapSortData data = new HeapSortData(N, sceneHeight, false);
             // HeapSortData data = new HeapSortData(N, sceneHeight, true);
             // HeapSortData data = new HeapSortData(N, sceneHeight/2 - 5, sceneHeight/2 + 5);
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame, data);
+            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
             }).start();
