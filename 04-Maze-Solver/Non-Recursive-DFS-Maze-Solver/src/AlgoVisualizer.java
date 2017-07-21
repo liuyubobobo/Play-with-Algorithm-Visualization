@@ -20,40 +20,15 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        if(go(1, 0))
-            System.out.println("The maze solved.");
-        else
-            System.out.println("The maze has no solution.");
+        go();
 
         this.setData(false, -1, -1);
         AlgoVisHelper.pause(DELAY);
     }
 
-    // 修改1: 改变go的返回值为boolean，如果成功找到出口则返回true
-    public boolean go(int x, int y){
+    public boolean go(){
 
-        if(!data.inArea(x,y))
-            throw new IllegalArgumentException("x,y are out of index in go function!");
-
-        data.visited[x][y] = true;
-        this.setData(true, x, y);
-        AlgoVisHelper.pause(DELAY);
-
-        if(x == data.N()-2 && y == data.M()-1 )
-            return true;
-
-        for(int i = 0 ; i < 4 ; i ++){
-            int newX = x + d[i][0];
-            int newY = y + d[i][1];
-            if(data.inArea(newX, newY) && data.maze[newX][newY] == ' ' && !data.visited[newX][newY])
-                if(go(newX, newY))
-                    return true;
-        }
-
-        // 修改2，如果当前位置不能到达出口，则将path设置为false
-        setData(false, x, y);
-
-        return false;
+        return true;
     }
 
 

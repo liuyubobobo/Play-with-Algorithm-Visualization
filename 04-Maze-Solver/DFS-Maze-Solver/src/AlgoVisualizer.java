@@ -20,7 +20,10 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        go(1, 0);
+        if(go(1, 0))
+            System.out.println("The maze solved.");
+        else
+            System.out.println("The maze has no solution.");
 
         this.setData(false, -1, -1);
         AlgoVisHelper.pause(DELAY);
