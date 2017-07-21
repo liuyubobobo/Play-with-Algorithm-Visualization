@@ -17,13 +17,10 @@ public class AlgoVisualizer {
 
     public void run(){
 
-//        data.maze[1][0] = ' ';                      // 设置迷宫入口
-//        data.maze[data.N()-2][data.M()-1] = ' ';    // 设置迷宫出口
+        data.maze[data.entranceX][data.entranceY] = MazeData.ROAD;                    // 设置迷宫入口
+        data.maze[data.exitX][data.exitY] = MazeData.ROAD;  // 设置迷宫出口
 
-        data.maze[1][0] = MazeData.ROAD;                    // 设置迷宫入口
-        data.maze[data.N()-2][data.M()-1] = MazeData.ROAD;  // 设置迷宫出口
-
-        genMazeByDFS(1, 1);
+        genMazeByDFS(data.entranceX, data.entranceY + 1);
 
         this.setData();
         AlgoVisHelper.pause(DELAY);

@@ -3,6 +3,9 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
+    public int entranceX, entranceY;
+    public int exitX, exitY;
+
     private int N, M;
     public char[][] maze;
     public boolean[][] visited;
@@ -11,6 +14,9 @@ public class MazeData {
 
         if( N%2 == 0 || M%2 == 0)
             throw new IllegalArgumentException("Our Maze Generalization Algorihtm requires the width and height of the maze are odd numbers");
+
+        if( N < 2 || M < 1)
+            throw new IllegalArgumentException("Maze size is invalid!");
 
         this.N = N;
         this.M = M;
@@ -26,6 +32,11 @@ public class MazeData {
 
                 visited[i][j] = false;
             }
+
+        this.entranceX = 1;
+        this.entranceY = 0;
+        this.exitX = N - 2;
+        this.exitY = M - 1;
     }
 
     public int N(){

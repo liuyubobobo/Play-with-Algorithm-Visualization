@@ -1,5 +1,8 @@
 public class MazeData {
 
+    public static final char ROAD = ' ';
+    public static final char WALL = '#';
+
     private int N, M;
     public char[][] maze;
 

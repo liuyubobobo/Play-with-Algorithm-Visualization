@@ -10,8 +10,8 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
-    public int entranceX, entranceY;
-    public int exitX, exitY;
+    private int entranceX, entranceY;
+    private int exitX, exitY;
 
     private int N, M;
     public char[][] maze;
@@ -70,13 +70,12 @@ public class MazeData {
         }
     }
 
-    public int N(){
-        return N;
-    }
-
-    public int M(){
-        return M;
-    }
+    public int N(){ return N; }
+    public int M(){ return M; }
+    public int getEntranceX(){ return entranceX; }
+    public int getEntranceY(){ return entranceY; }
+    public int getExitX(){ return exitX; }
+    public int getExitY(){ return exitY; }
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;

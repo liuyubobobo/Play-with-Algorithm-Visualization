@@ -20,7 +20,7 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        if(go(data.entranceX, data.entranceY))
+        if(go(data.getEntranceX(), data.getEntranceY()))
             System.out.println("The maze solved.");
         else
             System.out.println("The maze has no solution.");
@@ -39,7 +39,7 @@ public class AlgoVisualizer {
         this.setData(true, x, y);
         AlgoVisHelper.pause(DELAY);
 
-        if(x == data.exitX && y == data.exitY )
+        if(x == data.getExitX() && y == data.getExitY() )
             return true;
 
         for(int i = 0 ; i < 4 ; i ++){

@@ -3,6 +3,9 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
+    public int entranceX, entranceY;
+    public int exitX, exitY;
+
     private int N, M;
     public char[][] maze;
     public boolean[][] visited;
