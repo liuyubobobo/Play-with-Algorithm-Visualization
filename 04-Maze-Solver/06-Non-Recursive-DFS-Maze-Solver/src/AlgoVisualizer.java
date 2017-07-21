@@ -5,7 +5,7 @@ import java.util.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 5;
 
     private MazeData data;
     private AlgoFrame frame;
