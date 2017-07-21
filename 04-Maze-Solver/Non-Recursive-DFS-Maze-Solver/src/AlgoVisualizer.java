@@ -3,7 +3,7 @@ import java.util.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 5;
+    private static int DELAY = 40;
 
     private MazeData data;
     private AlgoFrame frame;
@@ -33,13 +33,17 @@ public class AlgoVisualizer {
         data.visited[1][0] = true;
         while(!stack.empty()){
             Position cur = stack.pop();
+            //if(cur.x)
 
             for(int i = 0 ; i < 4 ; i ++){
                 int newX = cur.x + d[i][0];
                 int newY = cur.y + d[i][1];
-                if(data.inArea(newX, newY) && !data.visited[newX][newY] && data.maze[newX][newY] == MazeData.ROAD)
-                    // TODO
-                    ;
+                if(data.inArea(newX, newY) && !data.visited[newX][newY] && data.maze[newX][newY] == MazeData.ROAD){
+                    stack.push(new Position(newX, newY));
+                    data.visited[newX][newY] = true;
+                    this.setData(true, newX, newY);
+                    AlgoVisHelper.pause(DELAY);
+                }
             }
         }
 

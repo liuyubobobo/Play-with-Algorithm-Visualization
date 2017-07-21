@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 5;
+    private static int DELAY = 40;
 
     private MazeData data;
     private AlgoFrame frame;
@@ -52,6 +52,7 @@ public class AlgoVisualizer {
 
         // 修改2，如果当前位置不能到达出口，则将path设置为false
         setData(false, x, y);
+        AlgoVisHelper.pause(DELAY);
 
         return false;
     }
