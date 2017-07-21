@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Arrays;
-import java.util.Queue;
+import java.util.*;
 
 public class AlgoVisualizer {
 
@@ -20,13 +17,31 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        go();
+        if(go())
+            System.out.println("The maze solved.");
+        else
+            System.out.println("The maze has no solution.");
 
         this.setData(false, -1, -1);
         AlgoVisHelper.pause(DELAY);
     }
 
     public boolean go(){
+
+        Stack<Position> stack = new Stack<Position>();
+        stack.push(new Position(1, 0));
+        data.visited[1][0] = true;
+        while(!stack.empty()){
+            Position cur = stack.pop();
+
+            for(int i = 0 ; i < 4 ; i ++){
+                int newX = cur.x + d[i][0];
+                int newY = cur.y + d[i][1];
+                if(data.inArea(newX, newY) && !data.visited[newX][newY] && data.maze[newX][newY] == MazeData.ROAD)
+                    // TODO
+                    ;
+            }
+        }
 
         return true;
     }

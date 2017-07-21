@@ -45,7 +45,7 @@ public class AlgoVisualizer {
         for(int i = 0 ; i < 4 ; i ++){
             int newX = x + d[i][0];
             int newY = y + d[i][1];
-            if(data.inArea(newX, newY) && data.maze[newX][newY] == ' ' && !data.visited[newX][newY])
+            if(data.inArea(newX, newY) && data.maze[newX][newY] == MazeData.ROAD && !data.visited[newX][newY])
                 if(go(newX, newY))
                     return true;
         }
