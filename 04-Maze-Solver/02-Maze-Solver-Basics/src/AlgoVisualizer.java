@@ -35,8 +35,8 @@ public class AlgoVisualizer {
         data.print();
 
         int blockSide = 8;
-        int sceneWidth = data.N() * blockSide;
-        int sceneHeight = data.M() * blockSide;
+        int sceneHeight = data.N() * blockSide;
+        int sceneWidth = data.M() * blockSide;
 
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Maze Solver Visualization", sceneWidth,sceneHeight);
