@@ -21,12 +21,13 @@ public class AlgoVisualizer {
 
     public void run(){
 
-        data.maze[1][0] = MazeData.ROAD;                    // 设置迷宫入口
-        data.maze[data.N()-2][data.M()-1] = MazeData.ROAD;  // 设置迷宫出口
+        // 设置迷宫的入口和出口
+        data.maze[data.getEntranceX()][data.getEntranceY()] = MazeData.ROAD;
+        data.maze[data.getExitX()][data.getExitY()] = MazeData.ROAD;
 
         Queue<Position> queue = new LinkedList<Position>();
-        queue.add(new Position(1, 1));
-        data.visited[1][1] = true;
+        queue.add(new Position(data.getEntranceX(), data.getEntranceY()+1));
+        data.visited[data.getEntranceX()][data.getEntranceY()+1] = true;
         while(queue.size() != 0){
             Position cur = queue.remove();
 

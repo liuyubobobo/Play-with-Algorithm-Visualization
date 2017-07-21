@@ -6,6 +6,9 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
+    private int entranceX, entranceY;
+    private int exitX, exitY;
+
     private int N, M;
     public char[][] maze;
     public boolean[][] visited;
@@ -29,15 +32,19 @@ public class MazeData {
 
                 visited[i][j] = false;
             }
+
+        this.entranceX = 1;
+        this.entranceY = 0;
+        this.exitX = N - 2;
+        this.exitY = M - 1;
     }
 
-    public int N(){
-        return N;
-    }
-
-    public int M(){
-        return M;
-    }
+    public int N(){ return N; }
+    public int M(){ return M; }
+    public int getEntranceX(){ return entranceX; }
+    public int getEntranceY(){ return entranceY; }
+    public int getExitX(){ return exitX; }
+    public int getExitY(){ return exitY; }
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;
