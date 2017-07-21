@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -71,4 +72,11 @@ public class AlgoVisHelper {
         }
     }
 
+    public static void putImage(Graphics2D g, int x, int y, String imageURL){
+
+        ImageIcon icon = new ImageIcon(imageURL);
+        Image image = icon.getImage();
+
+        g.drawImage(image, x, y, null);
+    }
 }
