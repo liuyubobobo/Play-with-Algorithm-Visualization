@@ -10,6 +10,9 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
+    public int entranceX, entranceY;
+    public int exitX, exitY;
+
     private int N, M;
     public char[][] maze;
     public boolean[][] visited;
@@ -36,6 +39,8 @@ public class MazeData {
             N = nmScanner.nextInt();
             M = nmScanner.nextInt();
             nmScanner.close();
+            if(N < 2 || M < 1)
+                throw new IllegalArgumentException("The size of maze is invalid.");
 
             maze = new char[N][M];
             visited = new boolean[N][M];
@@ -50,6 +55,11 @@ public class MazeData {
                     path[i][j] = false;
                 }
             }
+
+            entranceX = 1;
+            entranceY = 0;
+            exitX = N - 2;
+            exitY = M - 1;
         }
         catch(IOException e){
             e.printStackTrace();

@@ -29,10 +29,15 @@ public class AlgoVisualizer {
     public boolean go(){
 
         Stack<Position> stack = new Stack<Position>();
-        stack.push(new Position(1, 0));
-        data.visited[1][0] = true;
+        stack.push(new Position(data.entranceX, data.entranceY));
+        data.visited[data.entranceX][data.entranceY] = true;
+
+        this.setData(true, data.entranceX, data.entranceY);
+        AlgoVisHelper.pause(DELAY);
+
         while(!stack.empty()){
             Position cur = stack.pop();
+            // TODO
             //if(cur.x)
 
             for(int i = 0 ; i < 4 ; i ++){
