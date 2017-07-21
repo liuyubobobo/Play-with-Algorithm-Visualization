@@ -71,7 +71,7 @@ public class AlgoFrame extends JFrame{
             for(int i = 0 ; i < data.N() ; i ++)
                 for(int j = 0 ; j < data.M() ; j ++){
 
-                    if(data.mines[i][j])
+                    if(data.isMine(i, j))
                         AlgoVisHelper.putImage(g2d, i*h, j*w, MineSweeperData.mineImageURL);
                     else
                         AlgoVisHelper.putImage(g2d, i*h, j*w, MineSweeperData.blockImageURL);

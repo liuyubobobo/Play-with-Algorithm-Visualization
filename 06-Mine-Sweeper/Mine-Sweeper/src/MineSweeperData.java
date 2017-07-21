@@ -10,7 +10,8 @@ public class MineSweeperData {
     }
 
     private int N, M;
-    public boolean[][] mines;
+    private boolean[][] mines;
+    private int[][] numbers;
 
     public MineSweeperData(int N, int M, int mineNumber){
 
@@ -24,9 +25,11 @@ public class MineSweeperData {
         this.M = M;
 
         mines = new boolean[N][M];
+        numbers = new int[N][M];
         for(int i = 0 ; i < N ; i ++)
             for(int j = 0 ; j < M ; j ++){
                 mines[i][j] = false;
+                numbers[i][j] = 0;
             }
 
         for(int i = 0 ; i < mineNumber; i ++){
@@ -35,10 +38,23 @@ public class MineSweeperData {
             mines[x][y] = true;
         }
         shuffleBoard();
+        calculateNumbers();
     }
 
     public int N(){ return N; }
     public int M(){ return M; }
+
+    public boolean isMine(int x, int y){
+        if(!inArea(x, y))
+            throw new IllegalArgumentException("Out of index in isMine function!");
+        return mines[x][y];
+    }
+
+    public int getNumber(int x, int y){
+        if(!inArea(x, y))
+            throw new IllegalArgumentException("Out of index in getNumber function!");
+        return numbers[x][y];
+    }
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;
@@ -59,5 +75,23 @@ public class MineSweeperData {
             mines[iX][iY] = mines[randX][randY];
             mines[randX][randY] = t;
         }
+    }
+
+    private void calculateNumbers(){
+
+        for(int i = 0 ; i < N ; i ++)
+            for(int j = 0 ; j < M ; j ++){
+
+                if(mines[i][j])
+                    numbers[i][j] = -1;
+
+                numbers[i][j] = 0;
+                for(int ii = i-1 ; ii <= i+1 ; ii ++)
+                    for(int jj = j-1 ; jj <= j+1 ; jj ++)
+                        if(inArea(ii, jj) && isMine(ii, jj))
+                            numbers[i][j] ++;
+            }
+
+        return;
     }
 }

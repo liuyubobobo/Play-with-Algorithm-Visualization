@@ -30,18 +30,19 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        int sceneWidth = 800;
-        int sceneHeight = 800;
-        int blockSide = 8;
+        int N = 20;
+        int M = 20;
+
+        int blockSide = 32;
+        int sceneWidth = M * blockSide;
+        int sceneHeight = N * blockSide;
+
+        int mineNumber = 1;
+        MineSweeperData data = new MineSweeperData(N, M, mineNumber);
 
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Mine Sweeper", sceneWidth,sceneHeight);
 
-            int N = sceneHeight/blockSide;
-            int M = sceneWidth/blockSide;
-            int mineNumber = 20;
-
-            MineSweeperData data = new MineSweeperData(N, M, mineNumber);
             AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();

@@ -1,8 +1,8 @@
+import javafx.scene.input.MouseButton;
+
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Arrays;
-import java.util.Queue;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class AlgoVisualizer {
 
@@ -26,6 +26,26 @@ public class AlgoVisualizer {
 
     private void setData(){
         frame.setData(data);
+    }
+
+    private class AlgoMouseListener extends MouseAdapter{
+
+        @Override
+        public void mouseReleased(MouseEvent event){
+            event.translatePoint(
+                    -(int)(frame.getBounds().width - frame.getCanvasWidth()),
+                    -(int)(frame.getBounds().height - frame.getCanvasHeight())
+            );
+
+            Point pos = event.getPoint();
+
+            if(SwingUtilities.isLeftMouseButton(event)){
+
+            }
+            else if(SwingUtilities.isRightMouseButton(event)){
+
+            }
+        }
     }
 
     public static void main(String[] args) {

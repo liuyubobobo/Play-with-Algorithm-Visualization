@@ -10,7 +10,7 @@ public class MineSweeperData {
     }
 
     private int N, M;
-    public boolean[][] mines;
+    private boolean[][] mines;
 
     public MineSweeperData(int N, int M, int mineNumber){
 
@@ -39,6 +39,12 @@ public class MineSweeperData {
 
     public int N(){ return N; }
     public int M(){ return M; }
+
+    public boolean isMine(int x, int y){
+        if(!inArea(x, y))
+            throw new IllegalArgumentException("Out of index in isMine function!");
+        return mines[x][y];
+    }
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;
