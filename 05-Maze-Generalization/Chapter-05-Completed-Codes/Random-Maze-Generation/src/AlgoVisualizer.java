@@ -60,7 +60,7 @@ public class AlgoVisualizer {
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Maze Generation Visualization", sceneWidth,sceneHeight);
 
-            int N = sceneWidth/blockSide;
+            int N = sceneHeight/blockSide;
             int M = sceneWidth/blockSide;
 
             MazeData data = new MazeData(N, M);

@@ -37,9 +37,9 @@ public class AlgoVisualizer {
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Mine Sweeper", sceneWidth,sceneHeight);
 
-            int N = sceneWidth/blockSide;
+            int N = sceneHeight/blockSide;
             int M = sceneWidth/blockSide;
-            int mineNumber = (int)(0.01*N*M);
+            int mineNumber = 20;
 
             MineSweeperData data = new MineSweeperData(N, M, mineNumber);
             AlgoVisualizer vis = new AlgoVisualizer(frame, data);
