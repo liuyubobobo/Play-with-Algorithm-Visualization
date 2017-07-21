@@ -56,14 +56,38 @@ public class AlgoVisualizer {
 
     private void setData(boolean isLeftClicked, int x, int y){
         if(isLeftClicked){
-            if(data.inArea(x, y))
-                data.open[x][y] = true;
+            if(data.inArea(x, y)) {
+                //data.open[x][y] = true;
+                if(data.isMine(x, y)){
+                    // GAME OVER
+                    data.open[x][y] = true;
+                }
+                else
+                    open(x, y);
+            }
         }
         else{
             if(data.inArea(x, y))
                 data.flags[x][y] = true;
         }
         frame.setData(data);
+    }
+
+    private void open(int x, int y){
+
+        if(!data.inArea(x, y))
+            throw new IllegalArgumentException("Out of index in open function!");
+
+        if(data.isMine(x, y))
+            throw new IllegalArgumentException("Cannot open an mine block in open function.");
+
+        data.open[x][y] = true;
+        if(data.getNumber(x, y) == 0){
+            for(int i = x-1 ; i <= x + 1 ; i ++)
+                for(int j = y-1 ; j <= y+1 ;j ++)
+                    if(data.inArea(i, j) && !data.open[i][j] && !data.isMine(i, j))
+                        open(i, j);
+        }
     }
 
     public static void main(String[] args) {
