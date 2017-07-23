@@ -11,6 +11,7 @@ public class GameData {
     private int maxTurn;
     private int N, M;
     private Board starterBoard;
+    private Board showBoard;
 
     public GameData(String filename){
 
@@ -41,11 +42,10 @@ public class GameData {
             this.M = starterBoard.M();
 
             starterBoard.print();
+
+            showBoard = new Board(starterBoard);
         }
         catch(IOException e){
-            e.printStackTrace();
-        }
-        catch (Exception e){
             e.printStackTrace();
         }
         finally {
@@ -56,6 +56,7 @@ public class GameData {
 
     public int N(){ return N; }
     public int M(){ return M; }
+    public Board getShowBoard(){ return showBoard;}
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;

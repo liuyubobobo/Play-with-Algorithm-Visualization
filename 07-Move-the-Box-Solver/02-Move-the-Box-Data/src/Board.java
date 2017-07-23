@@ -26,6 +26,10 @@ public class Board {
     public int N(){ return N; }
     public int M(){ return M; }
 
+    public boolean inArea(int x, int y){
+        return x >= 0 && x < N && y >= 0 && y < M;
+    }
+
     public void print(){
         for(int i = 0 ; i < N ; i ++)
             System.out.println(String.valueOf(data[i]));

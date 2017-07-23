@@ -3,6 +3,9 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.swing.*;
 
@@ -46,9 +49,25 @@ public class AlgoFrame extends JFrame{
 
     private class AlgoCanvas extends JPanel{
 
+        private ArrayList<Color> colorList;
+        private Map<Character, Color> colorMap;
         public AlgoCanvas(){
             // 双缓存
             super(true);
+
+            colorList = new ArrayList<Color>();
+            colorList.add(AlgoVisHelper.Red);
+            colorList.add(AlgoVisHelper.Purple);
+            colorList.add(AlgoVisHelper.Blue);
+            colorList.add(AlgoVisHelper.Teal);
+            colorList.add(AlgoVisHelper.LightGreen);
+            colorList.add(AlgoVisHelper.Lime);
+            colorList.add(AlgoVisHelper.Amber);
+            colorList.add(AlgoVisHelper.DeepOrange);
+            colorList.add(AlgoVisHelper.Brown);
+            colorList.add(AlgoVisHelper.BlueGrey);
+
+            colorMap = new HashMap<Character, Color>();
         }
 
         @Override
@@ -68,8 +87,24 @@ public class AlgoFrame extends JFrame{
             int w = canvasWidth/data.M();
             int h = canvasHeight/data.N();
 
+            Board showBoard = data.getShowBoard();
 
+            for(int i = 0 ; i < showBoard.N() ; i ++)
+                for(int j = 0 ; j < showBoard.M() ; j++){
+                    char c  = showBoard.getData(i, j);
+                    if(c != Board.EMPTY){
 
+                        if(!colorMap.containsKey(c)){
+                            int sz = colorMap.size();
+                            colorMap.put(c, colorList.get(sz));
+                        }
+
+                        Color color = colorMap.get(c);
+                        AlgoVisHelper.setColor(g2d, color);
+                        AlgoVisHelper.fillRectangle(g2d, j*h+2, i*w+2, w-4, h-4);
+
+                    }
+                }
         }
 
         @Override

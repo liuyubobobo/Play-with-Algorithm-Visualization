@@ -45,9 +45,6 @@ public class GameData {
         catch(IOException e){
             e.printStackTrace();
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
         finally {
             if(scanner != null)
                 scanner.close();
