@@ -42,8 +42,8 @@ public class AlgoVisualizer {
             int w = frame.getCanvasWidth() / data.M();
             int h = frame.getCanvasHeight() / data.N();
 
-            int x = pos.x / h;
-            int y = pos.y / w;
+            int x = pos.y / h;
+            int y = pos.x / w;
             // System.out.println(x + " , " + y);
 
             if(SwingUtilities.isLeftMouseButton(event))

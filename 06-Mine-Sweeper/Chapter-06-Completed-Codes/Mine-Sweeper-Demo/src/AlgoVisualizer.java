@@ -38,13 +38,13 @@ public class AlgoVisualizer {
             );
 
             Point pos = event.getPoint();
-
+            // System.out.println(pos.x + " , " + pos.y);
             int w = frame.getCanvasWidth() / data.M();
             int h = frame.getCanvasHeight() / data.N();
 
-            int x = pos.x / h;
-            int y = pos.y / w;
-            // System.out.println(x + " , " + y);
+            int x = pos.y / h;
+            int y = pos.x / w;
+            //System.out.println(x + " , " + y);
 
             if(SwingUtilities.isLeftMouseButton(event))
                 setData(true, x, y);
