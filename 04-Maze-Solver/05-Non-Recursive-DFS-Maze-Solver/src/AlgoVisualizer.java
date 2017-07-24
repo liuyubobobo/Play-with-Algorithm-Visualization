@@ -13,6 +13,8 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(false, -1, -1);
     }
 
     public void run(){

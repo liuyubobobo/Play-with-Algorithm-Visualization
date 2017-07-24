@@ -1,4 +1,5 @@
 import javafx.geometry.Pos;
+import sun.jvm.hotspot.gc_implementation.parallelScavenge.PSOldGen;
 
 import java.awt.*;
 import java.util.*;
@@ -15,6 +16,8 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(false, Position.invalidPosition(), false, Position.invalidPosition());
     }
 
     public void run(){

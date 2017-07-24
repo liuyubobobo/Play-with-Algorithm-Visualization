@@ -15,6 +15,8 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(false, Position.invalidPosition(), false, Position.invalidPosition());
     }
 
     public void run(){
