@@ -18,12 +18,12 @@ public class AlgoVisualizer {
         // 根据frame的大小计算合理数值
         for( int i = 0 ; i < N ; i ++)
             numbers[i] = (int)(Math.random()*frame.getCanvasHeight()) + 1;
+
+        frame.setNumbers(numbers, 0,-1,-1);
     }
 
     public void run(){
 
-        frame.setNumbers(numbers, 0,-1,-1);
-        AlgoVisHelper.pause(DELAY);
         for( int i = 0 ; i < N ; i ++ ){
             // 寻找[i, n)区间里的最小值的索引
             int minIndex = i;

@@ -12,12 +12,12 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(0,-1);
     }
 
     public void run(){
 
-        this.setData(0,-1);
-        AlgoVisHelper.pause(DELAY);
         for( int i = 0 ; i < data.N() ; i ++ ){
 
             this.setData(i, i);

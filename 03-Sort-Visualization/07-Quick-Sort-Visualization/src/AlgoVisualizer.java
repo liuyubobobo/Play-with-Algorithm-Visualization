@@ -13,12 +13,11 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(-1, -1, -1, -1, -1);
     }
 
     public void run(){
-
-        this.setData(-1, -1, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
 
         quickSort(0, data.N()-1);
 

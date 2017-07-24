@@ -13,12 +13,11 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(data.N());
     }
 
     public void run(){
-
-        this.setData(data.N());
-        AlgoVisHelper.pause(DELAY);
 
         heapSort();
 

@@ -12,12 +12,11 @@ public class AlgoVisualizer {
 
         this.frame = frame;
         this.data = data;
+
+        this.setData(0,-1,-1);
     }
 
     public void run(){
-
-        this.setData(0,-1,-1);
-        AlgoVisHelper.pause(DELAY);
 
         for( int i = 0 ; i < data.N() ; i ++ ){
             // 寻找[i, n)区间里的最小值的索引
