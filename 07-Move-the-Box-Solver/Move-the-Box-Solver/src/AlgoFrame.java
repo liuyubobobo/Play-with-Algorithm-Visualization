@@ -83,6 +83,11 @@ public class AlgoFrame extends JFrame{
 //            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 //            g2d.addRenderingHints(hints);
 
+            if(data == null) {
+                System.out.println("data = null!");
+                return;
+            }
+
             // 具体绘制
             int w = canvasWidth/data.M();
             int h = canvasHeight/data.N();

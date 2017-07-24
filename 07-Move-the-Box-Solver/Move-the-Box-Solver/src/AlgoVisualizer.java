@@ -45,14 +45,14 @@ public class AlgoVisualizer {
             );
 
             Point pos = event.getPoint();
-            System.out.println(pos.x + " , " + pos.y );
+            //System.out.println(pos.x + " , " + pos.y );
 
             int w = frame.getCanvasWidth() / data.M();
             int h = frame.getCanvasHeight() / data.N();
 
             int x = pos.y / h;
             int y = pos.x / w;
-            System.out.println(x + " , " + y);
+            //System.out.println(x + " , " + y);
 
             if(SwingUtilities.isLeftMouseButton(event)){
                 if(data.getShowBoard().getData(x, y) != Board.EMPTY){
@@ -85,14 +85,15 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        String filename = "level/boston_09.txt";
-        GameData data = new GameData(filename);
-
-        int blockSide = 80;
-        int sceneWidth = data.M() * blockSide;
-        int sceneHeight = data.N() * blockSide;
+        String filename = "level/boston_16.txt";
 
         EventQueue.invokeLater(() -> {
+            GameData data = new GameData(filename);
+
+            int blockSide = 80;
+            int sceneWidth = data.M() * blockSide;
+            int sceneHeight = data.N() * blockSide;
+
             AlgoFrame frame = new AlgoFrame("Move the Box Solver", sceneWidth,sceneHeight);
 
             AlgoVisualizer vis = new AlgoVisualizer(frame, data);

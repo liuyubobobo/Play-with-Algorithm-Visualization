@@ -135,4 +135,30 @@ public class Board {
         System.out.println(swapString);
         return;
     }
+
+    @Override
+    public int hashCode(){
+
+        StringBuilder s = new StringBuilder();
+        for(int i = 0 ; i < data.length ; i ++)
+            s.append(data[i]);
+        return s.toString().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object another){
+
+        if(!(another instanceof Board))
+            return false;
+
+        if( another == this)
+            return true;
+
+        Board anotherBoard = (Board)another;
+        for(int i = 0 ; i < N ; i ++)
+            for(int j = 0 ; j < M ; j ++)
+                if(this.data[i][j] != anotherBoard.data[i][j])
+                    return false;
+        return true;
+    }
 }

@@ -3,7 +3,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class GameData {
@@ -12,6 +14,7 @@ public class GameData {
     private int N, M;
     private Board starterBoard;
     private Board showBoard;
+    private HashSet<Board> searchedBoards;
 
     public int clickx, clicky;
 
@@ -46,6 +49,8 @@ public class GameData {
             //starterBoard.print();
 
             showBoard = new Board(starterBoard);
+
+            searchedBoards = new HashSet<Board>();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -69,21 +74,32 @@ public class GameData {
         if(maxTurn < 0)
             return false;
 
-        return solve(new Board(starterBoard), maxTurn);
+        long startTime = System.currentTimeMillis();
+
+        searchedBoards.add(starterBoard);
+        boolean ret = solve(new Board(starterBoard), maxTurn);
+
+        long endTime = System.currentTimeMillis();
+        System.out.println( "Time : " + (endTime-startTime) + "ms" );
+
+        return ret;
     }
 
-    private int d[][] = {{-1, 0}, {1, 0}, {-1,0}};
+    private int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
     private boolean solve(Board board, int turn){
 
         if(board == null)
             throw new IllegalArgumentException("board can not be null in solve function!");
+
+//        System.out.println("= turn " + turn + " =");
+//        board.print();
+//        System.out.println("==========");
 
         if(turn == 0)
             return isWin(board);
 
         if(isWin(board))
             return true;
-
 
         for(int x = 0 ; x < N ; x ++)
             for(int y = 0 ; y < M ; y ++)
@@ -97,8 +113,13 @@ public class GameData {
                             nextBoard.swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
                             nextBoard.swap(x, y, newX, newY);
                             nextBoard.run();
-                            if(solve(nextBoard, turn-1))
-                                return true;
+
+                            if(!searchedBoards.contains(nextBoard)){
+                                searchedBoards.add(nextBoard);
+                                if(solve(nextBoard, turn-1))
+                                    return true;
+                            }
+
                         }
                     }
                 }

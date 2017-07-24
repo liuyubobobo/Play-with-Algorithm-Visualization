@@ -70,7 +70,7 @@ public class GameData {
         return solve(new Board(starterBoard), maxTurn);
     }
 
-    private int d[][] = {{-1, 0}, {1, 0}, {-1,0}};
+    private int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
     private boolean solve(Board board, int turn){
 
         if(board == null)
