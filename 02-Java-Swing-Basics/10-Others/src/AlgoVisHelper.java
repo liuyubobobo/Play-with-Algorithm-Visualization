@@ -79,4 +79,15 @@ public class AlgoVisHelper {
 
         g.drawImage(image, x, y, null);
     }
+
+    public static void drawText(Graphics2D g, String text, int centerx, int centery){
+
+        if(text == null)
+            throw new IllegalArgumentException("Text is null in drawText function!");
+
+        FontMetrics metrics = g.getFontMetrics();
+        int w = metrics.stringWidth(text);
+        int h = metrics.getDescent();
+        g.drawString(text, centerx - w/2, centery + h);
+    }
 }
