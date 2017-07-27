@@ -21,7 +21,7 @@ public class AlgoVisualizer {
         pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, 0));
 
         for(int i = 0 ; i < data.N() ; i ++){
-            data.particles[i].nextHorizontalWallCollisionEvent();
+            pq.add(data.particles[i].nextHorizontalWallCollisionEvent());
         }
         //this.setData(data);
     }

@@ -1,6 +1,3 @@
-/**
- * Created by yuanzhang on 7/27/17.
- */
 public class SystemData {
 
     private int sceneWidth, sceneHeight;

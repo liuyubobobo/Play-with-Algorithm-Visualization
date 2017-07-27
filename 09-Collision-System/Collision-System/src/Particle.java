@@ -42,4 +42,9 @@ public class Particle {
         return (this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y)
                 < (this.r + p.r) * (this.r + p.r);
     }
+
+    public SystemEvent nextHorizontalWallCollisionEvent(){
+
+
+    }
 }

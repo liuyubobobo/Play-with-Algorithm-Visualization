@@ -9,9 +9,9 @@ public class SystemEvent {
 
     Type type;
     Particle a, b;
-    long time;
+    double time;
 
-    public SystemEvent(Type type, Particle a, Particle b, long time){
+    public SystemEvent(Type type, Particle a, Particle b, double time){
         this.type = type;
         this.a = a;
         this.b = b;
