@@ -35,7 +35,7 @@ public class AlgoVisualizer {
                 pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, curEvent.time+DELAY));
                 System.out.println("REDRAW event handled.");
             }
-            else if(curEvent.type == SystemEvent.Type.PARTICLE_HORENTAL_WALL_COLLISION){
+            else if(curEvent.type == SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION){
                 ;
             }
             else if(curEvent.type == SystemEvent.Type.PARTICLE_VERTICLE_WALL_COLLISION){

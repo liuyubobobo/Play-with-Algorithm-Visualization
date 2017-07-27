@@ -1,7 +1,7 @@
 public class SystemEvent {
 
     public enum Type{
-        PARTICLE_HORENTAL_WALL_COLLISION,
+        PARTICLE_HORIZONTAL_WALL_COLLISION,
         PARTICLE_VERTICLE_WALL_COLLISION,
         TWO_PARTICLES_COLLISION,
         REDRAW
