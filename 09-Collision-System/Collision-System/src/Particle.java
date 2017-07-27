@@ -43,8 +43,23 @@ public class Particle {
                 < (this.r + p.r) * (this.r + p.r);
     }
 
-    public SystemEvent nextHorizontalWallCollisionEvent(){
+    public SystemEvent nextHorizontalWallCollisionEvent(int sceneHeight){
 
+        if(this.vy > 0)
+            return new SystemEvent(SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION,
+                        this, null, (sceneHeight - this.y)/this.vy);
+        else
+            return new SystemEvent(SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION,
+                    this, null, this.y/this.vy);
+    }
 
+    public SystemEvent nextVerticalWallCollisionEvent(int sceneWidth){
+
+        if(this.vx > 0)
+            return new SystemEvent(SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION,
+                    this, null, (sceneWidth - this.x)/this.vx);
+        else
+            return new SystemEvent(SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION,
+                    this, null, this.x/this.vx);
     }
 }

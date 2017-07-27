@@ -21,7 +21,8 @@ public class AlgoVisualizer {
         pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, 0));
 
         for(int i = 0 ; i < data.N() ; i ++){
-            pq.add(data.particles[i].nextHorizontalWallCollisionEvent());
+            pq.add(data.particles[i].nextHorizontalWallCollisionEvent(frame.getCanvasHeight()));
+            pq.add(data.particles[i].nextHorizontalWallCollisionEvent(frame.getCanvasWidth()));
         }
         //this.setData(data);
     }
@@ -32,19 +33,18 @@ public class AlgoVisualizer {
 
             SystemEvent curEvent = pq.remove();
 
-            if(curEvent.type == SystemEvent.Type.REDRAW){
+            if(curEvent.getType() == SystemEvent.Type.REDRAW){
                 this.setData(data);
                 AlgoVisHelper.pause(DELAY);
-                pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, curEvent.time+DELAY));
-                System.out.println("REDRAW event handled.");
+                pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, curEvent.getTime()+DELAY));
             }
-            else if(curEvent.type == SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION){
+            else if(curEvent.getType() == SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION){
                 ;
             }
-            else if(curEvent.type == SystemEvent.Type.PARTICLE_VERTICLE_WALL_COLLISION){
+            else if(curEvent.getType() == SystemEvent.Type.PARTICLE_VERTICLE_WALL_COLLISION){
                 ;
             }
-            else{ // curEvent.type == SystemEvent.Type.TWO_PARTICLES_COLLISION
+            else{ // curEvent.getType() == SystemEvent.Type.TWO_PARTICLES_COLLISION
                 ;
             }
         }
