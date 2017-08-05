@@ -4,7 +4,7 @@ public class Particle {
 
     private static int MIN_R = 10;
     private static int MAX_R = 30;
-    private static int MAX_SPEED = 10;
+    private static double MAX_SPEED = 1.0;
     private static double MASS_C = 10.0;
 
     public int x, y;
@@ -43,6 +43,11 @@ public class Particle {
                 < (this.r + p.r) * (this.r + p.r);
     }
 
+    public void move(double t){
+        this.x += this.vx * t;
+        this.y += this.vy * t;
+    }
+
     public SystemEvent nextHorizontalWallCollisionEvent(int sceneHeight){
 
         if(this.vy > 0)
@@ -61,5 +66,13 @@ public class Particle {
         else
             return new SystemEvent(SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION,
                     this, null, this.x/this.vx);
+    }
+
+    public void bounceOffHorizontalWall(){
+        this.vy = -this.vy;
+    }
+
+    public void bounceOffVerticalWall(){
+        this.vx = -this.vx;
     }
 }

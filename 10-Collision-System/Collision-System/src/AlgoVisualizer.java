@@ -12,6 +12,7 @@ public class AlgoVisualizer {
     private SystemData data;
     private AlgoFrame frame;
     private PriorityQueue<SystemEvent> pq;
+    double time = 0.0;
 
     public AlgoVisualizer(AlgoFrame frame, SystemData data){
 
@@ -22,9 +23,9 @@ public class AlgoVisualizer {
 
         for(int i = 0 ; i < data.N() ; i ++){
             pq.add(data.particles[i].nextHorizontalWallCollisionEvent(frame.getCanvasHeight()));
-            pq.add(data.particles[i].nextHorizontalWallCollisionEvent(frame.getCanvasWidth()));
+            pq.add(data.particles[i].nextVerticalWallCollisionEvent(frame.getCanvasWidth()));
         }
-        //this.setData(data);
+        this.setData(data);
     }
 
     public void run(){
@@ -32,6 +33,9 @@ public class AlgoVisualizer {
         while(!pq.isEmpty()){
 
             SystemEvent curEvent = pq.remove();
+            for(int i = 0 ; i < data.N() ; i ++)
+                data.particles[i].move(curEvent.getTime()-this.time);
+            this.time = curEvent.getTime();
 
             if(curEvent.getType() == SystemEvent.Type.REDRAW){
                 this.setData(data);
@@ -39,10 +43,16 @@ public class AlgoVisualizer {
                 pq.add(new SystemEvent(SystemEvent.Type.REDRAW, null, null, curEvent.getTime()+DELAY));
             }
             else if(curEvent.getType() == SystemEvent.Type.PARTICLE_HORIZONTAL_WALL_COLLISION){
-                ;
+                Particle p = curEvent.getParticleA();
+                p.bounceOffHorizontalWall();
+
+                pq.add(p.nextHorizontalWallCollisionEvent(frame.getCanvasHeight()));
             }
             else if(curEvent.getType() == SystemEvent.Type.PARTICLE_VERTICLE_WALL_COLLISION){
-                ;
+                Particle p = curEvent.getParticleB();
+                p.bounceOffVerticalWall();
+
+                pq.add(p.nextVerticalWallCollisionEvent(frame.getCanvasWidth()));
             }
             else{ // curEvent.getType() == SystemEvent.Type.TWO_PARTICLES_COLLISION
                 ;
