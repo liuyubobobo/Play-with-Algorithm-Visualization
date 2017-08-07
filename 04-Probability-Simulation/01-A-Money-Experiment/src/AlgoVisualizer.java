@@ -53,7 +53,7 @@ public class AlgoVisualizer {
         int N = 120;
 
         EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Fractal Visualizer", sceneWidth,sceneHeight);
+            AlgoFrame frame = new AlgoFrame("Money Problem", sceneWidth,sceneHeight);
 
             SocietyData data = new SocietyData(N, sceneHeight);
 

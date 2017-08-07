@@ -94,14 +94,14 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        int N = 20;
-        int M = 20;
+        int N = 24;
+        int M = 32;
 
         int blockSide = 32;
         int sceneWidth = M * blockSide;
         int sceneHeight = N * blockSide;
 
-        int mineNumber = 20;
+        int mineNumber = 66;
         MineSweeperData data = new MineSweeperData(N, M, mineNumber);
 
         EventQueue.invokeLater(() -> {

@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 10;
 
     private MazeData data;
     private AlgoFrame frame;

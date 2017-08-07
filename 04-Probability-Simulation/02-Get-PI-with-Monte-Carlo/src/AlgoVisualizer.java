@@ -31,7 +31,7 @@ public class AlgoVisualizer {
             int y = (int)(Math.random() * frame.getCanvasHeight());
             data.addPoint(x, y);
 
-            if( data.N() % 100 == 0) {
+            if( data.N() % 10 == 0) {
                 this.setData();
                 AlgoVisHelper.pause(DELAY);
 
@@ -52,13 +52,13 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        int sceneWidth = 400;
-        int sceneHeight = 400;
+        int sceneWidth = 800;
+        int sceneHeight = 800;
 
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Monte Carlo Visualizer", sceneWidth,sceneHeight);
 
-            MonteCarloData data = new MonteCarloData(sceneWidth/2, sceneHeight/2, 150);
+            MonteCarloData data = new MonteCarloData(sceneWidth/2, sceneHeight/2, 300);
 
             AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {

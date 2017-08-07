@@ -95,10 +95,10 @@ public class AlgoVisualizer {
         EventQueue.invokeLater(() -> {
             AlgoFrame frame = new AlgoFrame("Quick Sort Visualization", sceneWidth,sceneHeight);
 
-            int N = 200;
-            // int N = 100;
+            //int N = 200;
+            int N = 100;
 
-            QuickSortData data = new QuickSortData(N, sceneHeight, true);
+            QuickSortData data = new QuickSortData(N, sceneHeight, false);
             AlgoVisualizer vis = new AlgoVisualizer(frame, data);
             new Thread(() -> {
                 vis.run();
