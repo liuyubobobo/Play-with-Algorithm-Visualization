@@ -15,7 +15,7 @@ public class AlgoFrame extends JFrame{
 
         //setSize(canvasWidth, canvasHeight);
         AlgoCanvas canvas = new AlgoCanvas();
-        //canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeight));
+        // canvas.setPreferredSize(new Dimension(canvasWidth,canvasHeight));
         setContentPane(canvas);
         pack();
 
@@ -24,7 +24,7 @@ public class AlgoFrame extends JFrame{
 
         setVisible(true);
 
-        System.out.println(getContentPane().getBounds());
+        // System.out.println(getContentPane().getBounds());
     }
 
     public AlgoFrame(String title){
@@ -43,7 +43,6 @@ public class AlgoFrame extends JFrame{
             super.paintComponent(g);
 
             g.drawOval(50, 50, 300, 300);
-            //g.drawOval(0, 0, 800, 800);
         }
 
         @Override
