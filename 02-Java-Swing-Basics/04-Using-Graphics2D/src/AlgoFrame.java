@@ -39,19 +39,17 @@ public class AlgoFrame extends JFrame{
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            //g.drawOval(50, 50, 300, 300);
-
             Graphics2D g2d = (Graphics2D)g;
 
-            int strokeWidth = 10;
+            int strokeWidth = 5;
             g2d.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
             g2d.setColor(Color.RED);
-            Ellipse2D circle = new Ellipse2D.Double(50, 50, 600, 600);
+            Ellipse2D circle = new Ellipse2D.Double(50, 50, 300, 300);
             g2d.draw(circle);
 
             g2d.setColor(Color.BLUE);
-            Ellipse2D circle2 = new Ellipse2D.Double(50, 50, 600, 600);
+            Ellipse2D circle2 = new Ellipse2D.Double(50, 50, 300, 300);
             g2d.fill(circle2);
         }
 
