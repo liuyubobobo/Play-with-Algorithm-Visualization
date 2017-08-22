@@ -13,7 +13,6 @@ public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -41,9 +40,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    SocietyData data;
-    public void setData(SocietyData data){
-        this.data = data;
+    int[] money;
+    public void render(int[] money){
+        this.money = money;
         repaint();
     }
 
@@ -68,14 +67,19 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            int w = canvasWidth / data.N();
-            for(int i = 0 ; i < data.N() ; i ++){
-                AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
-                AlgoVisHelper.fillRectangle(g2d, i*w+1, canvasHeight-data.money[i], w-1, data.money[i]);
-            }
-
+            int w = canvasWidth / money.length;
+            for(int i = 0 ; i < money.length ; i ++)
+                if(money[i] > 0) {
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
+                    AlgoVisHelper.fillRectangle(g2d,
+                            i * w + 1, canvasHeight / 2 - money[i], w - 1, money[i]);
+                }
+                else{
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+                    AlgoVisHelper.fillRectangle(g2d,
+                            i * w + 1, canvasHeight / 2, w - 1, -money[i]);
+                }
         }
-
 
         @Override
         public Dimension getPreferredSize(){
