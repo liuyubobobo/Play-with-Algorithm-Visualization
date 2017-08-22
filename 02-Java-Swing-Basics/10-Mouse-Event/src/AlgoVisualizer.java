@@ -61,13 +61,11 @@ public class AlgoVisualizer {
     private class AlgoMouseListener extends MouseAdapter{
 
         @Override
-        public void mouseReleased(MouseEvent event){
+        public void mousePressed(MouseEvent event){
 
-            event.translatePoint(
-                    0,
-                    -(frame.getBounds().height - frame.getCanvasHeight())
-                    );
             //System.out.println(event.getPoint());
+            event.translatePoint(0,
+                    -(frame.getBounds().height - frame.getCanvasHeight()));
 
             for(Circle circle : circles)
                 if(circle.contain(event.getPoint()))
