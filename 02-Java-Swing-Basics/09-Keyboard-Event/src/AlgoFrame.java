@@ -10,7 +10,6 @@ public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -39,7 +38,7 @@ public class AlgoFrame extends JFrame{
 
     // data
     private Circle[] circles;
-    public void setCircles(Circle[] circles){
+    public void render(Circle[] circles){
         this.circles = circles;
         repaint();
     }
