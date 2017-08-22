@@ -42,6 +42,7 @@ public class AlgoVisualizer {
         int sceneWidth = 800;
         int sceneHeight = 800;
 
+        // TODO: 根据需要设置其他参数，初始化visualizer
         AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight);
     }
 }
