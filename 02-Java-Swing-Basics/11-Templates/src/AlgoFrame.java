@@ -10,7 +10,6 @@ public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -36,12 +35,11 @@ public class AlgoFrame extends JFrame{
 
     public int getCanvasWidth(){return canvasWidth;}
     public int getCanvasHeight(){return canvasHeight;}
-    //public JPanel getCanvas(){return canvas;}
 
-    // data
-    private Circle[] circles;
-    public void setCircles(Circle[] circles){
-        this.circles = circles;
+    // TODO: 设置自己的数据
+    private Object data;
+    public void render(Object data){
+        this.data = data;
         repaint();
     }
 
@@ -66,13 +64,7 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            AlgoVisHelper.setStrokeWidth(g2d,1);
-            AlgoVisHelper.setColor(g2d, Color.RED);
-            for(Circle circle: circles)
-                if(circle.isFilled)
-                    AlgoVisHelper.fillCircle(g2d, circle.x, circle.y, circle.r);
-                else
-                    AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.r);
+            // TODO： 绘制自己的数据data
         }
 
         @Override
