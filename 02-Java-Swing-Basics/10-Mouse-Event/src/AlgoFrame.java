@@ -10,7 +10,6 @@ public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -40,7 +39,7 @@ public class AlgoFrame extends JFrame{
 
     // data
     private Circle[] circles;
-    public void setCircles(Circle[] circles){
+    public void render(Circle[] circles){
         this.circles = circles;
         repaint();
     }
@@ -70,9 +69,9 @@ public class AlgoFrame extends JFrame{
             AlgoVisHelper.setColor(g2d, Color.RED);
             for(Circle circle: circles)
                 if(circle.isFilled)
-                    AlgoVisHelper.fillCircle(g2d, circle.x, circle.y, circle.r);
+                    AlgoVisHelper.fillCircle(g2d, circle.x, circle.y, circle.getR());
                 else
-                    AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.r);
+                    AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.getR());
         }
 
         @Override

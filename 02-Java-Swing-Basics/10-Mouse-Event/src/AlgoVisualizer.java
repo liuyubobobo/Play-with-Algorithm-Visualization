@@ -1,47 +1,52 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Random;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class AlgoVisualizer{
+public class AlgoVisualizer {
 
-    private int N;
     private Circle[] circles;
-    private static int R = 50;
     private AlgoFrame frame;
     private boolean isAnimated = true;
 
-    public AlgoVisualizer(int N, AlgoFrame frame){
-        this.N = N;
-        this.frame = frame;
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
+        // 初始化数据
         circles = new Circle[N];
-
-        for(int i = 0 ; i < N ; i ++ ) {
-            int x = (int)(Math.random()*(frame.getCanvasWidth()-2*R)) + R;
-            int y = (int)(Math.random()*(frame.getCanvasHeight()-2*R)) + R;
+        int R = 50;
+        for(int i = 0 ; i < N ; i ++){
+            int x = (int)(Math.random()*(sceneWidth-2*R)) + R;
+            int y = (int)(Math.random()*(sceneHeight-2*R)) + R;
             int vx = (int)(Math.random()*11) - 5;
             int vy = (int)(Math.random()*11) - 5;
             circles[i] = new Circle(x, y, R, vx, vy);
         }
+
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
+            frame.addKeyListener(new AlgoKeyListener());
+            frame.addMouseListener(new AlgoMouseListener());
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    // 动画逻辑
+    private void run(){
 
         while(true){
             // 绘制数据
-            frame.setCircles(circles);
+            frame.render(circles);
             AlgoVisHelper.pause(20);
 
             // 更新数据
-            if( isAnimated)
-                for(Circle circle: circles)
+            if(isAnimated)
+                for(Circle circle : circles)
                     circle.move(0, 0, frame.getCanvasWidth(), frame.getCanvasHeight());
         }
-    }
-
-    public void addAlgoKeyListener(){
-        frame.addKeyListener(new AlgoKeyListener());
     }
 
     private class AlgoKeyListener extends KeyAdapter{
@@ -53,17 +58,14 @@ public class AlgoVisualizer{
         }
     }
 
-    public void addAlgoMouseListener(){
-        frame.addMouseListener(new AlgoMouseListener());
-    }
-
     private class AlgoMouseListener extends MouseAdapter{
 
         @Override
         public void mouseReleased(MouseEvent event){
+
             event.translatePoint(
-                    -(int)(frame.getBounds().width - frame.getCanvasWidth()),
-                    -(int)(frame.getBounds().height - frame.getCanvasHeight())
+                    0,
+                    -(frame.getBounds().height - frame.getCanvasHeight())
                     );
             //System.out.println(event.getPoint());
 
@@ -77,17 +79,8 @@ public class AlgoVisualizer{
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 10;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Welcome", sceneWidth,sceneHeight);
-
-            int N = 10;
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame);
-            vis.addAlgoKeyListener();
-            vis.addAlgoMouseListener();
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }
