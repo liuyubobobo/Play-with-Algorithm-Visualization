@@ -39,7 +39,7 @@ public class AlgoFrame extends JFrame{
 
     // data
     private Circle[] circles;
-    public void setCircles(Circle[] circles){
+    public void render(Circle[] circles){
         this.circles = circles;
         repaint();
     }
@@ -68,7 +68,7 @@ public class AlgoFrame extends JFrame{
             AlgoVisHelper.setStrokeWidth(g2d,1);
             AlgoVisHelper.setColor(g2d, Color.RED);
             for(Circle circle: circles)
-                AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.r);
+                AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.getR());
         }
 
         @Override

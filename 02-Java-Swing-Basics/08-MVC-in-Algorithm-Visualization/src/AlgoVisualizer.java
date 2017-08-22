@@ -8,10 +8,11 @@ public class AlgoVisualizer {
     static private int R = 50;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame){
-        this.N = N;
-        this.frame = frame;
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
+        this.frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
+
+        this.N = N;
         circles = new Circle[N];
 
         for(int i = 0 ; i < N ; i ++ ) {
@@ -40,12 +41,10 @@ public class AlgoVisualizer {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 10;
 
         EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Welcome", sceneWidth,sceneHeight);
-
-            int N = 10;
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame);
+            AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
             new Thread(() -> {
                 vis.run();
             }).start();
