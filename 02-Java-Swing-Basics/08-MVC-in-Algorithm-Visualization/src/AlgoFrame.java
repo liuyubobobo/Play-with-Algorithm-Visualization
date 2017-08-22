@@ -1,16 +1,11 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
 import javax.swing.*;
+import java.awt.*;
+
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -30,7 +25,6 @@ public class AlgoFrame extends JFrame{
     }
 
     public AlgoFrame(String title){
-
         this(title, 1024, 768);
     }
 
@@ -39,7 +33,7 @@ public class AlgoFrame extends JFrame{
 
     // data
     private Circle[] circles;
-    public void setCircles(Circle[] circles){
+    public void render(Circle[] circles){
         this.circles = circles;
         repaint();
     }
@@ -68,7 +62,7 @@ public class AlgoFrame extends JFrame{
             AlgoVisHelper.setStrokeWidth(g2d,1);
             AlgoVisHelper.setColor(g2d, Color.RED);
             for(Circle circle: circles)
-                AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.r);
+                AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.getR());
         }
 
         @Override
@@ -77,5 +71,3 @@ public class AlgoFrame extends JFrame{
         }
     }
 }
-
-

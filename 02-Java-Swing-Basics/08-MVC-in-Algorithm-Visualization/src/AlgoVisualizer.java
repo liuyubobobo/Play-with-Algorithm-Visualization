@@ -3,32 +3,37 @@ import java.util.Random;
 
 public class AlgoVisualizer {
 
-    private int N;
-    private Circle[] circles;
-    static private int R = 50;
-    private AlgoFrame frame;
+    private Circle[] circles;   // 数据
+    private AlgoFrame frame;    // 视图
 
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        this.frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
-
-        this.N = N;
+        // 初始化数据
         circles = new Circle[N];
-
+        int R = 50;
         for(int i = 0 ; i < N ; i ++ ) {
-            int x = (int)(Math.random()*(frame.getCanvasWidth()-2*R)) + R;
-            int y = (int)(Math.random()*(frame.getCanvasHeight()-2*R)) + R;
+            int x = (int)(Math.random()*(sceneWidth-2*R)) + R;
+            int y = (int)(Math.random()*(sceneHeight-2*R)) + R;
             int vx = (int)(Math.random()*11) - 5;
             int vy = (int)(Math.random()*11) - 5;
             circles[i] = new Circle(x, y, R, vx, vy);
         }
+
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    // 动画逻辑
+    private void run(){
 
         while(true){
             // 绘制数据
-            frame.setCircles(circles);
+            frame.render(circles);
             AlgoVisHelper.pause(20);
 
             // 更新数据
@@ -43,11 +48,6 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
         int N = 10;
 
-        EventQueue.invokeLater(() -> {
-            AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }
