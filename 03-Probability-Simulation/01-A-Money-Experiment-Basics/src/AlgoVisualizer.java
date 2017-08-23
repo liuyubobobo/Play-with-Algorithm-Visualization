@@ -6,13 +6,12 @@ public class AlgoVisualizer {
     private int[] money;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight){
 
         // 初始化数据
-        money = new int[N];
-        for(int i = 0 ; i < N ; i ++) {
-            money[i] = sceneHeight/3;
-        }
+        money = new int[100];
+        for(int i = 0 ; i < money.length ; i ++)
+            money[i] = 100;
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -27,6 +26,9 @@ public class AlgoVisualizer {
 
         while(true){
 
+            frame.render(money);
+            AlgoVisHelper.pause(DELAY);
+
             for(int i = 0 ; i < money.length; i ++){
                 if(money[i] > 0){
                     int j = (int)(Math.random() * money.length);
@@ -34,18 +36,14 @@ public class AlgoVisualizer {
                     money[j] += 1;
                 }
             }
-
-            frame.render(money);
-            AlgoVisHelper.pause(DELAY);
         }
     }
 
     public static void main(String[] args) {
 
-        int sceneWidth = 1200;
-        int sceneHeight = 840;
-        int N = 120;
+        int sceneWidth = 1000;
+        int sceneHeight = 800;
 
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight);
     }
 }
