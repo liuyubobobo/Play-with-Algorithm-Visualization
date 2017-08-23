@@ -31,11 +31,14 @@ public class AlgoVisualizer {
         while(true){
 
             // 改进1：每一帧执行的tick数
-            for(int k = 0 ; k < DELAY*100 ; k ++){
-                int i = (int)(Math.random() * money.length);
-                int j = (int)(Math.random() * money.length);
-                money[i] -= 1;
-                money[j] += 1;
+            for(int k = 0 ; k < 50 ; k ++){
+                for(int i = 0 ; i < money.length; i ++){
+                    //if(money[i] > 0){
+                        int j = (int)(Math.random() * money.length);
+                        money[i] -= 1;
+                        money[j] += 1;
+                    //}
+                }
             }
 
             // 改进2：是否排序

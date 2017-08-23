@@ -27,12 +27,12 @@ public class AlgoVisualizer {
 
         while(true){
 
-            int i = (int)(Math.random() * money.length);
-            int j = (int)(Math.random() * money.length);
-
-            if(money[i] > 0){
-                money[i] -= 1;
-                money[j] += 1;
+            for(int i = 0 ; i < money.length; i ++){
+                if(money[i] > 0){
+                    int j = (int)(Math.random() * money.length);
+                    money[i] -= 1;
+                    money[j] += 1;
+                }
             }
 
             frame.render(money);
