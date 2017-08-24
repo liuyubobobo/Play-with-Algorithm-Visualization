@@ -33,11 +33,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    Circle circle;
-    LinkedList<Point> points;
-    public void render(Circle circle, LinkedList<Point> points){
-        this.circle = circle;
-        this.points = points;
+    MonteCarloPiData data;
+    public void render(MonteCarloPiData data){
+        this.data = data;
         repaint();
     }
 
@@ -64,10 +62,11 @@ public class AlgoFrame extends JFrame{
             // 具体绘制
             AlgoVisHelper.setStrokeWidth(g2d, 3);
             AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
+            Circle circle = data.getCircle();
             AlgoVisHelper.strokeCircle(g2d, circle.getX(), circle.getY(), circle.getR());
 
-            for(int i = 0 ; i < points.size() ; i ++){
-                Point p = points.get(i);
+            for(int i = 0 ; i < data.getPointsNumber() ; i ++){
+                Point p = data.getPoint(i);
                 if(circle.contain(p))
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
                 else
