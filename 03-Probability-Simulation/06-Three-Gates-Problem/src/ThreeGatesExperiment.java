@@ -18,7 +18,7 @@ public class ThreeGatesExperiment {
             if(play(changeDoor))
                 wins ++;
         System.out.println(changeDoor ? "Change" : "Not Change");
-        System.out.println("win rate:" + (double)wins/N);
+        System.out.println("winning rate:" + (double)wins/N);
     }
 
     private boolean play(boolean changeDoor){
