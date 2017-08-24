@@ -7,7 +7,6 @@ public class AlgoVisualizer {
     private static int DELAY = 40;
 
     private Circle circle;
-    private int insideCircle = 0;
     private LinkedList<Point> points;
     private AlgoFrame frame;
     private int N;
@@ -24,7 +23,7 @@ public class AlgoVisualizer {
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
-            frame = new AlgoFrame("Monte Carlo", sceneWidth, sceneHeight);
+            frame = new AlgoFrame("Get Pi with Monte Carlo", sceneWidth, sceneHeight);
 
             new Thread(() -> {
                 run();
@@ -36,26 +35,14 @@ public class AlgoVisualizer {
 
         for(int i = 0 ; i < N ; i ++){
 
-            //if( i % 10 == 0) {
-            if( i % 100 == 0) {
-                frame.render(circle, points);
-                AlgoVisHelper.pause(DELAY);
-
-                if(points.size() != 0) {
-                    int circleArea = insideCircle;
-                    int squareArea = points.size();
-                    double pi_estimation = (double)circleArea * 4 / squareArea;
-                    System.out.println("PI estimation: " + pi_estimation);
-                }
-            }
+            frame.render(circle, points);
+            AlgoVisHelper.pause(DELAY);
 
             int x = (int)(Math.random() * frame.getCanvasWidth());
             int y = (int)(Math.random() * frame.getCanvasHeight());
 
             Point p = new Point(x, y);
             points.add(p);
-            if(circle.contain(p))
-                insideCircle ++;
         }
 
     }
