@@ -5,7 +5,6 @@ public class MonteCarloExperiment {
     private int squareSide;
     private int N;
     private int outputInterval = 100;
-    MonteCarloPiData data;
 
     public MonteCarloExperiment(int squareSide, int N){
 
@@ -14,9 +13,6 @@ public class MonteCarloExperiment {
 
         this.squareSide = squareSide;
         this.N = N;
-
-        Circle circle = new Circle(squareSide/2, squareSide/2, squareSide/2);
-        data = new MonteCarloPiData(circle);
     }
 
     public void setOutputInterval(int interval){
@@ -28,6 +24,9 @@ public class MonteCarloExperiment {
     }
 
     public void run(){
+
+        Circle circle = new Circle(squareSide/2, squareSide/2, squareSide/2);
+        MonteCarloPiData data = new MonteCarloPiData(circle);
 
         for(int i = 0 ; i < N ; i ++){
 
