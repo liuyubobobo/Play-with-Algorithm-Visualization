@@ -40,7 +40,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    int[] money;
+    private int[] money;
     public void render(int[] money){
         this.money = money;
         repaint();

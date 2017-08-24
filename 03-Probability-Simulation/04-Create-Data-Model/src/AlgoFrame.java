@@ -33,7 +33,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    MonteCarloPiData data;
+    private MonteCarloPiData data;
     public void render(MonteCarloPiData data){
         this.data = data;
         repaint();

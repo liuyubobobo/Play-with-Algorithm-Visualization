@@ -16,6 +16,6 @@ public class Circle {
     public int getR(){ return r; }
 
     public boolean contain(Point p){
-        return Math.pow(p.getX() - x, 2) + Math.pow(p.getY() - y, 2) <= r*r;
+        return Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2) <= r*r;
     }
 }

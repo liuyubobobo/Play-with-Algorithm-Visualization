@@ -33,8 +33,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    Circle circle;
-    LinkedList<Point> points;
+    private Circle circle;
+    private LinkedList<Point> points;
     public void render(Circle circle, LinkedList<Point> points){
         this.circle = circle;
         this.points = points;
