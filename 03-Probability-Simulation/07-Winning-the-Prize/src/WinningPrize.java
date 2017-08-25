@@ -25,10 +25,10 @@ public class WinningPrize {
             if(play())
                 wins ++;
 
-        System.out.println("winning rate:" + (double)wins/N);
+        System.out.println("winning rate: " + (double)wins/N);
     }
 
-    public boolean play(){
+    private boolean play(){
         for(int i = 0 ; i < playTime ; i ++)
             if(Math.random() < chance)
                 return true;
