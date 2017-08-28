@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Random;
 
 public class AlgoVisualizer {
 
@@ -8,52 +7,51 @@ public class AlgoVisualizer {
     private InsertionSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, InsertionSortData data){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new InsertionSortData(N, sceneHeight);
 
-        this.setData(0,-1);
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Insertion Sort Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
     public void run(){
 
+        setData(0, -1);
+
         for( int i = 0 ; i < data.N() ; i ++ ){
 
-            this.setData(i, i);
-            AlgoVisHelper.pause(DELAY);
+            setData(i, i);
             for(int j = i ; j > 0 && data.get(j) < data.get(j-1) ; j --){
                 data.swap(j,j-1);
-                this.setData(i, j-1);
-                AlgoVisHelper.pause(DELAY);
+                setData(i+1, j-1);
             }
         }
         this.setData(data.N(), -1);
-        AlgoVisHelper.pause(DELAY);
+
     }
 
     private void setData(int orderedIndex, int currentIndex){
         data.orderedIndex = orderedIndex;
         data.currentIndex = currentIndex;
-        frame.setData(data);
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Insertion Sort Visualization", sceneWidth,sceneHeight);
-
-            int N = 200;
-            // int N = 100;
-
-            InsertionSortData data = new InsertionSortData(N, sceneHeight);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }

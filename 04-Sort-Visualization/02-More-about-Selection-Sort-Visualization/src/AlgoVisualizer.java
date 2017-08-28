@@ -1,70 +1,65 @@
 import java.awt.*;
-import java.util.Random;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
 
-    private int N;
-    private int[] numbers;
+    private SelectionSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int N, AlgoFrame frame){
-        this.N = N;
-        this.frame = frame;
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        numbers = new int[N];
+        data = new SelectionSortData(N, sceneHeight);
 
-        // 根据frame的大小计算合理数值
-        for( int i = 0 ; i < N ; i ++)
-            numbers[i] = (int)(Math.random()*frame.getCanvasHeight()) + 1;
-
-        frame.setNumbers(numbers, 0,-1,-1);
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Selection Sort Visualization", sceneWidth, sceneHeight);
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
 
-        for( int i = 0 ; i < N ; i ++ ){
+        setData(0, -1, -1);
+
+        for( int i = 0 ; i < data.N() ; i ++ ){
             // 寻找[i, n)区间里的最小值的索引
             int minIndex = i;
-            frame.setNumbers(numbers, i, -1, minIndex);
-            for( int j = i + 1 ; j < N ; j ++ ){
-                frame.setNumbers(numbers, i, j, minIndex);
-                AlgoVisHelper.pause(DELAY);
-                if( numbers[j] < numbers[minIndex] ){
+            setData(i, -1, minIndex);
+
+            for( int j = i + 1 ; j < data.N() ; j ++ ){
+                setData(i, j, minIndex);
+
+                if( data.get(j) < data.get(minIndex) ){
                     minIndex = j;
-                    frame.setNumbers(numbers, i, j, minIndex);
+                    setData(i, j, minIndex);
                 }
             }
 
-            swap( numbers , i , minIndex);
-            frame.setNumbers(numbers, i+1, -1, -1);
-            AlgoVisHelper.pause(DELAY);
+            data.swap(i , minIndex);
+            setData(i+1, -1, -1);
         }
-        frame.setNumbers(numbers, N, -1, -1);
-        AlgoVisHelper.pause(DELAY);
+
+        setData(data.N(),-1,-1);
     }
 
-    private static void swap(int[] arr, int i, int j) {
-        int t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
+    private void setData(int orderedIndex, int currentCompareIndex, int currentMinIndex){
+        data.orderedIndex = orderedIndex;
+        data.currentCompareIndex = currentCompareIndex;
+        data.currentMinIndex = currentMinIndex;
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Selection Sort Visualization", sceneWidth,sceneHeight);
-
-            int N = 200;
-            // int N = 100;
-            AlgoVisualizer vis = new AlgoVisualizer(N, frame);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }

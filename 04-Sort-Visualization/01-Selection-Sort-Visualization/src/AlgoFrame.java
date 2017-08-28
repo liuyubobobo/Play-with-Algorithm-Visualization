@@ -1,16 +1,10 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -38,9 +32,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    private int[] numbers;
-    public void setNumbers(int[] numbers){
-        this.numbers = numbers;
+    SelectionSortData data;
+    public void render(SelectionSortData data){
+        this.data = data;
         repaint();
     }
 
@@ -65,9 +59,11 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            int w = canvasWidth/numbers.length;
-            for(int i = 0 ; i < numbers.length ; i ++ )
-                AlgoVisHelper.fillRectangle(g2d, i*w, canvasHeight-numbers[i], w-1, numbers[i]);
+            int w = canvasWidth/data.N();
+            for(int i = 0 ; i < data.N() ; i ++ ) {
+                AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
+                AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
+            }
         }
 
         @Override

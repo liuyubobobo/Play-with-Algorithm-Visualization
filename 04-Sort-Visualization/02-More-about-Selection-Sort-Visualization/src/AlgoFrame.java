@@ -1,16 +1,10 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -38,15 +32,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    private int[] numbers;
-    private int orderedIndex;           // [0...orderedIndex) 是有序的
-    private int currentCompareIndex;    // 当前正在比较的元素索引
-    private int currentMinIndex;
-    public void setNumbers(int[] numbers, int orderedIndex, int currentCompareIndex, int currentMinIndex){
-        this.numbers = numbers;
-        this.orderedIndex = orderedIndex;
-        this.currentCompareIndex = currentCompareIndex;
-        this.currentMinIndex = currentMinIndex;
+    SelectionSortData data;
+    public void render(SelectionSortData data){
+        this.data = data;
         repaint();
     }
 
@@ -71,19 +59,18 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            int w = canvasWidth/numbers.length;
-            //AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
-            for(int i = 0 ; i < numbers.length ; i ++ ) {
-                if (i < orderedIndex)
+            int w = canvasWidth/data.N();
+            for(int i = 0 ; i < data.N() ; i ++ ) {
+                if (i < data.orderedIndex)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( currentCompareIndex != -1 && i == currentCompareIndex )
+                if(i == data.currentCompareIndex)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                if( currentMinIndex != -1 && i == currentMinIndex )
+                if(i == data.currentMinIndex)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - numbers[i], w - 1, numbers[i]);
+                AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
             }
         }
 

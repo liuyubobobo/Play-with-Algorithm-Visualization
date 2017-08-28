@@ -1,11 +1,8 @@
-
-public class InsertionSortData {
+public class SelectionSortData {
 
     private int[] numbers;
-    public int orderedIndex = -1;   // [0...orderedIndex) 是有序的
-    public int currentIndex = -1;
 
-    public InsertionSortData(int N, int randomBound){
+    public SelectionSortData(int N, int randomBound){
 
         numbers = new int[N];
 
@@ -25,6 +22,7 @@ public class InsertionSortData {
     }
 
     public void swap(int i, int j) {
+
         if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
             throw new IllegalArgumentException("Invalid index to access Sort Data.");
 
