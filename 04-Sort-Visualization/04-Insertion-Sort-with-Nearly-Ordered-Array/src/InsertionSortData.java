@@ -1,24 +1,25 @@
 import java.util.Arrays;
-import java.util.Random;
 
 
 public class InsertionSortData {
 
-    private int N;
+    public enum Type{
+        Default,
+        NearlyOrdered
+    }
 
     private int[] numbers;
     public int orderedIndex;           // [0...orderedIndex) 是有序的
     public int currentIndex;
 
-    public InsertionSortData(int N, int randomBound, boolean nearlyOrdered){
-        this.N = N;
+    public InsertionSortData(int N, int randomBound, Type dataType){
 
         numbers = new int[N];
 
         for( int i = 0 ; i < N ; i ++)
             numbers[i] = (int)(Math.random()*randomBound) + 1;
 
-        if(nearlyOrdered){
+        if(dataType == Type.NearlyOrdered){
             Arrays.sort(numbers);
             int swapTime = (int)(0.02*N);
             for(int i = 0 ; i < swapTime; i ++){
@@ -29,12 +30,8 @@ public class InsertionSortData {
         }
     }
 
-    public InsertionSortData(int N, int randomBound){
-        this(N, randomBound, false);
-    }
-
     public int N(){
-        return N;
+        return numbers.length;
     }
 
     public int get(int index){
@@ -45,6 +42,9 @@ public class InsertionSortData {
     }
 
     public void swap(int i, int j) {
+        if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
+            throw new IllegalArgumentException("Invalid index to access Sort Data.");
+
         int t = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = t;
