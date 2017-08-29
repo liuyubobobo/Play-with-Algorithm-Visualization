@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Random;
 import java.util.Arrays;
 
 public class AlgoVisualizer {
@@ -9,40 +8,34 @@ public class AlgoVisualizer {
     private MergeSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, MergeSortData data){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new MergeSortData(N, sceneHeight);
 
-        this.setData(-1, -1, -1);
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Merge Sort Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
     public void run(){
 
-        mergeSort(0, data.N()-1);
+        setData(-1, -1, -1);
+
+        for (int sz = 1; sz < data.N(); sz *= 2)
+            for (int i = 0; i < data.N() - sz; i += sz+sz)
+                // 对 arr[i...i+sz-1] 和 arr[i+sz...i+2*sz-1] 进行归并
+                merge(i, i+sz-1, Math.min(i+sz+sz-1,data.N()-1));
 
         this.setData(0, data.N()-1, data.N());
-        AlgoVisHelper.pause(DELAY);
-    }
-
-    private void mergeSort(int l, int r){
-
-        if( l >= r )
-            return;
-
-        setData(l, r, -1);
-        AlgoVisHelper.pause(DELAY);
-
-        int mid = (l+r)/2;
-        mergeSort(l, mid);
-        mergeSort(mid+1, r);
-        merge(l, mid, r);
     }
 
     private void merge(int l, int mid, int r){
-
-        setData(l, r, -1);
-        AlgoVisHelper.pause(DELAY);
 
         int[] aux = Arrays.copyOfRange(data.numbers, l, r+1);
 
@@ -64,36 +57,24 @@ public class AlgoVisualizer {
             }
 
             setData(l, r, k);
-            AlgoVisHelper.pause(DELAY);
         }
-
-        setData(l, r, -1);
-        AlgoVisHelper.pause(DELAY);
     }
 
     private void setData(int l, int r, int mergeIndex){
         data.l = l;
         data.r = r;
         data.mergeIndex = mergeIndex;
-        frame.setData(data);
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Merge Sort Visualization", sceneWidth,sceneHeight);
-
-            int N = 200;
-            // int N = 100;
-
-            MergeSortData data = new MergeSortData(N, sceneHeight);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }
