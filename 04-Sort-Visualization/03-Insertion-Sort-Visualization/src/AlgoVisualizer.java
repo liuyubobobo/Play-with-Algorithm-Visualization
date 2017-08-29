@@ -34,7 +34,7 @@ public class AlgoVisualizer {
                 setData(i+1, j-1);
             }
         }
-        this.setData(data.N(), -1);
+        setData(data.N(), -1);
 
     }
 

@@ -22,6 +22,10 @@ public class AlgoVisualizer {
         });
     }
 
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, InsertionSortData.Type.Default);
+    }
+
     public void run(){
 
         setData(0, -1);

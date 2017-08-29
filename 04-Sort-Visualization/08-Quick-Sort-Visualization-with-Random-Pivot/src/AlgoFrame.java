@@ -10,7 +10,6 @@ public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -39,7 +38,7 @@ public class AlgoFrame extends JFrame{
 
     // data
     QuickSortData data;
-    public void setData(QuickSortData data){
+    public void render(QuickSortData data){
         this.data = data;
         repaint();
     }
@@ -68,14 +67,14 @@ public class AlgoFrame extends JFrame{
             int w = canvasWidth/data.N();
             //AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
             for(int i = 0 ; i < data.N() ; i ++ ) {
-                if ( data.l != -1 && data.r != -1 && i >= data.l && i <= data.r)
+                if ( i >= data.l && i <= data.r)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Green);
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( data.curPivot != -1 && i == data.curPivot )
+                if( i == data.curPivot )
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Indigo);
-                if( data.curElement != -1 && i == data.curElement)
+                if( i == data.curElement)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
                 if( data.fixedPivots[i] )
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);

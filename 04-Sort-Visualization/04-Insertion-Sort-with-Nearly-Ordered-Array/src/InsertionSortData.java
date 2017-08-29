@@ -30,6 +30,10 @@ public class InsertionSortData {
         }
     }
 
+    public InsertionSortData(int N, int randomBound){
+        this(N, randomBound, Type.Default);
+    }
+
     public int N(){
         return numbers.length;
     }

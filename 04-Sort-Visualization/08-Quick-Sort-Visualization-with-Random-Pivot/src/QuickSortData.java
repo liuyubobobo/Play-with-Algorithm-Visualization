@@ -4,7 +4,10 @@ import java.util.Random;
 
 public class QuickSortData {
 
-    private int N;
+    public enum Type{
+        Default,
+        NearlyOrdered
+    }
 
     public int[] numbers;
     public int l, r;
@@ -13,8 +16,7 @@ public class QuickSortData {
     public int curElement;
 
     // 生成N个[0,randomBound)之间的随机数；nearlyOrdered控制随机数是否近乎有序
-    public QuickSortData(int N, int randomBound, boolean nearlyOrdered){
-        this.N = N;
+    public QuickSortData(int N, int randomBound, Type dataType){
 
         numbers = new int[N];
         fixedPivots = new boolean[N];
@@ -24,7 +26,7 @@ public class QuickSortData {
             fixedPivots[i] = false;
         }
 
-        if(nearlyOrdered){
+        if(dataType == Type.NearlyOrdered){
             Arrays.sort(numbers);
             int swapTime = (int)(0.02*N);
             for(int i = 0 ; i < swapTime; i ++){
@@ -36,7 +38,7 @@ public class QuickSortData {
     }
 
     public int N(){
-        return N;
+        return numbers.length;
     }
 
     public int get(int index){
@@ -47,6 +49,10 @@ public class QuickSortData {
     }
 
     public void swap(int i, int j) {
+
+        if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
+            throw new IllegalArgumentException("Invalid index to access Sort Data.");
+
         int t = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = t;

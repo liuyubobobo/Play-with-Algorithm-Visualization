@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.util.Random;
-import java.util.Arrays;
 
 public class AlgoVisualizer {
 
@@ -9,20 +7,28 @@ public class AlgoVisualizer {
     private QuickSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, QuickSortData data){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, QuickSortData.Type dataType){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new QuickSortData(N, sceneHeight, dataType);
 
-        this.setData(-1, -1, -1, -1, -1);
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Quick Sort Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
     public void run(){
 
+        setData(-1, -1, -1, -1, -1);
+
         quickSort(0, data.N()-1);
 
-        this.setData(0, data.N()-1, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
+        setData(0, data.N()-1, -1, -1, -1);
     }
 
     private void quickSort(int l, int r){
@@ -35,12 +41,10 @@ public class AlgoVisualizer {
 
         if( l == r ){
             setData(l, r, l, -1, -1);
-            AlgoVisHelper.pause(DELAY);
             return;
         }
 
         setData(l, r, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
 
         int p = partition(l, r);
         quickSort(l, p-1 );
@@ -52,27 +56,22 @@ public class AlgoVisualizer {
         int p = (int)(Math.random()*(r-l+1)) + l;
         data.swap(l, p);
         setData(l, r, -1, l, p);
-        AlgoVisHelper.pause(DELAY);
 
         int v = data.get(l);
         setData(l, r, -1, l, -1);
-        AlgoVisHelper.pause(DELAY);
 
         int j = l; // arr[l+1...j] < v ; arr[j+1...i) > v
         for( int i = l + 1 ; i <= r ; i ++ ) {
             setData(l, r, -1, l, i);
-            AlgoVisHelper.pause(DELAY);
             if (data.get(i) < v) {
                 j++;
                 data.swap(j, i);
                 setData(l, r, -1, l, i);
-                AlgoVisHelper.pause(DELAY);
             }
         }
 
         data.swap(l, j);
         setData(l, r, j, -1, -1);
-        AlgoVisHelper.pause(DELAY);
 
         return j;
     }
@@ -84,25 +83,18 @@ public class AlgoVisualizer {
             data.fixedPivots[fixedPivot] = true;
         data.curPivot = curPivot;
         data.curElement = curElement;
-        frame.setData(data);
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Quick Sort Visualization", sceneWidth,sceneHeight);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.NearlyOrdered);
 
-            //int N = 200;
-            int N = 100;
-
-            QuickSortData data = new QuickSortData(N, sceneHeight, false);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
     }
 }
