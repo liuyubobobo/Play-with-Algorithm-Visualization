@@ -32,31 +32,27 @@ public class MergeSort{
     }
 
     // 递归使用归并排序,对arr[l...r]的范围进行排序
-    private static void sort(Comparable[] arr, int l, int r, int depth) {
+    private static void sort(Comparable[] arr, int l, int r) {
 
-        System.out.print(MergeSort.hyphen(depth));
-        System.out.println("Deal with [ " + l + " , " + r + " ]");
-
-        if (l >= r)
+        // 对于小规模数组, 使用插入排序
+        if( r - l <= 15 ){
+            InsertionSort.sort(arr, l, r);
             return;
+        }
 
         int mid = (l+r)/2;
-        sort(arr, l, mid, depth + 2);
-        sort(arr, mid + 1, r, depth + 2);
-        merge(arr, l, mid, r);
-    }
-
-    private static String hyphen(int length){
-        StringBuilder s = new StringBuilder(length);
-        for(int i = 0 ; i < length ; i ++)
-            s.append('-');
-        return s.toString();
+        sort(arr, l, mid);
+        sort(arr, mid + 1, r);
+        // 对于arr[mid] <= arr[mid+1]的情况,不进行merge
+        // 对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失
+        if( arr[mid].compareTo(arr[mid+1]) > 0 )
+            merge(arr, l, mid, r);
     }
 
     public static void sort(Comparable[] arr){
 
         int n = arr.length;
-        sort(arr, 0, n-1, 0);
+        sort(arr, 0, n-1);
     }
 
     // 测试MergeSort
@@ -66,14 +62,9 @@ public class MergeSort{
         // 可以在1秒之内轻松处理100万数量级的数据
         // 注意：不要轻易尝试使用SelectionSort, InsertionSort或者BubbleSort处理100万级的数据
         // 否则，你就见识了O(n^2)的算法和O(nlogn)算法的本质差异：）
-//        int N = 1000000;
-//        Integer[] arr = SortTestHelper.generateRandomArray(N, 0, 100000);
-//        SortTestHelper.testSort("bobo.algo.MergeSort", arr);
-
-        Integer[] arr = new Integer[8];
-        for(int i = 0 ; i < 8 ; i ++)
-            arr[i] = new Integer(8-i);
-        MergeSort.sort(arr);
+        int N = 1000000;
+        Integer[] arr = SortTestHelper.generateRandomArray(N, 0, 100000);
+        SortTestHelper.testSort("bobo.algo.MergeSort", arr);
 
         return;
     }
