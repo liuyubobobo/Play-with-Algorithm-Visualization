@@ -32,7 +32,7 @@ public class AlgoVisualizer {
                 // 对 arr[i...i+sz-1] 和 arr[i+sz...i+2*sz-1] 进行归并
                 merge(i, i+sz-1, Math.min(i+sz+sz-1,data.N()-1));
 
-        this.setData(0, data.N()-1, data.N());
+        this.setData(0, data.N()-1, data.N()-1);
     }
 
     private void merge(int l, int mid, int r){

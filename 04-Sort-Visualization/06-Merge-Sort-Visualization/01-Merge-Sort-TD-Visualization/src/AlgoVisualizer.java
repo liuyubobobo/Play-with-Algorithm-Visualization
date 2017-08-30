@@ -29,7 +29,7 @@ public class AlgoVisualizer {
 
         mergeSort(0, data.N()-1);
 
-        this.setData(0, data.N()-1, data.N());
+        setData(0, data.N()-1, data.N()-1);
     }
 
     private void mergeSort(int l, int r){

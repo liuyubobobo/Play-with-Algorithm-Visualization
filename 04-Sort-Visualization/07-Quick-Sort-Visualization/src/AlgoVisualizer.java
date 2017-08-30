@@ -7,10 +7,10 @@ public class AlgoVisualizer {
     private QuickSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, QuickSortData.Type dataType){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
         // 初始化数据
-        data = new QuickSortData(N, sceneHeight, dataType);
+        data = new QuickSortData(N, sceneHeight);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -90,7 +90,7 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
         int N = 100;
 
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.Default);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
 
     }
 }

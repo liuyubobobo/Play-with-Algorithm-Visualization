@@ -1,32 +1,38 @@
 import java.util.Arrays;
-import java.util.Random;
 
 
 public class TwoWaysQuickSortData {
 
-    private int N;
+    public enum Type{
+        Default,
+        NearlyOrdered,
+        Identical
+    }
 
-    public int[] numbers;
+    private int[] numbers;
     public int l, r;
     public boolean[] fixedPivots;
     public int curPivot;
     public int curL, curR;
 
-    // 生成N个[0,randomBound)之间的随机数；nearlyOrdered控制随机数是否近乎有序
-    public TwoWaysQuickSortData(int N, int randomBound, boolean nearlyOrdered){
-        this.N = N;
+    public TwoWaysQuickSortData(int N, int randomBound, Type dataType){
 
         numbers = new int[N];
         fixedPivots = new boolean[N];
 
+        int lBound = 1;
+        int rBound = randomBound;
+        if(dataType == Type.Identical)
+            lBound = rBound;
+
         for( int i = 0 ; i < N ; i ++) {
-            numbers[i] = (int)(Math.random()*randomBound) + 1;
+            numbers[i] = (int)(Math.random()*(rBound-lBound+1)) + lBound;
             fixedPivots[i] = false;
         }
 
-        if(nearlyOrdered){
+        if(dataType == Type.NearlyOrdered){
             Arrays.sort(numbers);
-            int swapTime = (int)(0.02*N);
+            int swapTime = (int)(0.01*N);
             for(int i = 0 ; i < swapTime; i ++){
                 int a = (int)(Math.random()*N);
                 int b = (int)(Math.random()*N);
@@ -35,19 +41,12 @@ public class TwoWaysQuickSortData {
         }
     }
 
-    // 生成N个[lBound,rBound]之间的随机数
-    public TwoWaysQuickSortData(int N, int lBound, int rBound){
-        this.N = N;
-
-        numbers = new int[N];
-        fixedPivots = new boolean[N];
-
-        for( int i = 0 ; i < N ; i ++)
-            numbers[i] = (int)(Math.random()*(rBound-lBound+1)) + lBound;
+    public TwoWaysQuickSortData(int N, int randomBound){
+        this(N, randomBound, Type.Default);
     }
 
     public int N(){
-        return N;
+        return numbers.length;
     }
 
     public int get(int index){
@@ -58,6 +57,10 @@ public class TwoWaysQuickSortData {
     }
 
     public void swap(int i, int j) {
+
+        if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
+            throw new IllegalArgumentException("Invalid index to access Sort Data.");
+
         int t = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = t;

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class MergeSortData {
 
-    private int[] numbers;
+    public int[] numbers;
     public int l, r;
     public int mergeIndex;
 

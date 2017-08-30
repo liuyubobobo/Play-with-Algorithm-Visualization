@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Random;
 
 
 public class QuickSortData {
@@ -9,13 +8,12 @@ public class QuickSortData {
         NearlyOrdered
     }
 
-    public int[] numbers;
+    private int[] numbers;
     public int l, r;
     public boolean[] fixedPivots;
     public int curPivot;
     public int curElement;
 
-    // 生成N个[0,randomBound)之间的随机数；nearlyOrdered控制随机数是否近乎有序
     public QuickSortData(int N, int randomBound, Type dataType){
 
         numbers = new int[N];
@@ -28,13 +26,17 @@ public class QuickSortData {
 
         if(dataType == Type.NearlyOrdered){
             Arrays.sort(numbers);
-            int swapTime = (int)(0.02*N);
+            int swapTime = (int)(0.01*N);
             for(int i = 0 ; i < swapTime; i ++){
                 int a = (int)(Math.random()*N);
                 int b = (int)(Math.random()*N);
                 swap(a, b);
             }
         }
+    }
+
+    public QuickSortData(int N, int randomBound){
+        this(N, randomBound, Type.Default);
     }
 
     public int N(){
