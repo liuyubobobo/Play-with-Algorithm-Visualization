@@ -60,7 +60,6 @@ public class AlgoFrame extends JFrame{
 
             // 具体绘制
             int w = canvasWidth/data.N();
-            //AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
             for(int i = 0 ; i < data.N() ; i ++ ) {
                 if ( i >= data.l && i <= data.r)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Green);
