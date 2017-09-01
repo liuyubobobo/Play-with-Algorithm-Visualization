@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
 
     private ThreeWaysQuickSortData data;
     private AlgoFrame frame;
@@ -11,8 +11,7 @@ public class AlgoVisualizer {
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, ThreeWaysQuickSortData.Type dataType){
 
         // 初始化数据
-        int randomBound = dataType == ThreeWaysQuickSortData.Type.Identical ? sceneHeight/2 : sceneHeight;
-        data = new ThreeWaysQuickSortData(N, randomBound, dataType);
+        data = new ThreeWaysQuickSortData(N, sceneHeight, dataType);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -24,13 +23,17 @@ public class AlgoVisualizer {
         });
     }
 
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, ThreeWaysQuickSortData.Type.Default);
+    }
+
     public void run(){
 
         setData(-1, -1, -1, -1, -1, -1);
 
         quickSort3Ways(0, data.N()-1);
 
-        setData(0, data.N()-1, -1, -1, -1, -1);
+        setData(-1, -1, -1, -1, -1, -1);
     }
 
     private void quickSort3Ways(int l, int r){
@@ -47,9 +50,11 @@ public class AlgoVisualizer {
 
         // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
         int p = (int)(Math.random()*(r-l+1)) + l;
-        data.swap(l, p);
+        setData(l, r, -1, p, -1, -1);
 
+        data.swap(l, p);
         int v = data.get(l);
+        setData(l, r, -1, l, -1, -1);
 
         int lt = l;     // arr[l+1...lt] < v
         int gt = r + 1; // arr[gt...r] > v
