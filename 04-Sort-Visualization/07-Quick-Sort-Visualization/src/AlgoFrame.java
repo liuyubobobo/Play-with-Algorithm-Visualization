@@ -37,7 +37,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    QuickSortData data;
+    private QuickSortData data;
     public void render(QuickSortData data){
         this.data = data;
         repaint();

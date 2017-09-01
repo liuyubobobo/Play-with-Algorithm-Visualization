@@ -28,7 +28,7 @@ public class AlgoVisualizer {
 
         quickSort(0, data.N()-1);
 
-        setData(0, data.N()-1, -1, -1, -1);
+        setData(-1, -1, -1, -1, -1);
     }
 
     private void quickSort(int l, int r){

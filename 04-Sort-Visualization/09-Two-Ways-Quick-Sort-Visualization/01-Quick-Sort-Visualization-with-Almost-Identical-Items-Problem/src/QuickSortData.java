@@ -22,8 +22,11 @@ public class QuickSortData {
 
         int lBound = 1;
         int rBound = randomBound;
-        if(dataType == Type.Identical)
-            lBound = rBound;
+        if(dataType == Type.Identical){
+            int avgNumber = (lBound + rBound) / 2;
+            lBound = avgNumber;
+            rBound = avgNumber;
+        }
 
         for( int i = 0 ; i < N ; i ++) {
             numbers[i] = (int)(Math.random()*(rBound-lBound+1)) + lBound;

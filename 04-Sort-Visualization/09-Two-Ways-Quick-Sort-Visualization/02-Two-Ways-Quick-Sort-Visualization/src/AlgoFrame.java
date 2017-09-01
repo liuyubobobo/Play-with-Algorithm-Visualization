@@ -32,7 +32,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    TwoWaysQuickSortData data;
+    private TwoWaysQuickSortData data;
     public void render(TwoWaysQuickSortData data){
         this.data = data;
         repaint();

@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
 
     private TwoWaysQuickSortData data;
     private AlgoFrame frame;
@@ -10,8 +10,7 @@ public class AlgoVisualizer {
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, TwoWaysQuickSortData.Type dataType){
 
         // 初始化数据
-        int randomBound = dataType == TwoWaysQuickSortData.Type.Identical ? sceneHeight/2 : sceneHeight;
-        data = new TwoWaysQuickSortData(N, randomBound, dataType);
+        data = new TwoWaysQuickSortData(N, sceneHeight, dataType);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -23,13 +22,17 @@ public class AlgoVisualizer {
         });
     }
 
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.Default);
+    }
+
     public void run(){
 
         setData(-1, -1, -1, -1, -1, -1);
 
         quickSort2Ways(0, data.N()-1);
 
-        setData(0, data.N()-1, -1, -1, -1, -1);
+        setData(-1, -1, -1, -1, -1, -1);
     }
 
     private void quickSort2Ways(int l, int r){
@@ -52,10 +55,11 @@ public class AlgoVisualizer {
     private int partition(int l, int r){
 
         int p = (int)(Math.random()*(r-l+1)) + l;
-        data.swap(l, p);
-        setData(l, r, -1, l, -1, -1);
+        setData(l, r, -1, p, -1, -1);
 
+        data.swap(l, p);
         int v = data.get(l);
+        setData(l, r, -1, l, -1, -1);
 
         // arr[l+1...i) <= v; arr(j...r] >= v
         int i = l+1, j = r;
@@ -105,9 +109,9 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
         int N = 100;
 
-        // AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.Default);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.Default);
         // AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.NearlyOrdered);
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.Identical);
+        // AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, TwoWaysQuickSortData.Type.Identical);
 
     }
 }

@@ -32,7 +32,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    MergeSortData data;
+    private MergeSortData data;
     public void render(MergeSortData data){
         this.data = data;
         repaint();

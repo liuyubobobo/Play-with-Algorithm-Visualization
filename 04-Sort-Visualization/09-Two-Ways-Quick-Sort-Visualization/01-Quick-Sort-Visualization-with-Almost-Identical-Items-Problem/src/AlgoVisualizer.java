@@ -10,8 +10,7 @@ public class AlgoVisualizer {
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, QuickSortData.Type dataType){
 
         // 初始化数据
-        int randomBound = dataType == QuickSortData.Type.Identical ? sceneHeight/2 : sceneHeight;
-        data = new QuickSortData(N, randomBound, dataType);
+        data = new QuickSortData(N, sceneHeight, dataType);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -21,6 +20,10 @@ public class AlgoVisualizer {
                 run();
             }).start();
         });
+    }
+
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, QuickSortData.Type.Identical);
     }
 
     public void run(){
@@ -52,9 +55,9 @@ public class AlgoVisualizer {
     private int partition(int l, int r){
 
         int p = (int)(Math.random()*(r-l+1)) + l;
-        data.swap(l, p);
-        setData(l, r, -1, l, p);
+        setData(l, r, -1, p, -1);
 
+        data.swap(l, p);
         int v = data.get(l);
         setData(l, r, -1, l, -1);
 

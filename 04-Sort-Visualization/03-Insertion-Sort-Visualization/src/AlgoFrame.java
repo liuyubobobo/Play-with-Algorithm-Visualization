@@ -32,7 +32,7 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    InsertionSortData data;
+    private InsertionSortData data;
     public void render(InsertionSortData data){
         this.data = data;
         repaint();

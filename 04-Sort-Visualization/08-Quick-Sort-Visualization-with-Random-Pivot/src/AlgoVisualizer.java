@@ -22,6 +22,10 @@ public class AlgoVisualizer {
         });
     }
 
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, QuickSortData.Type.Default);
+    }
+
     public void run(){
 
         setData(-1, -1, -1, -1, -1);
@@ -54,9 +58,9 @@ public class AlgoVisualizer {
     private int partition(int l, int r){
 
         int p = (int)(Math.random()*(r-l+1)) + l;
-        data.swap(l, p);
-        setData(l, r, -1, l, p);
+        setData(l, r, -1, p, -1);
 
+        data.swap(l, p);
         int v = data.get(l);
         setData(l, r, -1, l, -1);
 
