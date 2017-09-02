@@ -27,10 +27,12 @@ public class AlgoVisualizer {
 
         setData(data.N());
 
+        // 建堆
         for( int i = (data.N()-1-1)/2 ; i >= 0 ; i -- ){
             shiftDown(data.N(), i);
         }
 
+        // 堆排序
         for( int i = data.N()-1; i > 0 ; i-- ){
             data.swap(0, i);
             shiftDown(i, 0);

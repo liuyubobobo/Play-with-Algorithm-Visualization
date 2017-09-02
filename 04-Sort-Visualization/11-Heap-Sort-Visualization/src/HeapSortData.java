@@ -1,8 +1,7 @@
-import java.util.Arrays;
 
 public class HeapSortData {
 
-    public int[] numbers;
+    private int[] numbers;
     public int heapIndex;   // numbers[heapIndex...N) 已经排好序
 
     public HeapSortData(int N, int randomBound){
