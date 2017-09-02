@@ -32,8 +32,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    private ThreeWaysQuickSortData data;
-    public void render(ThreeWaysQuickSortData data){
+    private MergeSortData data;
+    public void render(MergeSortData data){
         this.data = data;
         repaint();
     }
@@ -66,13 +66,7 @@ public class AlgoFrame extends JFrame{
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( i == data.curPivot )
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Indigo);
-                if( i >= data.l + 1 && i <= data.curL)
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                if( i >= data.curR && i <= data.r)
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                if( data.fixedPivots[i] )
+                if( i >= data.l && i <= data.mergeIndex )
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
 
                 AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));

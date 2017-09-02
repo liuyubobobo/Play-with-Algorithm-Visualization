@@ -1,44 +1,45 @@
 import java.awt.*;
-import java.util.Random;
-import java.util.Arrays;
+
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
 
     private HeapSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, HeapSortData data){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new HeapSortData(N, sceneHeight);
 
-        this.setData(data.N());
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Heap Sort Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
     public void run(){
 
-        heapSort();
+        setData(data.N());
 
-        this.setData(0);
-        AlgoVisHelper.pause(DELAY);
-    }
-
-    private void heapSort(){
-
-        for( int i = (data.N()-1-1)/2 ; i >= 0 ; i -- )
+        // 建堆
+        for( int i = (data.N()-1-1)/2 ; i >= 0 ; i -- ){
             shiftDown(data.N(), i);
+        }
 
+        // 堆排序
         for( int i = data.N()-1; i > 0 ; i-- ){
             data.swap(0, i);
             shiftDown(i, 0);
             setData(i);
-            AlgoVisHelper.pause(DELAY);
         }
 
         setData(0);
-        AlgoVisHelper.pause(DELAY);
     }
 
     private void shiftDown(int n, int k){
@@ -52,36 +53,26 @@ public class AlgoVisualizer {
                 break;
 
             data.swap(k, j);
-            setData(-1);
-            AlgoVisHelper.pause(DELAY);
+            setData(data.heapIndex);
+
             k = j;
         }
     }
 
     private void setData(int heapIndex){
-        if(heapIndex != -1)
-            data.heapIndex = heapIndex;
-        frame.setData(data);
+
+        data.heapIndex = heapIndex;
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Heap Sort Visualization", sceneWidth,sceneHeight);
-
-            int N = 200;
-            // int N = 100;
-
-            HeapSortData data = new HeapSortData(N, sceneHeight, false);
-            // HeapSortData data = new HeapSortData(N, sceneHeight, true);
-            // HeapSortData data = new HeapSortData(N, sceneHeight/2 - 5, sceneHeight/2 + 5);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }

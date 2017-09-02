@@ -4,14 +4,11 @@ import java.util.Random;
 
 public class MergeSortData {
 
-    private int N;
-
     public int[] numbers;
     public int l, r;
     public int mergeIndex;
 
     public MergeSortData(int N, int randomBound){
-        this.N = N;
 
         numbers = new int[N];
 
@@ -20,7 +17,7 @@ public class MergeSortData {
     }
 
     public int N(){
-        return N;
+        return numbers.length;
     }
 
     public int get(int index){
@@ -31,6 +28,9 @@ public class MergeSortData {
     }
 
     public void swap(int i, int j) {
+        if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
+            throw new IllegalArgumentException("Invalid index to access Sort Data.");
+
         int t = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = t;

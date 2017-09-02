@@ -23,7 +23,7 @@ public class AlgoVisualizer {
     }
 
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
-        this(sceneWidth, sceneHeight, N, QuickSortData.Type.Default);
+        this(sceneWidth, sceneHeight, N, QuickSortData.Type.Identical);
     }
 
     public void run(){
@@ -36,9 +36,6 @@ public class AlgoVisualizer {
     }
 
     private void quickSort(int l, int r){
-
-//        if( l >= r )
-//            return;
 
         if( l > r )
             return;
@@ -98,7 +95,7 @@ public class AlgoVisualizer {
         int sceneHeight = 800;
         int N = 100;
 
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.NearlyOrdered);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, QuickSortData.Type.Identical);
 
     }
 }

@@ -1,13 +1,16 @@
+import java.util.Arrays;
+import java.util.Random;
 
-public class HeapSortData {
 
-    private int[] numbers;
-    public int heapIndex;   // numbers[heapIndex...N) 已经排好序
+public class MergeSortData {
 
-    public HeapSortData(int N, int randomBound){
+    public int[] numbers;
+    public int l, r;
+    public int mergeIndex;
+
+    public MergeSortData(int N, int randomBound){
 
         numbers = new int[N];
-        heapIndex = N;
 
         for( int i = 0 ; i < N ; i ++)
             numbers[i] = (int)(Math.random()*randomBound) + 1;
@@ -25,7 +28,6 @@ public class HeapSortData {
     }
 
     public void swap(int i, int j) {
-
         if( i < 0 || i >= numbers.length || j < 0 || j >= numbers.length)
             throw new IllegalArgumentException("Invalid index to access Sort Data.");
 

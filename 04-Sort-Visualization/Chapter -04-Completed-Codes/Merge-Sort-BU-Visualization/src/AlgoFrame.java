@@ -1,16 +1,10 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -38,8 +32,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    MergeSortData data;
-    public void setData(MergeSortData data){
+    private MergeSortData data;
+    public void render(MergeSortData data){
         this.data = data;
         repaint();
     }
@@ -68,12 +62,12 @@ public class AlgoFrame extends JFrame{
             int w = canvasWidth/data.N();
             //AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
             for(int i = 0 ; i < data.N() ; i ++ ) {
-                if ( data.l != -1 && data.r != -1 && i >= data.l && i <= data.r)
+                if ( i >= data.l && i <= data.r)
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Green);
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( data.mergeIndex != -1 && i > data.l && i <= data.mergeIndex )
+                if( i >= data.l && i <= data.mergeIndex )
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
 
                 AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));

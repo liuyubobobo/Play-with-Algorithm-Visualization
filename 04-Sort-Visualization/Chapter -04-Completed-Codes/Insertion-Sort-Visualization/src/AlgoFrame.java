@@ -1,16 +1,10 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -38,8 +32,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    InsertionSortData data;
-    public void setData(InsertionSortData data){
+    private InsertionSortData data;
+    public void render(InsertionSortData data){
         this.data = data;
         repaint();
     }
@@ -73,8 +67,8 @@ public class AlgoFrame extends JFrame{
                 else
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Grey);
 
-                if( data.currentIndex != -1 && i == data.currentIndex )
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Indigo);
+                if( i == data.currentIndex )
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
                 AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
             }
         }

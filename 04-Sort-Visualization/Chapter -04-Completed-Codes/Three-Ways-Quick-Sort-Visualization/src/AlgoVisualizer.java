@@ -1,28 +1,39 @@
 import java.awt.*;
-import java.util.Random;
-import java.util.Arrays;
+
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
 
     private ThreeWaysQuickSortData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, ThreeWaysQuickSortData data){
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N, ThreeWaysQuickSortData.Type dataType){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new ThreeWaysQuickSortData(N, sceneHeight, dataType);
 
-        this.setData(-1, -1, -1, -1, -1, -1);
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Three Ways Quick Sort Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
+    }
+
+    public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
+        this(sceneWidth, sceneHeight, N, ThreeWaysQuickSortData.Type.Default);
     }
 
     public void run(){
 
+        setData(-1, -1, -1, -1, -1, -1);
+
         quickSort3Ways(0, data.N()-1);
 
-        this.setData(0, data.N()-1, -1, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
+        setData(-1, -1, -1, -1, -1, -1);
     }
 
     private void quickSort3Ways(int l, int r){
@@ -32,24 +43,23 @@ public class AlgoVisualizer {
 
         if( l == r ) {
             setData(l, r, l, -1, -1, -1);
-            AlgoVisHelper.pause(DELAY);
             return;
         }
 
         setData(l, r, -1, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
 
         // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
         int p = (int)(Math.random()*(r-l+1)) + l;
-        data.swap(l, p);
+        setData(l, r, -1, p, -1, -1);
 
+        data.swap(l, p);
         int v = data.get(l);
+        setData(l, r, -1, l, -1, -1);
 
         int lt = l;     // arr[l+1...lt] < v
         int gt = r + 1; // arr[gt...r] > v
         int i = l+1;    // arr[lt+1...i) == v
         setData(l, r, -1, l, lt, gt);
-        AlgoVisHelper.pause(DELAY);
 
         while( i < gt ){
             if( data.get(i) < v ){
@@ -64,13 +74,11 @@ public class AlgoVisualizer {
             else // arr[i] == v
                 i ++;
 
-            setData(l, r, -1, l, lt, gt);
-            AlgoVisHelper.pause(DELAY);
+            setData(l, r, -1, l, i, gt);
         }
 
         data.swap( l, lt );
         setData(l, r, lt, -1, -1, -1);
-        AlgoVisHelper.pause(DELAY);
 
         quickSort3Ways(l, lt-1 );
         quickSort3Ways(gt, r);
@@ -90,27 +98,20 @@ public class AlgoVisualizer {
         data.curPivot = curPivot;
         data.curL = curL;
         data.curR = curR;
-        frame.setData(data);
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
+        int N = 100;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Three Ways Quick Sort Visualization", sceneWidth,sceneHeight);
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, ThreeWaysQuickSortData.Type.Default);
+        // AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, ThreeWaysQuickSortData.Type.NearlyOrdered);
+        // AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N, ThreeWaysQuickSortData.Type.Identical);
 
-            int N = 200;
-            // int N = 100;
-
-            // ThreeWaysQuickSortData data = new ThreeWaysQuickSortData(N, sceneHeight, false);
-            // ThreeWaysQuickSortData data = new ThreeWaysQuickSortData(N, sceneHeight, true);
-            ThreeWaysQuickSortData data = new ThreeWaysQuickSortData(N, sceneHeight/2 - 5, sceneHeight/2 + 5);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
     }
 }
