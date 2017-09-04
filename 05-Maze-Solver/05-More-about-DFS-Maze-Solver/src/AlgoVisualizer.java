@@ -37,7 +37,7 @@ public class AlgoVisualizer {
     }
 
     // 从(x,y)的位置开始求解迷宫，如果求解成功，返回true；否则返回false
-    public boolean go(int x, int y){
+    private boolean go(int x, int y){
 
         if(!data.inArea(x,y))
             throw new IllegalArgumentException("x,y are out of index in go function!");

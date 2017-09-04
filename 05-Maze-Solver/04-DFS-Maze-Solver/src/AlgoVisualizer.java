@@ -35,7 +35,7 @@ public class AlgoVisualizer {
         setData(-1, -1);
     }
 
-    public void go(int x, int y){
+    private void go(int x, int y){
 
         if(!data.inArea(x,y))
             throw new IllegalArgumentException("x,y are out of index in go function!");
