@@ -75,6 +75,8 @@ public class AlgoFrame extends JFrame{
                     else
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
 
+                    if(data.inStack[i][j])
+                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
                     if(data.path[i][j])
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.Yellow);
 

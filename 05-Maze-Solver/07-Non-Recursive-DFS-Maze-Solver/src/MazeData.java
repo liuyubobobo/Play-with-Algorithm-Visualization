@@ -10,10 +10,15 @@ public class MazeData {
     public static final char ROAD = ' ';
     public static final char WALL = '#';
 
+    private int entranceX, entranceY;
+    private int exitX, exitY;
+
     private int N, M;
     public char[][] maze;
     public boolean[][] visited;
     public boolean[][] path;
+    public boolean[][] inStack;
+    public Position[][] prev;
 
     public MazeData(String filename){
 
@@ -36,10 +41,14 @@ public class MazeData {
             N = nmScanner.nextInt();
             M = nmScanner.nextInt();
             nmScanner.close();
+            if(N < 2 || M < 1)
+                throw new IllegalArgumentException("The size of maze is invalid.");
 
             maze = new char[N][M];
             visited = new boolean[N][M];
             path = new boolean[N][M];
+            inStack = new boolean[N][M];
+            prev = new Position[N][M];
             for(int i = 0 ; i < N ; i ++){
                 String line = scanner.nextLine();
                 if(line.length() != M)
@@ -48,8 +57,15 @@ public class MazeData {
                     maze[i][j] = line.charAt(j);
                     visited[i][j] = false;
                     path[i][j] = false;
+                    inStack[i][j] = false;
+                    prev[i][j] = null;
                 }
             }
+
+            entranceX = 1;
+            entranceY = 0;
+            exitX = N - 2;
+            exitY = M - 1;
         }
         catch(IOException e){
             e.printStackTrace();
@@ -60,13 +76,12 @@ public class MazeData {
         }
     }
 
-    public int N(){
-        return N;
-    }
-
-    public int M(){
-        return M;
-    }
+    public int N(){ return N; }
+    public int M(){ return M; }
+    public int getEntranceX(){ return entranceX; }
+    public int getEntranceY(){ return entranceY; }
+    public int getExitX(){ return exitX; }
+    public int getExitY(){ return exitY; }
 
     public boolean inArea(int x, int y){
         return x >= 0 && x < N && y >= 0 && y < M;
@@ -82,4 +97,10 @@ public class MazeData {
         return;
     }
 
+    public void clearTag(boolean[][] tag){
+        for(int i = 0 ; i < N ; i ++)
+            for(int j = 0 ; j < M ; j ++)
+                tag[i][j] = false;
+        return;
+    }
 }

@@ -6,4 +6,8 @@ public class Position {
         this.x = x;
         this.y = y;
     }
+
+    public static Position invalidPosition(){
+        return new Position(-1, -1);
+    }
 }
