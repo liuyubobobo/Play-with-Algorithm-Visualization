@@ -34,18 +34,18 @@ public class AlgoVisualizer {
         Stack<Position> stack = new Stack<Position>();
         Position entrance = new Position(data.getEntranceX(), data.getEntranceY());
         stack.push(entrance);
-        data.visited[entrance.x][entrance.y] = true;
+        data.visited[entrance.getX()][entrance.getY()] = true;
 
         while(!stack.empty()){
             Position curPos = stack.pop();
-            setData(curPos.x, curPos.y, true);
+            setData(curPos.getX(), curPos.getY(), true);
 
-            if(curPos.x == data.getExitX() && curPos.y == data.getExitY())
+            if(curPos.getX() == data.getExitX() && curPos.getY() == data.getExitY())
                 break;
 
             for(int i = 0 ; i < 4  ; i ++){
-                int newX = curPos.x + d[i][0];
-                int newY = curPos.y + d[i][1];
+                int newX = curPos.getX() + d[i][0];
+                int newY = curPos.getY() + d[i][1];
 
                 if(data.inArea(newX, newY)
                         && !data.visited[newX][newY]
