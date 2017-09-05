@@ -27,7 +27,7 @@ public class AlgoVisualizer {
         });
     }
 
-    public void run(){
+    private void run(){
 
         setData(-1, -1, false);
 
@@ -36,12 +36,17 @@ public class AlgoVisualizer {
         stack.push(entrance);
         data.visited[entrance.x][entrance.y] = true;
 
+        boolean isSolved = false;
+
         while(!stack.empty()){
             Position curPos = stack.pop();
             setData(curPos.x, curPos.y, true);
 
-            if(curPos.x == data.getExitX() && curPos.y == data.getExitY())
+            if(curPos.x == data.getExitX() && curPos.y == data.getExitY()){
+                isSolved = true;
+                findPath(curPos);
                 break;
+            }
 
             for(int i = 0 ; i < 4  ; i ++){
                 int newX = curPos.x + d[i][0];
@@ -50,14 +55,26 @@ public class AlgoVisualizer {
                 if(data.inArea(newX, newY)
                         && !data.visited[newX][newY]
                         && data.getMaze(newX, newY) == MazeData.ROAD){
-                    stack.push(new Position(newX, newY));
+                    stack.push(new Position(newX, newY, curPos));
                     data.visited[newX][newY] = true;
                 }
             }
 
         }
 
+        if(!isSolved)
+            System.out.println("The maze has no Solution!");
+
         setData(-1, -1, false);
+    }
+
+    private void findPath(Position des){
+
+        Position cur = des;
+        while(cur != null){
+            data.result[cur.x][cur.y] = true;
+            cur = cur.prev;
+        }
     }
 
     private void setData(int x, int y, boolean isPath){
