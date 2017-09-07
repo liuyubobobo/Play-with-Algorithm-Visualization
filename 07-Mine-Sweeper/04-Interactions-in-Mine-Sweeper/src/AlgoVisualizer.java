@@ -1,5 +1,3 @@
-import javafx.scene.input.MouseButton;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,22 +5,44 @@ import javax.swing.*;
 public class AlgoVisualizer {
 
     private static int DELAY = 5;
+    private static int blockSide = 32;
 
     private MineSweeperData data;
     private AlgoFrame frame;
-    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
+    private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
-    public AlgoVisualizer(AlgoFrame frame, MineSweeperData data){
+    public AlgoVisualizer(int N, int M, int mineNumber){
 
-        this.frame = frame;
-        this.data = data;
+        data = new MineSweeperData(N, M, mineNumber);
+        int sceneWidth = M * blockSide;
+        int sceneHeight = N * blockSide;
 
-        this.setData(false, -1, -1);
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Mine Sweeper", sceneWidth,sceneHeight);
+            frame.addMouseListener(new AlgoMouseListener());
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
     public void run(){
 
         this.setData(false, -1, -1);
+
+    }
+
+    private void setData(boolean isLeftClicked, int x, int y){
+        if(isLeftClicked){
+            if(data.inArea(x, y))
+                data.open[x][y] = true;
+        }
+        else{
+            if(data.inArea(x, y))
+                data.flags[x][y] = true;
+        }
+
+        frame.render(data);
         AlgoVisHelper.pause(DELAY);
     }
 
@@ -34,6 +54,7 @@ public class AlgoVisualizer {
 
         @Override
         public void mouseReleased(MouseEvent event){
+
             event.translatePoint(
                     -(int)(frame.getBounds().width - frame.getCanvasWidth()),
                     -(int)(frame.getBounds().height - frame.getCanvasHeight())
@@ -56,38 +77,12 @@ public class AlgoVisualizer {
         }
     }
 
-    private void setData(boolean isLeftClicked, int x, int y){
-        if(isLeftClicked){
-            if(data.inArea(x, y))
-                data.open[x][y] = true;
-        }
-        else{
-            if(data.inArea(x, y))
-                data.flags[x][y] = true;
-        }
-        frame.setData(data);
-    }
-
     public static void main(String[] args) {
 
         int N = 20;
-        int M = 20;
-
-        int blockSide = 32;
-        int sceneWidth = M * blockSide;
-        int sceneHeight = N * blockSide;
-
+        int M = 30;
         int mineNumber = 20;
-        MineSweeperData data = new MineSweeperData(N, M, mineNumber);
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Mine Sweeper", sceneWidth,sceneHeight);
-
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            vis.addAlgoMouseListener();
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(N, M, mineNumber);
     }
 }
