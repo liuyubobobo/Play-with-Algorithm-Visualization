@@ -1,8 +1,8 @@
 public class MineSweeperData {
 
-    public static String blockImageURL = "resources/block.png";
-    public static String flagImageURL = "resources/flag.png";
-    public static String mineImageURL = "resources/mine.png";
+    public static final String blockImageURL = "resources/block.png";
+    public static final String flagImageURL = "resources/flag.png";
+    public static final String mineImageURL = "resources/mine.png";
     public static String numberImageURL(int num){
         if(num < 0 || num >= 8)
             throw new IllegalArgumentException("No such a number image!");
@@ -17,7 +17,7 @@ public class MineSweeperData {
         if(N <= 0 || M <= 0)
             throw new IllegalArgumentException("Mine sweeper size is invalid!");
 
-        if(mineNumber > N*M)
+        if(mineNumber < 0 || mineNumber > N*M)
             throw new IllegalArgumentException("Mine number is larger than the size of mine sweeper board!");
 
         this.N = N;
@@ -29,12 +29,7 @@ public class MineSweeperData {
                 mines[i][j] = false;
             }
 
-        for(int i = 0 ; i < mineNumber; i ++){
-            int x = i/M;
-            int y = i%M;
-            mines[x][y] = true;
-        }
-        shuffleBoard();
+        generateMines(mineNumber);
     }
 
     public int N(){ return N; }
@@ -50,20 +45,30 @@ public class MineSweeperData {
         return x >= 0 && x < N && y >= 0 && y < M;
     }
 
-    private void shuffleBoard(){
+    private void generateMines(int mineNumber){
 
-        for(int i = N*M-1; i >= 0 ; i-- ){
-            int randNumber = (int)(Math.random()*(i+1));
-
-            int randX = randNumber/M;
-            int randY = randNumber%M;
-
-            int iX = i/M;
-            int iY = i%M;
-
-            boolean t = mines[iX][iY];
-            mines[iX][iY] = mines[randX][randY];
-            mines[randX][randY] = t;
+        for(int i = 0 ; i < mineNumber ; i ++){
+            int x = i/M;
+            int y = i%M;
+            mines[x][y] = true;
         }
+
+        int swapTime = 10000;
+        for(int i = 0 ; i < swapTime ; i ++){
+
+            int x1 = (int)(Math.random() * N);
+            int y1 = (int)(Math.random() * M);
+
+            int x2 = (int)(Math.random() * N);
+            int y2 = (int)(Math.random() * M);
+
+            swap(x1, y1, x2, y2);
+        }
+    }
+
+    private void swap(int x1, int y1, int x2, int y2){
+        boolean t = mines[x1][y1];
+        mines[x1][y1] = mines[x2][y2];
+        mines[x2][y2] = t;
     }
 }
