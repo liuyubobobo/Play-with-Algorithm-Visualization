@@ -1,75 +1,78 @@
-import java.awt.*;
+import javafx.geometry.Pos;
+
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.Arrays;
-import java.util.Queue;
+import java.util.Stack;
+import java.awt.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 20;
+    private static int blockSide = 8;
 
     private MazeData data;
     private AlgoFrame frame;
-    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
+    private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
-    public AlgoVisualizer(AlgoFrame frame, MazeData data){
+    public AlgoVisualizer(int N, int M){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new MazeData(N, M);
+        int sceneHeight = data.N() * blockSide;
+        int sceneWidth = data.M() * blockSide;
 
-        this.setData();
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Random Maze Generation Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
 
-        // 设置迷宫的入口和出口
-        data.maze[data.getEntranceX()][data.getEntranceY()] = MazeData.ROAD;
-        data.maze[data.getExitX()][data.getExitY()] = MazeData.ROAD;
+        setData(-1, -1);
 
-        Queue<Position> queue = new LinkedList<Position>();
-        queue.add(new Position(data.getEntranceX(), data.getEntranceY()+1));
-        data.visited[data.getEntranceX()][data.getEntranceY()+1] = true;
+        LinkedList<Position> queue = new LinkedList<Position>();
+        Position first = new Position(data.getEntranceX(), data.getEntranceY()+1);
+        queue.addLast(first);
+        data.visited[first.getX()][first.getY()] = true;
+
         while(queue.size() != 0){
-            Position cur = queue.remove();
+            Position curPos = queue.pop();
 
-            for(int i = 0 ; i < 4 ; i ++){
-                int newX = cur.x + d[i][0]*2;
-                int newY = cur.y + d[i][1]*2;
-                if(data.inArea(newX, newY) && !data.visited[newX][newY]){
-                    data.maze[cur.x+d[i][0]][cur.y+d[i][1]] = MazeData.ROAD;
-                    queue.add(new Position(newX, newY));
+            for(int i = 0 ; i < 4  ; i ++){
+                int newX = curPos.getX() + d[i][0]*2;
+                int newY = curPos.getY() + d[i][1]*2;
+
+                if(data.inArea(newX, newY)
+                        && !data.visited[newX][newY]
+                        && data.maze[newX][newY] == MazeData.ROAD){
+                    queue.addLast(new Position(newX, newY));
                     data.visited[newX][newY] = true;
-                    this.setData();
-                    AlgoVisHelper.pause(DELAY);
+                    setData(curPos.getX() + d[i][0], curPos.getY() + d[i][1]);
                 }
             }
         }
 
-        this.setData();
-        AlgoVisHelper.pause(DELAY);
+        setData(-1, -1);
     }
 
-    private void setData(){
-        frame.setData(data);
+    private void setData(int x, int y){
+        if(data.inArea(x, y))
+            data.maze[x][y] = MazeData.ROAD;
+
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
-        int sceneWidth = 808;
-        int sceneHeight = 808;
-        int blockSide = 8;
+        int N = 101;
+        int M = 101;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Maze Generation Visualization", sceneWidth,sceneHeight);
+        AlgoVisualizer vis = new AlgoVisualizer(N, M);
 
-            int N = sceneHeight/blockSide;
-            int M = sceneWidth/blockSide;
-
-            MazeData data = new MazeData(N, M);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
     }
 }

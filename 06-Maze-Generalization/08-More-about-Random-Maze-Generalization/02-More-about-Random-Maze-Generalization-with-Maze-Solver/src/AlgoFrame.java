@@ -64,12 +64,20 @@ public class AlgoFrame extends JFrame{
 
             for(int i = 0 ; i < data.N() ; i ++ )
                 for(int j = 0 ; j < data.M() ; j ++){
-                if ( data.maze[i][j] == MazeData.WALL)
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                else
-                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
 
-                AlgoVisHelper.fillRectangle(g2d, j * w, i * h, w, h);
+                    if(data.inMist[i][j])
+                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.Black);
+                    else{
+                        if(data.maze[i][j] == MazeData.WALL)
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
+                        else
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
+
+                        if(data.path[i][j])
+                            AlgoVisHelper.setColor(g2d, AlgoVisHelper.Yellow);
+                    }
+
+                    AlgoVisHelper.fillRectangle(g2d, j * w, i * h, w, h);
             }
         }
 

@@ -1,49 +1,47 @@
 import java.awt.*;
-import java.util.Random;
-import java.util.Arrays;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 5;
+    private static int blockSide = 8;
 
     private MazeData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, MazeData data){
+    public AlgoVisualizer(int N, int M){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new MazeData(N, M);
+        int sceneHeight = data.N() * blockSide;
+        int sceneWidth = data.M() * blockSide;
 
-        this.setData();
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Random Maze Generation Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
 
-        this.setData();
-        AlgoVisHelper.pause(DELAY);
+        setData();
+
     }
 
     private void setData(){
-        frame.setData(data);
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
-        int sceneWidth = 808;
-        int sceneHeight = 808;
-        int blockSide = 8;
+        int N = 101;
+        int M = 101;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Maze Generation Visualization", sceneWidth,sceneHeight);
+        AlgoVisualizer vis = new AlgoVisualizer(N, M);
 
-            int N = sceneHeight/blockSide;
-            int M = sceneWidth/blockSide;
-
-            MazeData data = new MazeData(N, M);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
     }
 }

@@ -1,5 +1,6 @@
 import javafx.geometry.Pos;
 
+import java.util.LinkedList;
 import java.util.Stack;
 import java.awt.*;
 
@@ -33,13 +34,13 @@ public class AlgoVisualizer {
 
         setData(-1, -1);
 
-        Stack<Position> stack = new Stack<Position>();
+        RandomQueue<Position> queue = new RandomQueue<Position>();
         Position first = new Position(data.getEntranceX(), data.getEntranceY()+1);
-        stack.push(first);
+        queue.add(first);
         data.visited[first.getX()][first.getY()] = true;
 
-        while(!stack.empty()){
-            Position curPos = stack.pop();
+        while(queue.size() != 0){
+            Position curPos = queue.remove();
 
             for(int i = 0 ; i < 4  ; i ++){
                 int newX = curPos.getX() + d[i][0]*2;
@@ -48,7 +49,7 @@ public class AlgoVisualizer {
                 if(data.inArea(newX, newY)
                         && !data.visited[newX][newY]
                         && data.maze[newX][newY] == MazeData.ROAD){
-                    stack.push(new Position(newX, newY));
+                    queue.add(new Position(newX, newY));
                     data.visited[newX][newY] = true;
                     setData(curPos.getX() + d[i][0], curPos.getY() + d[i][1]);
                 }

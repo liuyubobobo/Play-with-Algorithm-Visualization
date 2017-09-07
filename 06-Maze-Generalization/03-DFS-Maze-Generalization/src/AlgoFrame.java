@@ -1,16 +1,10 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -38,8 +32,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    MazeData data;
-    public void setData(MazeData data){
+    private MazeData data;
+    public void render(MazeData data){
         this.data = data;
         repaint();
     }

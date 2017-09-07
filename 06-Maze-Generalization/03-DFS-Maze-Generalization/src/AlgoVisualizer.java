@@ -1,77 +1,69 @@
 import java.awt.*;
-import java.util.Random;
-import java.util.Arrays;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 40;
+    private static int DELAY = 5;
+    private static int blockSide = 8;
 
     private MazeData data;
     private AlgoFrame frame;
+    private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
-    public AlgoVisualizer(AlgoFrame frame, MazeData data){
+    public AlgoVisualizer(int N, int M){
 
-        this.frame = frame;
-        this.data = data;
+        // 初始化数据
+        data = new MazeData(N, M);
+        int sceneHeight = data.N() * blockSide;
+        int sceneWidth = data.M() * blockSide;
 
-        this.setData();
+        // 初始化视图
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Random Maze Generation Visualization", sceneWidth, sceneHeight);
+
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
 
-        // 设置迷宫的入口和出口
-        data.maze[data.getEntranceX()][data.getEntranceY()] = MazeData.ROAD;
-        data.maze[data.getExitX()][data.getExitY()] = MazeData.ROAD;
+        setData(-1, -1);
 
-        genMazeByDFS(data.getEntranceX(), data.getEntranceY() + 1);
+        go(data.getEntranceX(), data.getEntranceY()+1);
 
-        this.setData();
-        AlgoVisHelper.pause(DELAY);
+        setData(-1, -1);
     }
 
-    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
-    public void genMazeByDFS(int x, int y){
+    private void go(int x, int y){
 
-        if(x < 0 || x >= data.N() || y < 0 || y >= data.M())
-            throw new IllegalArgumentException("x, y out of index in genMaze function!");
-
-        if(x%2 ==0 || y%2 == 0)
-            throw new IllegalArgumentException("invalid x, y value in genMaze function!");
+        if(!data.inArea(x,y))
+            throw new IllegalArgumentException("x,y are out of index in go function!");
 
         data.visited[x][y] = true;
         for(int i = 0 ; i < 4 ; i ++){
             int newX = x + d[i][0]*2;
             int newY = y + d[i][1]*2;
             if(data.inArea(newX, newY) && !data.visited[newX][newY]){
-                data.maze[x+d[i][0]][y+d[i][1]] = MazeData.ROAD;
-                this.setData();
-                AlgoVisHelper.pause(DELAY);
-                genMazeByDFS(newX, newY);
+                setData(x + d[i][0], y + d[i][1]);
+                go(newX, newY);
             }
         }
     }
 
-    private void setData(){
-        frame.setData(data);
+    private void setData(int x, int y){
+        if(data.inArea(x, y))
+            data.maze[x][y] = MazeData.ROAD;
+        frame.render(data);
+        AlgoVisHelper.pause(DELAY);
     }
 
     public static void main(String[] args) {
 
-        int sceneWidth = 808;
-        int sceneHeight = 808;
-        int blockSide = 8;
+        int N = 101;
+        int M = 101;
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Maze Generation Visualization", sceneWidth,sceneHeight);
+        AlgoVisualizer vis = new AlgoVisualizer(N, M);
 
-            int N = sceneHeight/blockSide;
-            int M = sceneWidth/blockSide;
-
-            MazeData data = new MazeData(N, M);
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
     }
 }
