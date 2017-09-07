@@ -1,11 +1,8 @@
-import javafx.geometry.Pos;
-
-import java.util.Stack;
 import java.awt.*;
 
 public class AlgoVisualizer {
 
-    private static int DELAY = 20;
+    private static int DELAY = 5;
     private static int blockSide = 8;
 
     private MazeData data;
@@ -33,33 +30,30 @@ public class AlgoVisualizer {
 
         setData(-1, -1);
 
-        Stack<Position> stack = new Stack<Position>();
-        Position first = new Position(data.getEntranceX(), data.getEntranceY()+1);
-        stack.push(first);
-        data.visited[first.getX()][first.getY()] = true;
-
-        while(!stack.empty()){
-            Position curPos = stack.pop();
-
-            for(int i = 0 ; i < 4  ; i ++){
-                int newX = curPos.getX() + d[i][0]*2;
-                int newY = curPos.getY() + d[i][1]*2;
-
-                if(data.inArea(newX, newY) && !data.visited[newX][newY]){
-                    stack.push(new Position(newX, newY));
-                    data.visited[newX][newY] = true;
-                    setData(curPos.getX() + d[i][0], curPos.getY() + d[i][1]);
-                }
-            }
-        }
+        go(data.getEntranceX(), data.getEntranceY()+1);
 
         setData(-1, -1);
+    }
+
+    private void go(int x, int y){
+
+        if(!data.inArea(x,y))
+            throw new IllegalArgumentException("x,y are out of index in go function!");
+
+        data.visited[x][y] = true;
+        for(int i = 0 ; i < 4 ; i ++){
+            int newX = x + d[i][0]*2;
+            int newY = y + d[i][1]*2;
+            if(data.inArea(newX, newY) && !data.visited[newX][newY]){
+                setData(x + d[i][0], y + d[i][1]);
+                go(newX, newY);
+            }
+        }
     }
 
     private void setData(int x, int y){
         if(data.inArea(x, y))
             data.maze[x][y] = MazeData.ROAD;
-
         frame.render(data);
         AlgoVisHelper.pause(DELAY);
     }

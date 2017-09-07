@@ -14,7 +14,7 @@ public class RandomQueue<E>{
 
     public E remove(){
         if(queue.size() == 0)
-            throw new IllegalArgumentException("There's no element to remove in Random Queue");
+            throw new IllegalArgumentException("There's no element to remove in Random Qeuue");
 
         int randIndex = (int)(Math.random()*queue.size());
 
