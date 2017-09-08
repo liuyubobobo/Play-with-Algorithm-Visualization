@@ -1,8 +1,5 @@
-import javafx.scene.input.MouseButton;
-
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
 public class AlgoVisualizer {
 
@@ -11,21 +8,31 @@ public class AlgoVisualizer {
     private FractalData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(AlgoFrame frame, FractalData data){
+    public AlgoVisualizer(int depth){
 
-        this.frame = frame;
-        this.data = data;
-        this.setData(data);
+        data = new FractalData(depth);
+        int sceneWidth = (int)Math.pow(3, depth);
+        int sceneHeight = (int)Math.pow(3, depth);
+
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Fractal Visualizer", sceneWidth,sceneHeight);
+            frame.addKeyListener(new AlgoKeyListener());
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
 
-        this.setData(data);
+        setData(data.depth);
+    }
+
+    private void setData(int depth){
+        data.depth = depth;
+
+        frame.render(data);
         AlgoVisHelper.pause(DELAY);
-    }
-
-    private void setData(FractalData data){
-        frame.setData(data);
     }
 
     public void addAlgoKeyListener(){
@@ -39,8 +46,7 @@ public class AlgoVisualizer {
             //System.out.println("Key released:" + event);
             if(event.getKeyChar() >= '0' && event.getKeyChar() <= '9'){
                 int depth = event.getKeyChar() - '0';
-                data.depth = depth;
-                setData(data);
+                setData(depth);
             }
         }
     }
@@ -48,19 +54,7 @@ public class AlgoVisualizer {
     public static void main(String[] args) {
 
         int depth = 6;
-        int sceneWidth = (int)Math.pow(3, depth);
-        int sceneHeight = (int)Math.pow(3, depth);
 
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Fractal Visualizer", sceneWidth,sceneHeight);
-
-            FractalData data = new FractalData(depth);
-
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            vis.addAlgoKeyListener();
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(depth);
     }
 }

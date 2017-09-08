@@ -3,17 +3,12 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -41,8 +36,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    FractalData data;
-    public void setData(FractalData data){
+    private FractalData data;
+    public void render(FractalData data){
         this.data = data;
         repaint();
     }
@@ -73,11 +68,14 @@ public class AlgoFrame extends JFrame{
 
         private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
 
-//            if( w <= 0 || h <= 0)
-//                return;
+            int w_3 = w/3;
+            int h_3 = h/3;
 
-            if(w <= 0) w = 1;
-            if(h <= 0) h = 1;
+            if(w_3 <= 0 || h_3 <= 0){
+                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+                AlgoVisHelper.fillRectangle(g, x, y, 1, 1);
+                return;
+            }
 
             if( depth == data.depth ){
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
@@ -85,8 +83,6 @@ public class AlgoFrame extends JFrame{
                 return;
             }
 
-            int w_3 = w/3;
-            int h_3 = h/3;
             drawFractal(g, x, y, w_3, h_3, depth+1);
             drawFractal(g, x+2*w_3, y, w_3, h_3, depth+1);
             drawFractal(g, x+w_3, y+w_3, w_3, h_3, depth+1);

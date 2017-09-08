@@ -3,17 +3,12 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -41,8 +36,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    FractalData data;
-    public void setData(FractalData data){
+    private FractalData data;
+    public void render(FractalData data){
         this.data = data;
         repaint();
     }
