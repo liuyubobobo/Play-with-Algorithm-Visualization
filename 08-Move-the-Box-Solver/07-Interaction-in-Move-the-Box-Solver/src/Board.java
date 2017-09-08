@@ -1,4 +1,3 @@
-
 public class Board {
 
     public static char EMPTY = '.';
@@ -6,8 +5,8 @@ public class Board {
     private int N, M;
     private char[][] data;
 
-    public Board preBoard = null;
-    public String swapString = "";
+    private Board preBoard = null;
+    private String swapString = "";
 
     public Board(String[] lines){
         if(lines == null)
@@ -28,7 +27,7 @@ public class Board {
         }
     }
 
-    public Board(Board board){
+    public Board(Board board, Board preBoard, String swapString){
         if(board == null)
             throw new IllegalArgumentException("board can not be null in Board constructor!");
 
@@ -38,6 +37,13 @@ public class Board {
         for(int i = 0 ; i < N ; i ++)
             for(int j = 0 ; j < M ; j ++)
                 this.data[i][j] = board.data[i][j];
+
+        this.preBoard = preBoard;
+        this.swapString = swapString;
+    }
+
+    public Board(Board board){
+        this(board, null, "");
     }
 
     public int N(){ return N; }
@@ -56,6 +62,18 @@ public class Board {
     public void print(){
         for(int i = 0 ; i < N ; i ++)
             System.out.println(String.valueOf(data[i]));
+    }
+
+    public boolean isWin(){
+
+        for(int i = 0 ; i < N ; i ++)
+            for(int j = 0 ; j < M ; j ++)
+                if(data[i][j] != EMPTY)
+                    return false;
+
+        printSwapInfo();
+
+        return true;
     }
 
     public void swap(int x1, int y1, int x2, int y2){
@@ -80,7 +98,7 @@ public class Board {
     }
 
     private static int d[][] = {{0, 1}, {1, 0}};
-    public boolean match(){
+    private boolean match(){
 
         boolean isMatched = false;
 
@@ -94,7 +112,7 @@ public class Board {
                         int newX2 = newX1 + d[i][0];
                         int newY2 = newY1 + d[i][1];
                         if(inArea(newX1, newY1) && inArea(newX2, newY2)
-                            && data[x][y] == data[newX1][newY1] && data[x][y] == data[newX2][newY2]){
+                                && data[x][y] == data[newX1][newY1] && data[x][y] == data[newX2][newY2]){
 
                             tag[x][y] = true;
                             tag[newX1][newY1] = true;
@@ -112,7 +130,7 @@ public class Board {
         return isMatched;
     }
 
-    public void drop(){
+    private void drop(){
 
         for(int j = 0 ; j < M ; j ++){
             int cur = N-1;

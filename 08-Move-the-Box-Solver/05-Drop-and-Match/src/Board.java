@@ -1,4 +1,3 @@
-
 public class Board {
 
     public static char EMPTY = '.';
@@ -55,6 +54,16 @@ public class Board {
             System.out.println(String.valueOf(data[i]));
     }
 
+    public boolean isWin(){
+
+        for(int i = 0 ; i < N ; i ++)
+            for(int j = 0 ; j < M ; j ++)
+                if(data[i][j] != EMPTY)
+                    return false;
+
+        return true;
+    }
+
     public void swap(int x1, int y1, int x2, int y2){
 
         if(!inArea(x1, y1) || !inArea(x2, y2))
@@ -77,7 +86,7 @@ public class Board {
     }
 
     private static int d[][] = {{0, 1}, {1, 0}};
-    public boolean match(){
+    private boolean match(){
 
         boolean isMatched = false;
 
@@ -109,7 +118,7 @@ public class Board {
         return isMatched;
     }
 
-    public void drop(){
+    private void drop(){
 
         for(int j = 0 ; j < M ; j ++){
             int cur = N-1;

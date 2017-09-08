@@ -3,10 +3,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-
+import java.util.HashSet;
 
 public class GameData {
 
@@ -16,7 +14,7 @@ public class GameData {
     private Board showBoard;
     private HashSet<Board> searchedBoards;
 
-    public int clickx, clicky;
+    public int clickx = -1, clicky = -1;
 
     public GameData(String filename){
 
@@ -85,20 +83,16 @@ public class GameData {
         return ret;
     }
 
-    private int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
+    private static int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
     private boolean solve(Board board, int turn){
 
         if(board == null)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
-//        System.out.println("= turn " + turn + " =");
-//        board.print();
-//        System.out.println("==========");
-
         if(turn == 0)
-            return isWin(board);
+            return board.isWin();
 
-        if(isWin(board))
+        if(board.isWin())
             return true;
 
         for(int x = 0 ; x < N ; x ++)
@@ -108,9 +102,8 @@ public class GameData {
                         int newX = x + d[i][0];
                         int newY = y + d[i][1];
                         if(inArea(newX, newY)){
-                            Board nextBoard = new Board(board);
-                            nextBoard.preBoard = board;
-                            nextBoard.swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
+                            String swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
+                            Board nextBoard = new Board(board, board, swapString);
                             nextBoard.swap(x, y, newX, newY);
                             nextBoard.run();
 
@@ -127,18 +120,4 @@ public class GameData {
         return false;
     }
 
-    private boolean isWin(Board board){
-
-        if(board == null)
-            throw new IllegalArgumentException("board can not be null in isWin function!");
-
-        for(int i = 0 ; i < N ; i ++)
-            for(int j = 0 ; j < M ; j ++)
-                if(board.getData(i, j) != Board.EMPTY)
-                    return false;
-
-        board.printSwapInfo();
-
-        return true;
-    }
 }

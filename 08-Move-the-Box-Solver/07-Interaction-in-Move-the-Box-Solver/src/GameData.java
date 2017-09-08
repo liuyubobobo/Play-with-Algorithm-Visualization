@@ -13,7 +13,7 @@ public class GameData {
     private Board starterBoard;
     private Board showBoard;
 
-    public int clickx, clicky;
+    public int clickx = -1, clicky = -1;
 
     public GameData(String filename){
 
@@ -43,7 +43,7 @@ public class GameData {
             this.N = starterBoard.N();
             this.M = starterBoard.M();
 
-            //starterBoard.print();
+            starterBoard.print();
 
             showBoard = new Board(starterBoard);
         }
@@ -66,24 +66,23 @@ public class GameData {
 
     public boolean solve(){
 
-        if(maxTurn < 0)
+        if(maxTurn <= 0)
             return false;
 
         return solve(new Board(starterBoard), maxTurn);
     }
 
-    private int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
+    private static int d[][] = {{-1, 0}, {0, 1}, {0,-1}};
     private boolean solve(Board board, int turn){
 
         if(board == null)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
         if(turn == 0)
-            return isWin(board);
+            return board.isWin();
 
-        if(isWin(board))
+        if(board.isWin())
             return true;
-
 
         for(int x = 0 ; x < N ; x ++)
             for(int y = 0 ; y < M ; y ++)
@@ -92,9 +91,8 @@ public class GameData {
                         int newX = x + d[i][0];
                         int newY = y + d[i][1];
                         if(inArea(newX, newY)){
-                            Board nextBoard = new Board(board);
-                            nextBoard.preBoard = board;
-                            nextBoard.swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
+                            String swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
+                            Board nextBoard = new Board(board, board, swapString);
                             nextBoard.swap(x, y, newX, newY);
                             nextBoard.run();
                             if(solve(nextBoard, turn-1))
@@ -104,20 +102,5 @@ public class GameData {
                 }
 
         return false;
-    }
-
-    private boolean isWin(Board board){
-
-        if(board == null)
-            throw new IllegalArgumentException("board can not be null in isWin function!");
-
-        for(int i = 0 ; i < N ; i ++)
-            for(int j = 0 ; j < M ; j ++)
-                if(board.getData(i, j) != Board.EMPTY)
-                    return false;
-
-        board.printSwapInfo();
-
-        return true;
     }
 }

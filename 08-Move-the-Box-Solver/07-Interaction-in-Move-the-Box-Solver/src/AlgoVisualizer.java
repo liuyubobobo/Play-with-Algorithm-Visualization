@@ -1,5 +1,3 @@
-import javafx.scene.input.MouseButton;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,27 +5,43 @@ import javax.swing.*;
 public class AlgoVisualizer {
 
     private static int DELAY = 5;
+    private static int blockSide = 80;
 
     private GameData data;
     private AlgoFrame frame;
-    private final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
-    public AlgoVisualizer(AlgoFrame frame, GameData data){
+    public AlgoVisualizer(String filename){
 
-        this.frame = frame;
-        this.data = data;
+        data = new GameData(filename);
+        int sceneWidth = data.M() * blockSide;
+        int sceneHeight = data.N() * blockSide;
 
-        this.setData(-1, -1);
+        EventQueue.invokeLater(() -> {
+            frame = new AlgoFrame("Move the Box Solver", sceneWidth,sceneHeight);
+            frame.addMouseListener(new AlgoMouseListener());
+            new Thread(() -> {
+                run();
+            }).start();
+        });
     }
 
-    public void run(){
+    private void run(){
+
+        setData(-1, -1);
 
         if(data.solve())
             System.out.println("The game has a solution!");
         else
             System.out.println("The game does NOT have a solution.");
 
-        this.setData(-1, -1);
+        setData(-1, -1);
+    }
+
+    private void setData(int clickx, int clicky){
+        data.clickx = clickx;
+        data.clicky = clicky;
+
+        frame.render(data);
         AlgoVisHelper.pause(DELAY);
     }
 
@@ -57,14 +71,17 @@ public class AlgoVisualizer {
             //System.out.println(x + " , " + y);
 
             if(SwingUtilities.isLeftMouseButton(event)){
-                if(data.getShowBoard().getData(x, y) != Board.EMPTY){
+                if(data.inArea(x, y)){
                     setData(x, y);
-                    if(clickPos1 == null)
+                    if(clickPos1 == null){
                         clickPos1 = new Position(x, y);
+                    }
                     else{
                         clickPos2 = new Position(x, y);
-                        data.getShowBoard().swap(clickPos1.x, clickPos1.y, clickPos2.x, clickPos2.y);
-                        data.getShowBoard().run();
+                        if(clickPos2.nextTo(clickPos1)){
+                            data.getShowBoard().swap(clickPos1.getX(), clickPos1.getY(), clickPos2.getX(), clickPos2.getY());
+                            data.getShowBoard().run();
+                        }
                         clickPos1 = null;
                         clickPos2 = null;
                         setData(-1, -1);
@@ -73,35 +90,16 @@ public class AlgoVisualizer {
                 else{
                     setData(-1, -1);
                     clickPos1 = null;
+                    clickPos2 = null;
                 }
             }
         }
     }
 
-    private void setData(int clickx, int clicky){
-        data.clickx = clickx;
-        data.clicky = clicky;
-
-        frame.setData(data);
-    }
-
     public static void main(String[] args) {
 
         String filename = "level/boston_09.txt";
-        GameData data = new GameData(filename);
 
-        int blockSide = 80;
-        int sceneWidth = data.M() * blockSide;
-        int sceneHeight = data.N() * blockSide;
-
-        EventQueue.invokeLater(() -> {
-            AlgoFrame frame = new AlgoFrame("Move the Box Solver", sceneWidth,sceneHeight);
-
-            AlgoVisualizer vis = new AlgoVisualizer(frame, data);
-            vis.addAlgoMouseListener();
-            new Thread(() -> {
-                vis.run();
-            }).start();
-        });
+        AlgoVisualizer vis = new AlgoVisualizer(filename);
     }
 }

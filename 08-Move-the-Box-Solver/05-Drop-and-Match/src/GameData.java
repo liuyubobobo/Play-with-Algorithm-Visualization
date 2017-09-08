@@ -41,7 +41,7 @@ public class GameData {
             this.N = starterBoard.N();
             this.M = starterBoard.M();
 
-            //starterBoard.print();
+            starterBoard.print();
 
             showBoard = new Board(starterBoard);
         }
@@ -64,22 +64,22 @@ public class GameData {
 
     public boolean solve(){
 
-        if(maxTurn < 0)
+        if(maxTurn <= 0)
             return false;
 
         return solve(new Board(starterBoard), maxTurn);
     }
 
-    private int d[][] = {{-1, 0}, {0, -1}, {0,1}};
+    private static int d[][] = {{-1, 0}, {0, 1}, {0,-1}};
     private boolean solve(Board board, int turn){
 
         if(board == null)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
         if(turn == 0)
-            return isWin(board);
+            return board.isWin();
 
-        if(isWin(board))
+        if(board.isWin())
             return true;
 
         for(int x = 0 ; x < N ; x ++)
@@ -99,18 +99,5 @@ public class GameData {
                 }
 
         return false;
-    }
-
-    private boolean isWin(Board board){
-
-        if(board == null)
-            throw new IllegalArgumentException("board can not be null in isWin function!");
-
-        for(int i = 0 ; i < N ; i ++)
-            for(int j = 0 ; j < M ; j ++)
-                if(board.getData(i, j) != Board.EMPTY)
-                    return false;
-
-        return true;
     }
 }

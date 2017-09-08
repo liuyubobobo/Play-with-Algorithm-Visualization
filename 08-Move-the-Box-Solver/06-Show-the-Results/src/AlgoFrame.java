@@ -3,17 +3,13 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
+import java.util.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
-    private JPanel canvas;
 
     public AlgoFrame(String title, int canvasWidth, int canvasHeight){
 
@@ -41,8 +37,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    GameData data;
-    public void setData(GameData data){
+    private GameData data;
+    public void render(GameData data){
         this.data = data;
         repaint();
     }
@@ -50,7 +46,7 @@ public class AlgoFrame extends JFrame{
     private class AlgoCanvas extends JPanel{
 
         private ArrayList<Color> colorList;
-        private Map<Character, Color> colorMap;
+        private HashMap<Character, Color> colorMap;
         public AlgoCanvas(){
             // 双缓存
             super(true);
