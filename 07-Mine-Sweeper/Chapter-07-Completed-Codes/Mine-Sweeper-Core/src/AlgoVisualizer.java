@@ -86,7 +86,7 @@ public class AlgoVisualizer {
     public static void main(String[] args) {
 
         int N = 20;
-        int M = 30;
+        int M = 20;
         int mineNumber = 20;
 
         AlgoVisualizer vis = new AlgoVisualizer(N, M, mineNumber);
