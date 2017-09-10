@@ -7,7 +7,6 @@ public class AlgoVisualizer {
 
     private MineSweeperData data;
     private AlgoFrame frame;
-    private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
     public AlgoVisualizer(int N, int M, int mineNumber){
 
