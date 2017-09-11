@@ -1,10 +1,10 @@
 
-public class KnuthShuffle {
+public class NaiveShuffle2 {
 
     private int N;
     private int n, m;
 
-    public KnuthShuffle(int N, int n, int m){
+    public NaiveShuffle2(int N, int n, int m){
 
         if(N <= 0)
             throw new IllegalArgumentException("N must be larger than 0!");
@@ -48,17 +48,11 @@ public class KnuthShuffle {
 
     private void shuffle(int[] arr){
 
-        // 写法 1
-//        for(int i = 0 ; i < n ; i ++){
-//            int x = (int)(Math.random() * (n-i)) + i;
-//            swap(arr, i, x);
-//        }
-
-        // 写法 2
-        for(int i = n - 1 ; i >= 0 ; i --){
-            int x = (int)(Math.random() * (i+1));
+        for(int i = 0 ; i < m ; i ++){
+            int x = (int)(Math.random() * n);
             swap(arr, i, x);
         }
+
     }
 
     private void swap(int[] arr, int x, int y){
@@ -71,7 +65,7 @@ public class KnuthShuffle {
     public static void main(String[] args) {
 
         int N = 10000000;
-        KnuthShuffle exp = new KnuthShuffle(N, 10, 5);
+        NaiveShuffle2 exp = new NaiveShuffle2(N, 10, 5);
         exp.run();
 
     }

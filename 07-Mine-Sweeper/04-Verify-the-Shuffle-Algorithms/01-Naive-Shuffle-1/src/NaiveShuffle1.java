@@ -48,11 +48,9 @@ public class NaiveShuffle1 {
 
     private void shuffle(int[] arr){
 
-        int swapTime = n;
-        for(int i = 0 ; i < swapTime ; i ++){
+        for(int i = 0 ; i < n ; i ++){
             int x = (int)(Math.random() * n);
-            int y = (int)(Math.random() * n);
-            swap(arr, x, y);
+            swap(arr, i, x);
         }
     }
 
