@@ -4,7 +4,7 @@ public class MineSweeperData {
     public static final String flagImageURL = "resources/flag.png";
     public static final String mineImageURL = "resources/mine.png";
     public static String numberImageURL(int num){
-        if(num < 0 || num >= 8)
+        if(num < 0 || num > 8)
             throw new IllegalArgumentException("No such a number image!");
         return "resources/" + num + ".png";
     }
@@ -116,11 +116,14 @@ public class MineSweeperData {
             throw new IllegalArgumentException("Cannot open an mine block in open function.");
 
         open[x][y] = true;
-        if(getNumber(x, y) == 0){
-            for(int i = x-1 ; i <= x + 1 ; i ++)
-                for(int j = y-1 ; j <= y+1 ;j ++)
-                    if(inArea(i, j) && !open[i][j] && !isMine(i, j))
-                        open(i, j);
-        }
+
+        if(numbers[x][y] > 0)
+            return;
+
+        for(int i = x - 1 ; i <= x + 1 ; i ++)
+            for(int j = y - 1 ; j <= y + 1 ;j ++)
+                if(inArea(i, j) && !open[i][j] && !mines[i][j])
+                    open(i, j);
+
     }
 }
