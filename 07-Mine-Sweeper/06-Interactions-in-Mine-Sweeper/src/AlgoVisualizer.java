@@ -9,7 +9,6 @@ public class AlgoVisualizer {
 
     private MineSweeperData data;
     private AlgoFrame frame;
-    private static final int d[][] = {{-1,0},{0,1},{1,0},{0,-1}};
 
     public AlgoVisualizer(int N, int M, int mineNumber){
 
@@ -33,13 +32,11 @@ public class AlgoVisualizer {
     }
 
     private void setData(boolean isLeftClicked, int x, int y){
-        if(isLeftClicked){
-            if(data.inArea(x, y))
+        if(data.inArea(x, y)){
+            if(isLeftClicked)
                 data.open[x][y] = true;
-        }
-        else{
-            if(data.inArea(x, y))
-                data.flags[x][y] = true;
+            else
+                data.flags[x][y] = !data.flags[x][y];
         }
 
         frame.render(data);
@@ -80,8 +77,8 @@ public class AlgoVisualizer {
     public static void main(String[] args) {
 
         int N = 20;
-        int M = 30;
-        int mineNumber = 20;
+        int M = 20;
+        int mineNumber = 50;
 
         AlgoVisualizer vis = new AlgoVisualizer(N, M, mineNumber);
     }

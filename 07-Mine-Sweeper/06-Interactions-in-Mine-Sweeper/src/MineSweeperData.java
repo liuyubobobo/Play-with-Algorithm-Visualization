@@ -4,7 +4,7 @@ public class MineSweeperData {
     public static final String flagImageURL = "resources/flag.png";
     public static final String mineImageURL = "resources/mine.png";
     public static String numberImageURL(int num){
-        if(num < 0 || num >= 8)
+        if(num < 0 || num > 8)
             throw new IllegalArgumentException("No such a number image!");
         return "resources/" + num + ".png";
     }

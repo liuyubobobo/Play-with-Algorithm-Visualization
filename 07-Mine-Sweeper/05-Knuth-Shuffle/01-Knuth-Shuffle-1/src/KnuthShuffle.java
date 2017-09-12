@@ -49,6 +49,7 @@ public class KnuthShuffle {
     private void shuffle(int[] arr){
 
         for(int i = 0 ; i < n ; i ++){
+            // 从 [i, n) 区间里随机选择元素
             int x = (int)(Math.random() * (n-i)) + i;
             swap(arr, i, x);
         }
