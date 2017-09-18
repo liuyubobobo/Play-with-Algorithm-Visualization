@@ -27,7 +27,6 @@ public class GameData {
             scanner = new Scanner(new BufferedInputStream(fis), "UTF-8");
 
             String turnline = scanner.nextLine();
-
             this.maxTurn = Integer.parseInt(turnline);
 
             ArrayList<String> lines = new ArrayList<String>();
