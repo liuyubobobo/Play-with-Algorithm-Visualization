@@ -64,17 +64,19 @@ public class GameData {
 
     public boolean solve(){
 
-        if(maxTurn <= 0)
+        if(maxTurn < 0)
             return false;
 
         return solve(new Board(starterBoard), maxTurn);
     }
 
-    private static int d[][] = {{-1, 0}, {0, 1}, {0,-1}};
+    private static int d[][] = {{1, 0}, {0, 1}, {0,-1}};
+    // 通过盘面board，使用turn次move，解决move the box的问题
+    // 若可以成功解决，则返回true，否则返回false
     private boolean solve(Board board, int turn){
 
-        if(board == null)
-            throw new IllegalArgumentException("board can not be null in solve function!");
+        if(board == null || turn < 0)
+            throw new IllegalArgumentException("Illegal arguments in solve function!");
 
         if(turn == 0)
             return board.isWin();

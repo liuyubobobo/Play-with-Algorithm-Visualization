@@ -98,7 +98,7 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        String filename = "level/boston_09.txt";
+        String filename = "level/boston_16.txt";
 
         AlgoVisualizer vis = new AlgoVisualizer(filename);
     }

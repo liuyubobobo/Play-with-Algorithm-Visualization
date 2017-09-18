@@ -32,8 +32,6 @@ public class AlgoVisualizer {
             System.out.println("The game has a solution!");
         else
             System.out.println("The game does NOT have a solution.");
-
-        setData();
     }
 
     private void setData(){

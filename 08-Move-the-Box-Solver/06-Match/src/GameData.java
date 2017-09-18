@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.HashSet;
+
 
 public class GameData {
 
@@ -12,9 +12,6 @@ public class GameData {
     private int N, M;
     private Board starterBoard;
     private Board showBoard;
-    private HashSet<Board> searchedBoards;
-
-    public int clickx = -1, clicky = -1;
 
     public GameData(String filename){
 
@@ -44,11 +41,9 @@ public class GameData {
             this.N = starterBoard.N();
             this.M = starterBoard.M();
 
-            //starterBoard.print();
+            starterBoard.print();
 
             showBoard = new Board(starterBoard);
-
-            searchedBoards = new HashSet<Board>();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -72,21 +67,13 @@ public class GameData {
         if(maxTurn < 0)
             return false;
 
-        long startTime = System.currentTimeMillis();
-
-        searchedBoards.add(starterBoard);
-        boolean ret = solve(starterBoard, maxTurn);
-
-        long endTime = System.currentTimeMillis();
-        System.out.println( "Time : " + (endTime-startTime) + "ms" );
-
-        return ret;
+        return solve(starterBoard, maxTurn);
     }
 
-    private static int d[][] = {{1, 0}, {0, -1}, {0, 1}};
+    private static int d[][] = {{1, 0}, {0, 1}, {0,-1}};
     private boolean solve(Board board, int turn){
 
-        if(board == null)
+        if(board == null || turn < 0)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
         if(turn == 0)
@@ -102,22 +89,15 @@ public class GameData {
                         int newX = x + d[i][0];
                         int newY = y + d[i][1];
                         if(inArea(newX, newY)){
-                            String swapString = String.format("swap (%d, %d) and (%d, %d)", x, y, newX, newY);
-                            Board nextBoard = new Board(board, board, swapString);
+                            Board nextBoard = new Board(board);
                             nextBoard.swap(x, y, newX, newY);
                             nextBoard.run();
-
-                            if(!searchedBoards.contains(nextBoard)){
-                                searchedBoards.add(nextBoard);
-                                if(solve(nextBoard, turn-1))
-                                    return true;
-                            }
-
+                            if(solve(nextBoard, turn-1))
+                                return true;
                         }
                     }
                 }
 
         return false;
     }
-
 }

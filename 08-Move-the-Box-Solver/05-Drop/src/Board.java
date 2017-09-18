@@ -85,52 +85,23 @@ public class Board {
         return;
     }
 
-    private static int d[][] = {{0, 1}, {1, 0}};
-    private boolean match(){
-
-        boolean isMatched = false;
-
-        boolean tag[][] = new boolean[N][M];
-        for(int x = 0 ; x < N ; x ++)
-            for(int y = 0 ; y < M ; y ++)
-                if(data[x][y] != EMPTY)
-                    for(int i = 0 ; i < 2 ; i ++){
-                        int newX1 = x + d[i][0];
-                        int newY1 = y + d[i][1];
-                        int newX2 = newX1 + d[i][0];
-                        int newY2 = newY1 + d[i][1];
-                        if(inArea(newX1, newY1) && inArea(newX2, newY2)
-                            && data[x][y] == data[newX1][newY1] && data[x][y] == data[newX2][newY2]){
-
-                            tag[x][y] = true;
-                            tag[newX1][newY1] = true;
-                            tag[newX2][newY2] = true;
-
-                            isMatched = true;
-                        }
-                    }
-
-        for(int x = 0 ; x < N ; x ++)
-            for(int y = 0 ; y < M ; y ++)
-                if(tag[x][y])
-                    data[x][y] = EMPTY;
-
-        return isMatched;
-    }
-
     private void drop(){
 
         for(int j = 0 ; j < M ; j ++){
             int cur = N-1;
             for(int i = N-1 ; i >= 0 ; i --)
                 if(data[i][j] != EMPTY){
-                    data[cur][j] = data[i][j];
+                    swap(cur, j, i, j);
                     cur--;
                 }
-            for(; cur >= 0 ; cur --)
-                data[cur][j] = EMPTY;
         }
 
         return;
     }
+
+    private boolean match(){
+
+        return false;
+    }
+
 }

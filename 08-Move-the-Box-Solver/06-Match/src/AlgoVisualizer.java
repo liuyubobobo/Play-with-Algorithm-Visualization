@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 
 public class AlgoVisualizer {
 
@@ -23,9 +24,14 @@ public class AlgoVisualizer {
         });
     }
 
-    public void run(){
+    private void run(){
 
         setData();
+
+        if(data.solve())
+            System.out.println("The game has a solution!");
+        else
+            System.out.println("The game does NOT have a solution.");
     }
 
     private void setData(){

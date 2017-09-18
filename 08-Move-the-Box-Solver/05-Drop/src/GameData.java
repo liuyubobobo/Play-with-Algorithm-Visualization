@@ -64,16 +64,16 @@ public class GameData {
 
     public boolean solve(){
 
-        if(maxTurn <= 0)
+        if(maxTurn < 0)
             return false;
 
-        return solve(new Board(starterBoard), maxTurn);
+        return solve(starterBoard, maxTurn);
     }
 
-    private static int d[][] = {{-1, 0}, {0, 1}, {0,-1}};
+    private static int d[][] = {{1, 0}, {0, 1}, {0,-1}};
     private boolean solve(Board board, int turn){
 
-        if(board == null)
+        if(board == null || turn < 0)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
         if(turn == 0)
