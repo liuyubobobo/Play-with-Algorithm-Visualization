@@ -1,8 +1,4 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 

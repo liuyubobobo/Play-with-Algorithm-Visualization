@@ -136,11 +136,9 @@ public class Board {
             int cur = N-1;
             for(int i = N-1 ; i >= 0 ; i --)
                 if(data[i][j] != EMPTY){
-                    data[cur][j] = data[i][j];
+                    swap(cur, j, i, j);
                     cur--;
                 }
-            for(; cur >= 0 ; cur --)
-                data[cur][j] = EMPTY;
         }
 
         return;

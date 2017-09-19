@@ -32,8 +32,6 @@ public class AlgoVisualizer {
             System.out.println("The game has a solution!");
         else
             System.out.println("The game does NOT have a solution.");
-
-        setData();
     }
 
     private void setData(){
@@ -43,7 +41,8 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        String filename = "level/boston_09.txt";
+        // String filename = "level/boston_09.txt";
+        String filename = "level/boston_16.txt";
 
         AlgoVisualizer vis = new AlgoVisualizer(filename);
     }

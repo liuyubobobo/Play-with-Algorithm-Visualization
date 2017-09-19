@@ -85,6 +85,20 @@ public class Board {
         return;
     }
 
+    private void drop(){
+
+        for(int j = 0 ; j < M ; j ++){
+            int cur = N-1;
+            for(int i = N-1 ; i >= 0 ; i --)
+                if(data[i][j] != EMPTY){
+                    swap(cur, j, i, j);
+                    cur--;
+                }
+        }
+
+        return;
+    }
+
     private static int d[][] = {{0, 1}, {1, 0}};
     private boolean match(){
 
@@ -118,17 +132,4 @@ public class Board {
         return isMatched;
     }
 
-    private void drop(){
-
-        for(int j = 0 ; j < M ; j ++){
-            int cur = N-1;
-            for(int i = N-1 ; i >= 0 ; i --)
-                if(data[i][j] != EMPTY){
-                    swap(cur, j, i, j);
-                    cur--;
-                }
-        }
-
-        return;
-    }
 }

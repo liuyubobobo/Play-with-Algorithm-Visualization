@@ -1,8 +1,4 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -102,12 +98,6 @@ public class AlgoFrame extends JFrame{
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
                         String text = String.format("( %d , %d )", i, j);
                         AlgoVisHelper.drawText(g2d, text, j*h + h/2, i*w + w/2);
-                    }
-
-                    if( i == data.clickx && j == data.clicky) {
-                        AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                        AlgoVisHelper.setStrokeWidth(g2d, 4);
-                        AlgoVisHelper.strokeRectangle(g2d, j * h + 2, i * w + 2, w - 4, h - 4);
                     }
                 }
         }
