@@ -75,7 +75,7 @@ public class GameData {
         long startTime = System.currentTimeMillis();
 
         searchedBoards.add(starterBoard);
-        boolean ret = solve(new Board(starterBoard), maxTurn);
+        boolean ret = solve(starterBoard, maxTurn);
 
         long endTime = System.currentTimeMillis();
         System.out.println( "Time : " + (endTime-startTime) + "ms" );
@@ -83,10 +83,10 @@ public class GameData {
         return ret;
     }
 
-    private static int d[][] = {{-1, 0}, {0, -1}, {0, 1}};
+    private static int d[][] = {{1, 0}, {0, -1}, {0, 1}};
     private boolean solve(Board board, int turn){
 
-        if(board == null)
+        if(board == null || turn < 0)
             throw new IllegalArgumentException("board can not be null in solve function!");
 
         if(turn == 0)
