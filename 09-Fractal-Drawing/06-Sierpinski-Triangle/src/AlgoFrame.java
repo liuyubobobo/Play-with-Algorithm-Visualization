@@ -93,8 +93,8 @@ public class AlgoFrame extends JFrame{
             int AC_centerx = (Ax + Cx) / 2;
             int AC_centery = (Ay + Cy) / 2;
 
-//            int BC_centerx = (Bx + Cx) / 2;
-//            int BC_centery = (By + Cy) / 2;
+            int BC_centerx = (Bx + Cx) / 2;
+            int BC_centery = (By + Cy) / 2;
 
             drawFractal(g, Ax, Ay, side/2, depth+1);
             drawFractal(g, AC_centerx, AC_centery, side/2, depth+1);
