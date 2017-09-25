@@ -63,7 +63,7 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            drawFractal(g2d, 0, canvasWidth, canvasHeight, 0);
+            drawFractal(g2d, 0, canvasHeight, canvasWidth, 0);
         }
 
         private void drawFractal(Graphics2D g, int Ax, int Ay, int side, int depth){
@@ -81,20 +81,20 @@ public class AlgoFrame extends JFrame{
             int Cx = Ax + side/2;
             int Cy = Ay - h;
 
-            if( depth == data.depth ){
+            if(depth == data.depth){
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
                 AlgoVisHelper.fillTriangle(g, Ax, Ay, Bx, By, Cx, Cy);
                 return;
             }
 
-            int AB_centerx = (Ax+Bx)/2;
-            int AB_centery = (Ay+By)/2;
+            int AB_centerx = (Ax + Bx) / 2;
+            int AB_centery = (Ay + By) / 2;
 
-            int AC_centerx = (Ax+Cx)/2;
-            int AC_centery = (Ay+Cy)/2;
+            int AC_centerx = (Ax + Cx) / 2;
+            int AC_centery = (Ay + Cy) / 2;
 
-            int BC_centerx = (Bx+Cx)/2;
-            int BC_centery = (By+Cy)/2;
+//            int BC_centerx = (Bx + Cx) / 2;
+//            int BC_centery = (By + Cy) / 2;
 
             drawFractal(g, Ax, Ay, side/2, depth+1);
             drawFractal(g, AC_centerx, AC_centery, side/2, depth+1);

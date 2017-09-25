@@ -72,15 +72,15 @@ public class AlgoFrame extends JFrame{
 
         private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
 
-            if( depth == data.getDepth() ){
-                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g, x, y, w, h);
-                return;
-            }
-
             if(w <= 1 || h <= 1){
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
                 AlgoVisHelper.fillRectangle(g, x, y, Math.max(w,1), Math.max(h,1));
+                return;
+            }
+
+            if( depth == data.getDepth() ){
+                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+                AlgoVisHelper.fillRectangle(g, x, y, w, h);
                 return;
             }
 

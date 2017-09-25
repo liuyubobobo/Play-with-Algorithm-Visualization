@@ -64,6 +64,9 @@ public class AlgoFrame extends JFrame{
 
         private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
 
+            if(w <= 1 || h <= 1)
+                return;
+
             int w_3 = w / 3;
             int h_3 = h / 3;
 
@@ -72,9 +75,6 @@ public class AlgoFrame extends JFrame{
                 AlgoVisHelper.fillRectangle(g, x + w_3, y + h_3, w_3, h_3);
                 return;
             }
-
-            if(w <= 1 || h <= 1)
-                return;
 
             for(int i = 0 ; i < 3 ; i ++)
                 for(int j = 0 ; j < 3 ; j ++)
