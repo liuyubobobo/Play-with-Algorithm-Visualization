@@ -68,26 +68,25 @@ public class AlgoFrame extends JFrame{
 
         private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
 
-            int w_3 = w/3;
-            int h_3 = h/3;
-
-            if(w_3 <= 0 || h_3 <= 0){
-                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g, x, y, 1, 1);
-                return;
-            }
-
             if( depth == data.depth ){
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
                 AlgoVisHelper.fillRectangle(g, x, y, w, h);
                 return;
             }
 
-            drawFractal(g, x, y, w_3, h_3, depth+1);
-            drawFractal(g, x+2*w_3, y, w_3, h_3, depth+1);
-            drawFractal(g, x+w_3, y+w_3, w_3, h_3, depth+1);
-            drawFractal(g, x, y+2*w_3, w_3, h_3, depth+1);
-            drawFractal(g, x+2*w_3, y+2*w_3, w_3, h_3, depth+1);
+            if(w <= 1 || h <= 1){
+                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+                AlgoVisHelper.fillRectangle(g, x, y, Math.max(w,1), Math.max(h,1));
+                return;
+            }
+
+            int w_3 = w/3;
+            int h_3 = h/3;
+            drawFractal(g, x, y, w_3, h_3, depth + 1);
+            drawFractal(g, x + 2 * w_3, y, w_3, h_3, depth + 1);
+            drawFractal(g, x + w_3, y + h_3, w_3, h_3, depth + 1);
+            drawFractal(g, x, y + 2 * h_3, w_3, h_3, depth + 1);
+            drawFractal(g, x + 2 * w_3, y + 2 * h_3, w_3, h_3, depth + 1);
 
             return;
         }
