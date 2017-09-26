@@ -63,31 +63,31 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            drawFractal(g2d, 0, 0, canvasWidth, canvasHeight, 0);
+            drawFractal(g2d, canvasWidth/2, canvasHeight, canvasHeight, 0, 0);
         }
 
-        private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
+        private void drawFractal(Graphics2D g, double x1, double y1, double side, double angle, int depth){
 
-            int w_3 = w/3;
-            int h_3 = h/3;
+            double side_2 = side / 2;
 
-            if(w_3 <= 0 || h_3 <= 0){
-                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g, x, y, 1, 1);
+            if(side_2 <= 0)
                 return;
-            }
 
             if( depth == data.depth ){
+                double x2 = x1 - side * Math.sin(angle*Math.PI/180.0);
+                double y2 = y1 - side * Math.cos(angle*Math.PI/180.0);
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g, x, y, w, h);
+                AlgoVisHelper.drawLine(g, x1, y1, x2, y2);
                 return;
             }
 
-            drawFractal(g, x, y, w_3, h_3, depth+1);
-            drawFractal(g, x+2*w_3, y, w_3, h_3, depth+1);
-            drawFractal(g, x+w_3, y+w_3, w_3, h_3, depth+1);
-            drawFractal(g, x, y+2*w_3, w_3, h_3, depth+1);
-            drawFractal(g, x+2*w_3, y+2*w_3, w_3, h_3, depth+1);
+            double x2 = x1 - side_2 * Math.sin(angle*Math.PI/180.0);
+            double y2 = y1 - side_2 * Math.cos(angle*Math.PI/180.0);
+            AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+            AlgoVisHelper.drawLine(g, x1, y1, x2, y2);
+
+            drawFractal(g, x2, y2, side/2, angle+data.splitAngle/2, depth+1);
+            drawFractal(g, x2, y2, side/2, angle-data.splitAngle/2, depth+1);
 
             return;
         }

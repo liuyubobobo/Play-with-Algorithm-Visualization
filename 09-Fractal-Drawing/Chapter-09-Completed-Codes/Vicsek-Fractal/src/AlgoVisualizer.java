@@ -8,9 +8,13 @@ public class AlgoVisualizer {
     private FractalData data;
     private AlgoFrame frame;
 
-    public AlgoVisualizer(int sceneWidth, int sceneHeight, int depth, double splitAngle){
+    public AlgoVisualizer(int maxDepth){
 
-        data = new FractalData(depth, splitAngle);
+        data = new FractalData(maxDepth);
+        int sceneWidth = (int)Math.pow(3, maxDepth);
+        int sceneHeight = (int)Math.pow(3, maxDepth);
+//        int sceneWidth = 1024;
+//        int sceneHeight = 768;
 
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Fractal Visualizer", sceneWidth,sceneHeight);
@@ -51,11 +55,8 @@ public class AlgoVisualizer {
 
     public static void main(String[] args) {
 
-        int depth = 6;
-        double splitAngle = 60.0;
-        int sceneWidth = 800;
-        int sceneHeight = 800;
+        int maxDepth = 6;
 
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, depth, splitAngle);
+        AlgoVisualizer vis = new AlgoVisualizer(maxDepth);
     }
 }

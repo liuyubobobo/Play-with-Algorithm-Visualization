@@ -1,8 +1,4 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
+import java.awt.*;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
@@ -68,15 +64,15 @@ public class AlgoFrame extends JFrame{
 
         private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth){
 
-            int w_3 = w/3;
-            int h_3 = h/3;
-
-            if(w_3 <= 0 || h_3 <= 0)
+            if(w <= 1 || h <= 1)
                 return;
+
+            int w_3 = w / 3;
+            int h_3 = h / 3;
 
             if( depth == data.depth ){
                 AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                AlgoVisHelper.fillRectangle(g, x+w_3, y+h_3, w_3, h_3);
+                AlgoVisHelper.fillRectangle(g, x + w_3, y + h_3, w_3, h_3);
                 return;
             }
 
@@ -84,10 +80,10 @@ public class AlgoFrame extends JFrame{
                 for(int j = 0 ; j < 3 ; j ++)
                     if(i == 1 && j == 1){
                         AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
-                        AlgoVisHelper.fillRectangle(g, x+i*w_3, y+j*h_3, w_3, h_3);
+                        AlgoVisHelper.fillRectangle(g, x + w_3, y + h_3, w_3, h_3);
                     }
                     else
-                        drawFractal(g, x+i*w_3, y+j*h_3, w_3, h_3, depth+1);
+                        drawFractal(g, x + i * w_3, y + j * h_3, w_3, h_3, depth + 1);
 
             return;
         }
