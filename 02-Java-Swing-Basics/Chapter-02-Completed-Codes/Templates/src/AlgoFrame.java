@@ -20,11 +20,12 @@ public class AlgoFrame extends JFrame{
 
         AlgoCanvas canvas = new AlgoCanvas();
         setContentPane(canvas);
-        pack();
+
+        setResizable(false);
+        pack();    // 在setResizable(false)后进行pack()，防止在Windows下系统修改frame的尺寸
+                   // 具体参见：http://coding.imooc.com/learn/questiondetail/26420.html
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
         setVisible(true);
     }
 
