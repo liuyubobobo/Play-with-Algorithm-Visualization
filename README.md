@@ -19,6 +19,26 @@
 
 ## 课程源码目录 
 
+| 第一章 欢迎来到看得见的算法 | Java源码 |
+| :--- | :---: |
+| 1-1 欢迎来到看得见的算法 | [无代码] |
+| 1-2 学习这个课程将完成什么项目？ | [无代码] |
+| 1-3 关于本课程的编程环境 | [无代码] |
+| 1-4 更多学习本课程的注意事项 | [无代码] |
+| **第二章 要想看得见，先要搞定GUI编程** | [章节Java代码](02-Java-Swing-Basics/) |
+| 2-1 使用JFrame | [Java](02-Java-Swing-Basics/01-About-Java-GUI/src/) |
+| 2-2 创建属于自己的第一个JFrame子类 | [Java](02-Java-Swing-Basics/02-Your-First-JFrame/src/) |
+| 2-3 设置画布与图形绘制基础 | [Java](02-Java-Swing-Basics/03-Rendering-Basics/src/) |
+| 2-4 使用Graphics2D | [Java](02-Java-Swing-Basics/04-Using-Graphics2D/src/) |
+| 2-5 整理绘制工具类 | [Java](02-Java-Swing-Basics/05-Drawing-Refactor/src/) |
+| 2-6 高级绘制特性：抗锯齿和双缓存 | [Java](02-Java-Swing-Basics/06-Advanced-Rendering/src/) |
+| 2-7 动画基础 | [Java](02-Java-Swing-Basics/07-Animation-Basics/src/) |
+| 2-8 算法可视化中的MVC | [Java](02-Java-Swing-Basics/08-MVC-in-Algorithm-Visualization/src/) |
+| 2-9 键盘事件 | [Java](02-Java-Swing-Basics/09-Keyboard-Event/src/) |
+| 2-10 鼠标事件 | [Java](02-Java-Swing-Basics/10-Mouse-Event/src/) |
+| 2-11 课程所使用的GUI编程模板 | [Java](02-Java-Swing-Basics/11-Templates/src/) |
+| 第二章完整代码 | [Java](02-Java-Swing-Basics/Chapter-02-Completed-Codes/) |
+
 ---
 
 由于慕课网规定，课程不再提供PPT下载，请谅解。
