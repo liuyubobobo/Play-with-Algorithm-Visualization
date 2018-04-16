@@ -49,7 +49,7 @@
 | 第三章完整代码 | [Java](03-Probability-Simulation/Chapter-03-Completed-Codes/) |
 | **第四章 排序算法可视化** | [章节Java代码](04-Sort-Visualization/) |
 | 4-1 选择排序算法可视化 | [Java](04-Sort-Visualization/01-Selection-Sort-Visualization/src/) |
-| 4-2 为可视化添加更多效果 | [Java](04-Sort-Visualization/02-More-about-Selection-Sort-Visualization/src	/) |
+| 4-2 为可视化添加更多效果 | [Java](04-Sort-Visualization/02-More-about-Selection-Sort-Visualization/src/) |
 | 4-3 插入排序可视化 | [Java](04-Sort-Visualization/03-Insertion-Sort-Visualization/src/) |
 | 4-4 在近乎有序的数据上测试插入排序算法 | [Java](04-Sort-Visualization/04-Insertion-Sort-with-Nearly-Ordered-Array/src/) |
 | 4-5 通过归并排序算法深入理解递归 | [Java](04-Sort-Visualization/05-Merge-Sort-More-Explanations/) |
@@ -122,4 +122,8 @@
 
 ---
 
-由于慕课网规定，课程不再提供PPT下载，请谅解。
+* 做这个课程的时候，一气儿设想了20多个demo，用来展示算法的实际运用。本以为是个很好的选题，毕竟大家平时使用算法都过于抽象。如果可能，这个选题可以出好几季，让大家真正做到“看见”这些算法。但是没想到课程推出以后，销量非常差。所以这个课程的后几季的制作计划暂时只能暂停。请谅解。
+
+* **但这个课程本身依然自成体系，是我在慕课网做过的课程中，最喜欢的课程。也相信非常值得大家学习。希望大家喜欢。万一，只是万一，这个课程在以后的时间里突然火起来了，慕课网肯定会联系我做第二季第三季的：）**
+
+* 由于慕课网规定，课程不再提供PPT下载，请谅解。
