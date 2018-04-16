@@ -97,7 +97,7 @@ public class AlgoFrame extends JFrame{
 
                         Color color = colorMap.get(c);
                         AlgoVisHelper.setColor(g2d, color);
-                        AlgoVisHelper.fillRectangle(g2d, j*h+2, i*w+2, w-4, h-4);
+                        AlgoVisHelper.fillRectangle(g2d, j*w+2, i*h+2, w-4, h-4);
 
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
                         String text = String.format("( %d , %d )", i, j);
@@ -107,7 +107,7 @@ public class AlgoFrame extends JFrame{
                     if( i == data.clickx && j == data.clicky) {
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
                         AlgoVisHelper.setStrokeWidth(g2d, 4);
-                        AlgoVisHelper.strokeRectangle(g2d, j * h + 2, i * w + 2, w - 4, h - 4);
+                        AlgoVisHelper.strokeRectangle(g2d, j * w + 2, i * h + 2, w - 4, h - 4);
                     }
                 }
         }

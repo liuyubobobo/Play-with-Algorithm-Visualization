@@ -93,7 +93,7 @@ public class AlgoFrame extends JFrame{
 
                         Color color = colorMap.get(c);
                         AlgoVisHelper.setColor(g2d, color);
-                        AlgoVisHelper.fillRectangle(g2d, j*h+2, i*w+2, w-4, h-4);
+                        AlgoVisHelper.fillRectangle(g2d, j*w+2, i*h+2, w-4, h-4);
 
                         AlgoVisHelper.setColor(g2d, AlgoVisHelper.White);
                         String text = String.format("( %d , %d )", i, j);
