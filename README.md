@@ -2,7 +2,7 @@
 
 大家好， 欢迎大家来到我在[慕课网](http://www.imooc.com/)上的实战课程[《看得见的算法（第一季）》]()的官方代码仓。这个代码仓将不仅仅包含课程的所有源代码，还将发布课程的更新相关内容，勘误信息以及计划的更多可以丰富课程的内容，如更多分享，多多练习，等等等等。课程源码为Java语言源代码。关于更多语言的支持，今后有时间，我会慢慢更新这个代码仓（不过预计会是蜗牛速了>_<）。大家可以下载、运行、测试、修改。如果你发现了任何bug，或者对课程中的任何内容有意见或建议，欢迎和我联系：）
 
-**个人网站**：[liuyubobobo.com](http://liuyubobobo.com)
+**个人网站**：[liuyubobobo.com](http://liuyubobobo.com) [废弃重整中...]
 
 **电子邮件**：[liuyubobobo@gmail.com](mailto:liuyubobobo@gmail.com)
 
@@ -14,7 +14,7 @@
 
 **个人公众号：是不是很酷**：）
 
-![qrcode](src/qrcode.jpg)
+![qrcode](src/qrcode.png)
 
 
 ## 课程相关其他代码仓
