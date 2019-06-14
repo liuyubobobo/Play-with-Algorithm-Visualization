@@ -33,12 +33,11 @@
     
 ## 更多推荐
 
-* 感谢学习课程的大佬 [@摘星fy](https://github.com/kingAnyWHere)基于Canvas实现的堆和任意二分搜索树的可视化。有兴趣的同学可以去大佬的代码仓围观。
-    * 堆的可视化：[https://github.com/kingAnyWHere/MaxHeap](https://github.com/kingAnyWHere/MaxHeap)
-    * 任意二分搜索树的可视化 ：[https://github.com/kingAnyWHere/canvas-binary-search](https://github.com/kingAnyWHere/canvas-binary-search) 
-    * 以下为任意二分搜索树可视化截图：）
+* 感谢学习课程的大佬 [**@摘星fy**](https://github.com/kingAnyWHere) 基于Canvas实现的迷宫可视化。有兴趣的同学可以去大佬的代码仓围观。同时，[**@摘星fy**](https://github.com/kingAnyWHere) 还基于Canvas实现了我的《修炼算法内功》和《玩转数据结构》两门课程中诸多算法和数据结构的可视化内容，大家不要错过！
+
+    代码仓传送门：[**https://github.com/kingAnyWHere/codding.cn/tree/master/algo**](https://github.com/kingAnyWHere/codding.cn/tree/master/algo)
     
-![BST-Visualization](src/demo.png)
+![maze](src/fy.jpg)
 
 * 如果大家有学习这个课程后受启发，制作出的好的算法可视化的代码仓，也请联系我。**免费广告位在此预留：）**
 
